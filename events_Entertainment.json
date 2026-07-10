@@ -1,0 +1,362 @@
+[
+  {
+    "year": 1599,
+    "event": "The Globe Theatre opens in London."
+  },
+  {
+    "year": 1895,
+    "event": "First public film screening by the Lumière brothers."
+  },
+  {
+    "year": 1902,
+    "event": "Georges Méliès releases 'A Trip to the Moon'."
+  },
+  {
+    "year": 1903,
+    "event": "'The Great Train Robbery' is released."
+  },
+  {
+    "year": 1911,
+    "event": "First Hollywood film studio opens."
+  },
+  {
+    "year": 1914,
+    "event": "Charlie Chaplin's Little Tramp character debuts."
+  },
+  {
+    "year": 1915,
+    "event": "'The Birth of a Nation' is released."
+  },
+  {
+    "year": 1920,
+    "event": "First commercial radio broadcast in the US (KDKA)."
+  },
+  {
+    "year": 1922,
+    "event": "'Nosferatu' is released."
+  },
+  {
+    "year": 1923,
+    "event": "Walt Disney Company is founded."
+  },
+  {
+    "year": 1927,
+    "event": "'The Jazz Singer', the first feature-length motion picture with synchronized dialogue, is released."
+  },
+  {
+    "year": 1928,
+    "event": "Mickey Mouse debuts in 'Steamboat Willie'."
+  },
+  {
+    "year": 1929,
+    "event": "The first Academy Awards ceremony is held."
+  },
+  {
+    "year": 1930,
+    "event": "The Motion Picture Production Code (Hays Code) is introduced."
+  },
+  {
+    "year": 1931,
+    "event": "Universal Pictures releases 'Dracula' starring Bela Lugosi."
+  },
+  {
+    "year": 1933,
+    "event": "'King Kong' is released."
+  },
+  {
+    "year": 1935,
+    "event": "First Technicolor feature film, 'Becky Sharp', is released."
+  },
+  {
+    "year": 1937,
+    "event": "'Snow White and the Seven Dwarfs' premieres."
+  },
+  {
+    "year": 1938,
+    "event": "Orson Welles broadcasts 'The War of the Worlds'."
+  },
+  {
+    "year": 1939,
+    "event": "'The Wizard of Oz' is released."
+  },
+  {
+    "year": 1940,
+    "event": "Bugs Bunny makes his official debut in 'A Wild Hare'."
+  },
+  {
+    "year": 1941,
+    "event": "'Citizen Kane' is released."
+  },
+  {
+    "year": 1942,
+    "event": "'Casablanca' premieres."
+  },
+  {
+    "year": 1946,
+    "event": "Cannes Film Festival is held for the first time."
+  },
+  {
+    "year": 1947,
+    "event": "The Tony Awards are held for the first time."
+  },
+  {
+    "year": 1948,
+    "event": "Ed Sullivan Show premieres on CBS."
+  },
+  {
+    "year": 1949,
+    "event": "The first Emmy Awards are presented."
+  },
+  {
+    "year": 1951,
+    "event": "'I Love Lucy' premieres on television."
+  },
+  {
+    "year": 1952,
+    "event": "'Singin' in the Rain' is released."
+  },
+  {
+    "year": 1953,
+    "event": "Playboy magazine publishes its first issue."
+  },
+  {
+    "year": 1954,
+    "event": "Godzilla makes his first appearance in film."
+  },
+  {
+    "year": 1955,
+    "event": "Disneyland opens in Anaheim, California."
+  },
+  {
+    "year": 1956,
+    "event": "Elvis Presley releases his debut album."
+  },
+  {
+    "year": 1958,
+    "event": "The first Grammy Awards are held."
+  },
+  {
+    "year": 1959,
+    "event": "The Twilight Zone premieres on television."
+  },
+  {
+    "year": 1960,
+    "event": "Alfred Hitchcock's 'Psycho' is released."
+  },
+  {
+    "year": 1961,
+    "event": "'West Side Story' film adaptation is released."
+  },
+  {
+    "year": 1962,
+    "event": "The first James Bond film, 'Dr. No', premieres."
+  },
+  {
+    "year": 1963,
+    "event": "'Doctor Who' debuts on BBC television."
+  },
+  {
+    "year": 1964,
+    "event": "The Beatles make their first appearance on The Ed Sullivan Show."
+  },
+  {
+    "year": 1965,
+    "event": "'The Sound of Music' is released in theaters."
+  },
+  {
+    "year": 1966,
+    "event": "'Star Trek' premieres on NBC."
+  },
+  {
+    "year": 1967,
+    "event": "The first Super Bowl is played."
+  },
+  {
+    "year": 1968,
+    "event": "'2001: A Space Odyssey' is released."
+  },
+  {
+    "year": 1969,
+    "event": "Woodstock Music & Art Fair is held."
+  },
+  {
+    "year": 1971,
+    "event": "Walt Disney World opens in Florida."
+  },
+  {
+    "year": 1972,
+    "event": "'The Godfather' is released."
+  },
+  {
+    "year": 1973,
+    "event": "'The Exorcist' is released."
+  },
+  {
+    "year": 1974,
+    "event": "Dungeons & Dragons is published."
+  },
+  {
+    "year": 1975,
+    "event": "'Jaws' becomes the first modern summer blockbuster."
+  },
+  {
+    "year": 1976,
+    "event": "The Muppet Show premieres."
+  },
+  {
+    "year": 1977,
+    "event": "'Star Wars' is released in theaters."
+  },
+  {
+    "year": 1978,
+    "event": "'Space Invaders' arcade game is released."
+  },
+  {
+    "year": 1979,
+    "event": "Sony releases the Walkman."
+  },
+  {
+    "year": 1980,
+    "event": "Pac-Man is released in arcades."
+  },
+  {
+    "year": 1981,
+    "event": "MTV launches on cable television."
+  },
+  {
+    "year": 1982,
+    "event": "Michael Jackson's 'Thriller' is released."
+  },
+  {
+    "year": 1983,
+    "event": "The Nintendo Entertainment System (Famicom) launches in Japan."
+  },
+  {
+    "year": 1984,
+    "event": "Apple's '1984' Macintosh commercial airs during Super Bowl XVIII."
+  },
+  {
+    "year": 1985,
+    "event": "Super Mario Bros. is released for the NES."
+  },
+  {
+    "year": 1986,
+    "event": "'The Phantom of the Opera' opens in London's West End."
+  },
+  {
+    "year": 1987,
+    "event": "'The Simpsons' debut as shorts on The Tracey Ullman Show."
+  },
+  {
+    "year": 1989,
+    "event": "The Game Boy is released by Nintendo."
+  },
+  {
+    "year": 1990,
+    "event": "'The Fresh Prince of Bel-Air' premieres."
+  },
+  {
+    "year": 1991,
+    "event": "Nirvana releases 'Nevermind'."
+  },
+  {
+    "year": 1993,
+    "event": "'Jurassic Park' makes pioneering use of CGI."
+  },
+  {
+    "year": 1994,
+    "event": "Sony PlayStation launches in Japan."
+  },
+  {
+    "year": 1995,
+    "event": "'Toy Story', the first entirely computer-animated feature film, is released."
+  },
+  {
+    "year": 1996,
+    "event": "'Pokemon Red and Green' are released in Japan."
+  },
+  {
+    "year": 1997,
+    "event": "'Titanic' is released."
+  },
+  {
+    "year": 1998,
+    "event": "'The Legend of Zelda: Ocarina of Time' is released."
+  },
+  {
+    "year": 1999,
+    "event": "'The Matrix' is released in theaters."
+  },
+  {
+    "year": 2000,
+    "event": "The PlayStation 2 is released."
+  },
+  {
+    "year": 2001,
+    "event": "The first iPod is released by Apple."
+  },
+  {
+    "year": 2002,
+    "event": "'American Idol' debuts on Fox."
+  },
+  {
+    "year": 2003,
+    "event": "Steam digital distribution platform is launched by Valve."
+  },
+  {
+    "year": 2004,
+    "event": "'World of Warcraft' is released."
+  },
+  {
+    "year": 2005,
+    "event": "YouTube is launched."
+  },
+  {
+    "year": 2006,
+    "event": "The Nintendo Wii is released."
+  },
+  {
+    "year": 2007,
+    "event": "Netflix introduces streaming video."
+  },
+  {
+    "year": 2008,
+    "event": "'Iron Man' kicks off the Marvel Cinematic Universe."
+  },
+  {
+    "year": 2009,
+    "event": "'Avatar' is released and becomes the highest-grossing film of all time."
+  },
+  {
+    "year": 2010,
+    "event": "Instagram is launched."
+  },
+  {
+    "year": 2011,
+    "event": "'Game of Thrones' premieres on HBO."
+  },
+  {
+    "year": 2012,
+    "event": "'The Avengers' is released in theaters."
+  },
+  {
+    "year": 2013,
+    "event": "'Grand Theft Auto V' is released, breaking sales records."
+  },
+  {
+    "year": 2014,
+    "event": "Amazon acquires Twitch."
+  },
+  {
+    "year": 2015,
+    "event": "'Hamilton' premieres on Broadway."
+  },
+  {
+    "year": 2016,
+    "event": "'Pokemon Go' is released and becomes a global phenomenon."
+  },
+  {
+    "year": 2017,
+    "event": "The Nintendo Switch is released worldwide."
+  }
+]

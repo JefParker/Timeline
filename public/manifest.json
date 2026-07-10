@@ -1,0 +1,79 @@
+{
+    "name": "Timeline",
+    "short_name": "Timeline",
+    "description": "Daily historical event ordering game",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0f0f11",
+    "theme_color": "#0f0f11",
+    "icons": [
+        {
+            "src": "/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/splash.png",
+            "sizes": "1080x1920",
+            "type": "image/png",
+            "form_factor": "narrow"
+        },
+        {
+            "src": "/screenshot-wide.png",
+            "sizes": "1920x1080",
+            "type": "image/png",
+            "form_factor": "wide"
+        },
+        {
+            "src": "/screenshot_active.jpg",
+            "sizes": "768x1376",
+            "type": "image/jpeg",
+            "form_factor": "narrow"
+        },
+        {
+            "src": "/screenshot_leaderboard.jpg",
+            "sizes": "768x1376",
+            "type": "image/jpeg",
+            "form_factor": "narrow"
+        },
+        {
+            "src": "/images/screenshot_elegant_dark.jpg",
+            "sizes": "768x1376",
+            "type": "image/jpeg",
+            "form_factor": "narrow"
+        },
+        {
+            "src": "/images/screenshot_elegant_light.jpg",
+            "sizes": "768x1376",
+            "type": "image/jpeg",
+            "form_factor": "narrow"
+        },
+        {
+            "src": "/images/screenshot_steampunk.jpg",
+            "sizes": "768x1376",
+            "type": "image/jpeg",
+            "form_factor": "narrow"
+        }
+    ]
+}

@@ -1,0 +1,362 @@
+[
+  {
+    "event": "Great Pyramid of Giza completed",
+    "year": -2560
+  },
+  {
+    "event": "Stonehenge construction begins",
+    "year": -2500
+  },
+  {
+    "event": "Ziggurat of Ur built",
+    "year": -2000
+  },
+  {
+    "event": "Abu Simbel temples carved",
+    "year": -1300
+  },
+  {
+    "event": "Hanging Gardens of Babylon built",
+    "year": -600
+  },
+  {
+    "event": "Parthenon construction begins",
+    "year": -447
+  },
+  {
+    "event": "Parthenon completed",
+    "year": -432
+  },
+  {
+    "event": "Terracotta Army buried",
+    "year": -220
+  },
+  {
+    "event": "Colosseum construction begins",
+    "year": 70
+  },
+  {
+    "event": "Colosseum completed",
+    "year": 80
+  },
+  {
+    "event": "Pantheon rebuilt by Hadrian",
+    "year": 118
+  },
+  {
+    "event": "Hadrian's Wall construction begins",
+    "year": 122
+  },
+  {
+    "event": "St. Peter's Basilica (Old) consecrated",
+    "year": 320
+  },
+  {
+    "event": "Hagia Sophia construction begins",
+    "year": 532
+  },
+  {
+    "event": "Hagia Sophia completed",
+    "year": 537
+  },
+  {
+    "event": "Dome of the Rock completed",
+    "year": 691
+  },
+  {
+    "event": "Great Mosque of Córdoba begun",
+    "year": 785
+  },
+  {
+    "event": "Charlemagne's Palatine Chapel consecrated",
+    "year": 814
+  },
+  {
+    "event": "Borobudur Temple completed",
+    "year": 850
+  },
+  {
+    "event": "Westminster Abbey consecrated",
+    "year": 1065
+  },
+  {
+    "event": "Tower of London construction begins",
+    "year": 1078
+  },
+  {
+    "event": "Notre-Dame de Paris construction begins",
+    "year": 1163
+  },
+  {
+    "event": "Leaning Tower of Pisa construction begins",
+    "year": 1173
+  },
+  {
+    "event": "Krak des Chevaliers expanded by Hospitallers",
+    "year": 1190
+  },
+  {
+    "event": "Cologne Cathedral construction begins",
+    "year": 1248
+  },
+  {
+    "event": "Florence Cathedral construction begins",
+    "year": 1296
+  },
+  {
+    "event": "Notre-Dame de Paris completed",
+    "year": 1345
+  },
+  {
+    "event": "Great Wall of China (Ming dynasty) construction begins",
+    "year": 1368
+  },
+  {
+    "event": "Leaning Tower of Pisa completed",
+    "year": 1373
+  },
+  {
+    "event": "Forbidden City construction begins",
+    "year": 1406
+  },
+  {
+    "event": "Forbidden City completed",
+    "year": 1420
+  },
+  {
+    "event": "Florence Cathedral dome completed",
+    "year": 1436
+  },
+  {
+    "event": "Machu Picchu built (estimated)",
+    "year": 1438
+  },
+  {
+    "event": "Winter Palace (first version) built",
+    "year": 1455
+  },
+  {
+    "event": "St. Peter's Basilica (Current) construction begins",
+    "year": 1506
+  },
+  {
+    "event": "St. Basil's Cathedral construction begins",
+    "year": 1555
+  },
+  {
+    "event": "St. Basil's Cathedral completed",
+    "year": 1561
+  },
+  {
+    "event": "Rialto Bridge completed",
+    "year": 1591
+  },
+  {
+    "event": "Taj Mahal construction begins",
+    "year": 1631
+  },
+  {
+    "event": "Taj Mahal completed",
+    "year": 1653
+  },
+  {
+    "event": "Great Fire of London destroys St Paul's",
+    "year": 1666
+  },
+  {
+    "event": "St. Paul's Cathedral rebuilding begins",
+    "year": 1675
+  },
+  {
+    "event": "Palace of Versailles becomes royal residence",
+    "year": 1682
+  },
+  {
+    "event": "Buckingham Palace (Buckingham House) built",
+    "year": 1703
+  },
+  {
+    "event": "St. Paul's Cathedral completed",
+    "year": 1708
+  },
+  {
+    "event": "British Museum established",
+    "year": 1753
+  },
+  {
+    "event": "Trevi Fountain completed",
+    "year": 1762
+  },
+  {
+    "event": "White House construction begins",
+    "year": 1792
+  },
+  {
+    "event": "Louvre Museum opens",
+    "year": 1793
+  },
+  {
+    "event": "White House first occupied",
+    "year": 1800
+  },
+  {
+    "event": "Arc de Triomphe construction begins",
+    "year": 1806
+  },
+  {
+    "event": "Erie Canal opened",
+    "year": 1825
+  },
+  {
+    "event": "Arc de Triomphe completed",
+    "year": 1836
+  },
+  {
+    "event": "Big Ben bell cast",
+    "year": 1858
+  },
+  {
+    "event": "Big Ben clock tower completed",
+    "year": 1859
+  },
+  {
+    "event": "Suez Canal opens",
+    "year": 1869
+  },
+  {
+    "event": "Sagrada Família construction begins",
+    "year": 1882
+  },
+  {
+    "event": "Brooklyn Bridge opens",
+    "year": 1883
+  },
+  {
+    "event": "Washington Monument completed",
+    "year": 1884
+  },
+  {
+    "event": "Statue of Liberty dedicated",
+    "year": 1886
+  },
+  {
+    "event": "Eiffel Tower construction begins",
+    "year": 1887
+  },
+  {
+    "event": "Eiffel Tower opens",
+    "year": 1889
+  },
+  {
+    "event": "Tower Bridge opens",
+    "year": 1894
+  },
+  {
+    "event": "Grand Central Terminal opens",
+    "year": 1913
+  },
+  {
+    "event": "Panama Canal opens",
+    "year": 1914
+  },
+  {
+    "event": "Lincoln Memorial dedicated",
+    "year": 1922
+  },
+  {
+    "event": "Mount Rushmore carving begins",
+    "year": 1927
+  },
+  {
+    "event": "Chrysler Building completed",
+    "year": 1930
+  },
+  {
+    "event": "Empire State Building completed",
+    "year": 1931
+  },
+  {
+    "event": "Sydney Harbour Bridge opens",
+    "year": 1932
+  },
+  {
+    "event": "Golden Gate Bridge opens",
+    "year": 1937
+  },
+  {
+    "event": "Mount Rushmore completed",
+    "year": 1941
+  },
+  {
+    "event": "Pentagon completed",
+    "year": 1943
+  },
+  {
+    "event": "Gateway Arch construction begins",
+    "year": 1956
+  },
+  {
+    "event": "Tokyo Tower completed",
+    "year": 1958
+  },
+  {
+    "event": "Guggenheim Museum New York opens",
+    "year": 1959
+  },
+  {
+    "event": "Space Needle opens",
+    "year": 1962
+  },
+  {
+    "event": "Gateway Arch completed",
+    "year": 1965
+  },
+  {
+    "event": "Sydney Opera House opens",
+    "year": 1973
+  },
+  {
+    "event": "CN Tower opens",
+    "year": 1976
+  },
+  {
+    "event": "Louvre Pyramid completed",
+    "year": 1989
+  },
+  {
+    "event": "Channel Tunnel opens",
+    "year": 1994
+  },
+  {
+    "event": "Petronas Towers completed",
+    "year": 1998
+  },
+  {
+    "event": "London Eye erected",
+    "year": 1999
+  },
+  {
+    "event": "Taipei 101 completed",
+    "year": 2004
+  },
+  {
+    "event": "Burj Khalifa completed",
+    "year": 2010
+  },
+  {
+    "event": "The Shard completed",
+    "year": 2012
+  },
+  {
+    "event": "One World Trade Center opens",
+    "year": 2014
+  },
+  {
+    "event": "Panama Canal expansion opens",
+    "year": 2016
+  },
+  {
+    "event": "Expo 2020 Dubai pavilions open (delayed)",
+    "year": 2021
+  }
+]

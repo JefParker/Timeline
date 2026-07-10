@@ -1,0 +1,362 @@
+[
+  {
+    "event": "Discovery of Brazil by Cabral",
+    "year": 1500
+  },
+  {
+    "event": "Amerigo Vespucci explores South American coast",
+    "year": 1501
+  },
+  {
+    "event": "Columbus discovers Honduras",
+    "year": 1502
+  },
+  {
+    "event": "Columbus returns from fourth voyage",
+    "year": 1504
+  },
+  {
+    "event": "Waldseemüller map names America",
+    "year": 1507
+  },
+  {
+    "event": "Discovery of Moluccas by Portuguese",
+    "year": 1512
+  },
+  {
+    "event": "Balboa sees the Pacific Ocean",
+    "year": 1513
+  },
+  {
+    "event": "Havana founded",
+    "year": 1515
+  },
+  {
+    "event": "Magellan departs on global circumnavigation",
+    "year": 1519
+  },
+  {
+    "event": "Strait of Magellan discovered",
+    "year": 1520
+  },
+  {
+    "event": "Fall of Tenochtitlan",
+    "year": 1521
+  },
+  {
+    "event": "Elcano completes first circumnavigation",
+    "year": 1522
+  },
+  {
+    "event": "Verrazzano explores North American coast",
+    "year": 1524
+  },
+  {
+    "event": "Pizarro begins expedition to Peru",
+    "year": 1527
+  },
+  {
+    "event": "Pizarro captures Atahualpa",
+    "year": 1532
+  },
+  {
+    "event": "Cartier explores Gulf of St. Lawrence",
+    "year": 1534
+  },
+  {
+    "event": "Cartier names Montreal",
+    "year": 1535
+  },
+  {
+    "event": "De Soto expedition begins in North America",
+    "year": 1539
+  },
+  {
+    "event": "Coronado expedition begins in American Southwest",
+    "year": 1540
+  },
+  {
+    "event": "Discovery of the Mississippi River",
+    "year": 1541
+  },
+  {
+    "event": "Cabrillo explores California coast",
+    "year": 1542
+  },
+  {
+    "event": "Willoughby expedition attempts Northeast Passage",
+    "year": 1553
+  },
+  {
+    "event": "St. Augustine founded in Florida",
+    "year": 1565
+  },
+  {
+    "event": "Frobisher discovers Frobisher Bay",
+    "year": 1576
+  },
+  {
+    "event": "Francis Drake begins circumnavigation",
+    "year": 1577
+  },
+  {
+    "event": "Roanoke Colony founded",
+    "year": 1584
+  },
+  {
+    "event": "Davis Strait discovered",
+    "year": 1585
+  },
+  {
+    "event": "Barentsz explores Arctic",
+    "year": 1595
+  },
+  {
+    "event": "Cape Cod named by Gosnold",
+    "year": 1602
+  },
+  {
+    "event": "Port Royal founded",
+    "year": 1605
+  },
+  {
+    "event": "Discovery of Australia by Willem Janszoon",
+    "year": 1606
+  },
+  {
+    "event": "Jamestown founded",
+    "year": 1607
+  },
+  {
+    "event": "Quebec founded by Champlain",
+    "year": 1608
+  },
+  {
+    "event": "Hudson explores Hudson River",
+    "year": 1609
+  },
+  {
+    "event": "Hudson Bay discovered",
+    "year": 1610
+  },
+  {
+    "event": "Le Maire and Schouten discover Cape Horn",
+    "year": 1615
+  },
+  {
+    "event": "Baffin Bay discovered",
+    "year": 1616
+  },
+  {
+    "event": "Mayflower lands at Plymouth Rock",
+    "year": 1620
+  },
+  {
+    "event": "Nicolet reaches Lake Michigan",
+    "year": 1634
+  },
+  {
+    "event": "Abel Tasman discovers New Zealand",
+    "year": 1642
+  },
+  {
+    "event": "Tasman discovers Fiji",
+    "year": 1643
+  },
+  {
+    "event": "Tasman maps Australian coast",
+    "year": 1644
+  },
+  {
+    "event": "Cape Town founded",
+    "year": 1652
+  },
+  {
+    "event": "Marquette and Jolliet explore Mississippi River",
+    "year": 1673
+  },
+  {
+    "event": "La Salle claims Louisiana for France",
+    "year": 1682
+  },
+  {
+    "event": "Calcutta founded",
+    "year": 1690
+  },
+  {
+    "event": "Kamchatka explored by Atlasov",
+    "year": 1697
+  },
+  {
+    "event": "Dampier explores Australian coast",
+    "year": 1699
+  },
+  {
+    "event": "Roggeveen discovers Easter Island",
+    "year": 1722
+  },
+  {
+    "event": "Bering Strait discovered",
+    "year": 1728
+  },
+  {
+    "event": "Bering sights Alaska",
+    "year": 1741
+  },
+  {
+    "event": "Cook's first voyage begins",
+    "year": 1768
+  },
+  {
+    "event": "Cook explores New Zealand coastline",
+    "year": 1769
+  },
+  {
+    "event": "Cook reaches Botany Bay, Australia",
+    "year": 1770
+  },
+  {
+    "event": "Cook's second voyage begins",
+    "year": 1772
+  },
+  {
+    "event": "Cook crosses Antarctic Circle",
+    "year": 1773
+  },
+  {
+    "event": "Discovery of New Caledonia",
+    "year": 1774
+  },
+  {
+    "event": "Dominguez-Escalante expedition",
+    "year": 1776
+  },
+  {
+    "event": "Cook discovers Hawaii",
+    "year": 1778
+  },
+  {
+    "event": "First Fleet arrives in Australia",
+    "year": 1788
+  },
+  {
+    "event": "Vancouver expedition begins",
+    "year": 1791
+  },
+  {
+    "event": "Columbia River discovered by Gray",
+    "year": 1792
+  },
+  {
+    "event": "Mungo Park explores Niger River",
+    "year": 1795
+  },
+  {
+    "event": "Bass Strait discovered",
+    "year": 1798
+  },
+  {
+    "event": "Lewis and Clark expedition begins",
+    "year": 1804
+  },
+  {
+    "event": "Lewis and Clark reach the Pacific Ocean",
+    "year": 1805
+  },
+  {
+    "event": "Pike expedition begins",
+    "year": 1806
+  },
+  {
+    "event": "Antarctica sighted by Bellingshausen",
+    "year": 1819
+  },
+  {
+    "event": "Palmer sights Antarctica Peninsula",
+    "year": 1820
+  },
+  {
+    "event": "Weddell Sea discovered",
+    "year": 1821
+  },
+  {
+    "event": "Sturt explores Murray River",
+    "year": 1830
+  },
+  {
+    "event": "Ross locates North Magnetic Pole",
+    "year": 1831
+  },
+  {
+    "event": "Wilkes maps Antarctic coast",
+    "year": 1840
+  },
+  {
+    "event": "Livingstone begins Zambezi expedition",
+    "year": 1852
+  },
+  {
+    "event": "Victoria Falls discovered",
+    "year": 1855
+  },
+  {
+    "event": "Lake Victoria discovered by Speke",
+    "year": 1858
+  },
+  {
+    "event": "Burke and Wills expedition in Australia",
+    "year": 1860
+  },
+  {
+    "event": "Lake Albert discovered",
+    "year": 1864
+  },
+  {
+    "event": "Powell explores Grand Canyon",
+    "year": 1869
+  },
+  {
+    "event": "Challenger expedition begins",
+    "year": 1872
+  },
+  {
+    "event": "Nordenskiold navigates Northeast Passage",
+    "year": 1878
+  },
+  {
+    "event": "Nansen crosses Greenland",
+    "year": 1888
+  },
+  {
+    "event": "First confirmed landing on Antarctica",
+    "year": 1895
+  },
+  {
+    "event": "Gerlache expedition to Antarctica",
+    "year": 1897
+  },
+  {
+    "event": "Amundsen completes Northwest Passage",
+    "year": 1906
+  },
+  {
+    "event": "Peary claims North Pole",
+    "year": 1909
+  },
+  {
+    "event": "Amundsen reaches South Pole",
+    "year": 1911
+  },
+  {
+    "event": "Scott reaches South Pole",
+    "year": 1912
+  },
+  {
+    "event": "Endurance sinks in Antarctica",
+    "year": 1915
+  },
+  {
+    "event": "Byrd claims flight over North Pole",
+    "year": 1926
+  }
+]

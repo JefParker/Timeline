@@ -1,0 +1,362 @@
+[
+  {
+    "event": "First Olympic Games",
+    "year": -776
+  },
+  {
+    "event": "Founding of Rome",
+    "year": -753
+  },
+  {
+    "event": "Battle of Marathon",
+    "year": -490
+  },
+  {
+    "event": "Assassination of Julius Caesar",
+    "year": -44
+  },
+  {
+    "event": "Fall of the Western Roman Empire",
+    "year": 476
+  },
+  {
+    "event": "Hijra of Muhammad",
+    "year": 622
+  },
+  {
+    "event": "Battle of Tours",
+    "year": 732
+  },
+  {
+    "event": "Coronation of Charlemagne",
+    "year": 800
+  },
+  {
+    "event": "Battle of Hastings",
+    "year": 1066
+  },
+  {
+    "event": "First Crusade captures Jerusalem",
+    "year": 1099
+  },
+  {
+    "event": "Signing of the Magna Carta",
+    "year": 1215
+  },
+  {
+    "event": "Fall of Baghdad to Mongols",
+    "year": 1258
+  },
+  {
+    "event": "Black Death begins in Europe",
+    "year": 1347
+  },
+  {
+    "event": "Fall of Constantinople",
+    "year": 1453
+  },
+  {
+    "event": "Columbus reaches the Americas",
+    "year": 1492
+  },
+  {
+    "event": "Vasco da Gama reaches India",
+    "year": 1498
+  },
+  {
+    "event": "Martin Luther posts his 95 Theses",
+    "year": 1517
+  },
+  {
+    "event": "Defeat of the Spanish Armada",
+    "year": 1588
+  },
+  {
+    "event": "Founding of Jamestown",
+    "year": 1607
+  },
+  {
+    "event": "Mayflower arrives at Plymouth",
+    "year": 1620
+  },
+  {
+    "event": "Peace of Westphalia",
+    "year": 1648
+  },
+  {
+    "event": "Great Fire of London",
+    "year": 1666
+  },
+  {
+    "event": "Glorious Revolution in England",
+    "year": 1688
+  },
+  {
+    "event": "Declaration of Independence",
+    "year": 1776
+  },
+  {
+    "event": "French Revolution begins",
+    "year": 1789
+  },
+  {
+    "event": "Haitian Independence",
+    "year": 1804
+  },
+  {
+    "event": "Battle of Waterloo",
+    "year": 1815
+  },
+  {
+    "event": "Invention of the telegraph",
+    "year": 1837
+  },
+  {
+    "event": "Revolutions of 1848",
+    "year": 1848
+  },
+  {
+    "event": "Publication of On the Origin of Species",
+    "year": 1859
+  },
+  {
+    "event": "American Civil War begins",
+    "year": 1861
+  },
+  {
+    "event": "Meiji Restoration in Japan",
+    "year": 1868
+  },
+  {
+    "event": "Completion of the Transcontinental Railroad",
+    "year": 1869
+  },
+  {
+    "event": "Unification of Germany",
+    "year": 1871
+  },
+  {
+    "event": "Invention of the telephone",
+    "year": 1876
+  },
+  {
+    "event": "Wright brothers' first flight",
+    "year": 1903
+  },
+  {
+    "event": "Russo-Japanese War begins",
+    "year": 1904
+  },
+  {
+    "event": "Einstein's theory of special relativity",
+    "year": 1905
+  },
+  {
+    "event": "San Francisco earthquake",
+    "year": 1906
+  },
+  {
+    "event": "Sinking of the Titanic",
+    "year": 1912
+  },
+  {
+    "event": "Assassination of Archduke Franz Ferdinand",
+    "year": 1914
+  },
+  {
+    "event": "Russian Revolution",
+    "year": 1917
+  },
+  {
+    "event": "End of World War I",
+    "year": 1918
+  },
+  {
+    "event": "Treaty of Versailles signed",
+    "year": 1919
+  },
+  {
+    "event": "League of Nations established",
+    "year": 1920
+  },
+  {
+    "event": "Irish Free State established",
+    "year": 1922
+  },
+  {
+    "event": "Munich Beer Hall Putsch",
+    "year": 1923
+  },
+  {
+    "event": "Death of Lenin",
+    "year": 1924
+  },
+  {
+    "event": "Scopes Monkey Trial",
+    "year": 1925
+  },
+  {
+    "event": "First solo transatlantic flight by Charles Lindbergh",
+    "year": 1927
+  },
+  {
+    "event": "Discovery of penicillin",
+    "year": 1928
+  },
+  {
+    "event": "Wall Street Crash",
+    "year": 1929
+  },
+  {
+    "event": "Gandhi's Salt March",
+    "year": 1930
+  },
+  {
+    "event": "Statute of Westminster",
+    "year": 1931
+  },
+  {
+    "event": "Hitler appointed Chancellor of Germany",
+    "year": 1933
+  },
+  {
+    "event": "Spanish Civil War begins",
+    "year": 1936
+  },
+  {
+    "event": "Invasion of Poland",
+    "year": 1939
+  },
+  {
+    "event": "Fall of France",
+    "year": 1940
+  },
+  {
+    "event": "Attack on Pearl Harbor",
+    "year": 1941
+  },
+  {
+    "event": "Battle of Midway",
+    "year": 1942
+  },
+  {
+    "event": "Warsaw Ghetto Uprising",
+    "year": 1943
+  },
+  {
+    "event": "D-Day landings",
+    "year": 1944
+  },
+  {
+    "event": "Atomic bombings of Hiroshima and Nagasaki",
+    "year": 1945
+  },
+  {
+    "event": "Nuremberg Trials begin",
+    "year": 1946
+  },
+  {
+    "event": "Independence of India and Pakistan",
+    "year": 1947
+  },
+  {
+    "event": "State of Israel established",
+    "year": 1948
+  },
+  {
+    "event": "NATO formed",
+    "year": 1949
+  },
+  {
+    "event": "Korean War begins",
+    "year": 1950
+  },
+  {
+    "event": "Discovery of DNA structure",
+    "year": 1953
+  },
+  {
+    "event": "Brown v. Board of Education decision",
+    "year": 1954
+  },
+  {
+    "event": "Montgomery Bus Boycott",
+    "year": 1955
+  },
+  {
+    "event": "Hungarian Revolution",
+    "year": 1956
+  },
+  {
+    "event": "Sputnik 1 launched",
+    "year": 1957
+  },
+  {
+    "event": "Cuban Revolution ends",
+    "year": 1959
+  },
+  {
+    "event": "Construction of the Berlin Wall",
+    "year": 1961
+  },
+  {
+    "event": "Cuban Missile Crisis",
+    "year": 1962
+  },
+  {
+    "event": "Assassination of JFK",
+    "year": 1963
+  },
+  {
+    "event": "Civil Rights Act signed",
+    "year": 1964
+  },
+  {
+    "event": "Six-Day War",
+    "year": 1967
+  },
+  {
+    "event": "Apollo 11 moon landing",
+    "year": 1969
+  },
+  {
+    "event": "Watergate break-in",
+    "year": 1972
+  },
+  {
+    "event": "Fall of Saigon",
+    "year": 1975
+  },
+  {
+    "event": "Iranian Revolution",
+    "year": 1979
+  },
+  {
+    "event": "Fall of the Berlin Wall",
+    "year": 1989
+  },
+  {
+    "event": "Dissolution of the Soviet Union",
+    "year": 1991
+  },
+  {
+    "event": "End of Apartheid in South Africa",
+    "year": 1994
+  },
+  {
+    "event": "Transfer of sovereignty over Hong Kong",
+    "year": 1997
+  },
+  {
+    "event": "September 11 attacks",
+    "year": 2001
+  },
+  {
+    "event": "Global financial crisis",
+    "year": 2008
+  },
+  {
+    "event": "Brexit referendum",
+    "year": 2016
+  }
+]

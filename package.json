@@ -1,0 +1,20 @@
+{
+  "name": "timeline",
+  "version": "1.2.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "wrangler pages dev public",
+    "dev": "wrangler pages dev public"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "wrangler": "^4.107.0"
+  },
+  "dependencies": {
+    "puppeteer": "^25.3.0"
+  }
+}

@@ -1,0 +1,362 @@
+[
+  {
+    "event": "Copernicus publishes De revolutionibus orbium coelestium",
+    "year": 1543
+  },
+  {
+    "event": "William Gilbert publishes De Magnete",
+    "year": 1600
+  },
+  {
+    "event": "Johannes Kepler publishes Astronomia nova",
+    "year": 1609
+  },
+  {
+    "event": "Galileo Galilei publishes Sidereus Nuncius",
+    "year": 1610
+  },
+  {
+    "event": "William Harvey publishes Exercitatio Anatomica de Motu Cordis et Sanguinis in Animalibus",
+    "year": 1628
+  },
+  {
+    "event": "Galileo publishes Dialogue Concerning the Two Chief World Systems",
+    "year": 1632
+  },
+  {
+    "event": "Robert Boyle formulates Boyle's law",
+    "year": 1662
+  },
+  {
+    "event": "Robert Hooke publishes Micrographia",
+    "year": 1665
+  },
+  {
+    "event": "Ole Rømer makes the first quantitative measurement of the speed of light",
+    "year": 1676
+  },
+  {
+    "event": "Isaac Newton publishes Philosophiæ Naturalis Principia Mathematica",
+    "year": 1687
+  },
+  {
+    "event": "Carl Linnaeus publishes Systema Naturae",
+    "year": 1735
+  },
+  {
+    "event": "Benjamin Franklin conducts his kite experiment",
+    "year": 1752
+  },
+  {
+    "event": "Mikhail Lomonosov discovers the atmosphere of Venus",
+    "year": 1761
+  },
+  {
+    "event": "Joseph Priestley discovers oxygen",
+    "year": 1774
+  },
+  {
+    "event": "William Herschel discovers Uranus",
+    "year": 1781
+  },
+  {
+    "event": "Charles-Augustin de Coulomb introduces Coulomb's law",
+    "year": 1785
+  },
+  {
+    "event": "Antoine Lavoisier publishes Elements of Chemistry",
+    "year": 1789
+  },
+  {
+    "event": "Edward Jenner develops the smallpox vaccine",
+    "year": 1796
+  },
+  {
+    "event": "Alessandro Volta invents the voltaic pile",
+    "year": 1800
+  },
+  {
+    "event": "Thomas Young conducts the double-slit experiment",
+    "year": 1801
+  },
+  {
+    "event": "John Dalton proposes his atomic theory",
+    "year": 1803
+  },
+  {
+    "event": "Amedeo Avogadro proposes Avogadro's law",
+    "year": 1811
+  },
+  {
+    "event": "Hans Christian Ørsted discovers electromagnetism",
+    "year": 1820
+  },
+  {
+    "event": "Nicolas Léonard Sadi Carnot describes the Carnot cycle",
+    "year": 1824
+  },
+  {
+    "event": "Georg Ohm formulates Ohm's law",
+    "year": 1827
+  },
+  {
+    "event": "Friedrich Wöhler synthesizes urea",
+    "year": 1828
+  },
+  {
+    "event": "Michael Faraday discovers electromagnetic induction",
+    "year": 1831
+  },
+  {
+    "event": "Matthias Schleiden and Theodor Schwann formulate cell theory",
+    "year": 1839
+  },
+  {
+    "event": "Julius Robert von Mayer proposes the law of conservation of energy",
+    "year": 1842
+  },
+  {
+    "event": "Johann Gottfried Galle discovers Neptune",
+    "year": 1846
+  },
+  {
+    "event": "Gregor Mendel begins his experiments on plant hybridization",
+    "year": 1856
+  },
+  {
+    "event": "Charles Darwin publishes On the Origin of Species",
+    "year": 1859
+  },
+  {
+    "event": "Louis Pasteur disproves spontaneous generation",
+    "year": 1861
+  },
+  {
+    "event": "James Clerk Maxwell publishes A Dynamical Theory of the Electromagnetic Field",
+    "year": 1864
+  },
+  {
+    "event": "Pierre Janssen and Norman Lockyer discover helium",
+    "year": 1868
+  },
+  {
+    "event": "Dmitri Mendeleev publishes the periodic table",
+    "year": 1869
+  },
+  {
+    "event": "Johannes Diderik van der Waals derives the van der Waals equation",
+    "year": 1873
+  },
+  {
+    "event": "Ludwig Boltzmann formulates the statistical definition of entropy",
+    "year": 1877
+  },
+  {
+    "event": "Thomas Edison invents a practical incandescent light bulb",
+    "year": 1879
+  },
+  {
+    "event": "Robert Koch discovers the bacterium that causes tuberculosis",
+    "year": 1882
+  },
+  {
+    "event": "Louis Pasteur successfully tests the rabies vaccine",
+    "year": 1885
+  },
+  {
+    "event": "The Michelson–Morley experiment yields a null result for the aether",
+    "year": 1887
+  },
+  {
+    "event": "Heinrich Hertz discovers radio waves",
+    "year": 1888
+  },
+  {
+    "event": "Wilhelm Röntgen discovers X-rays",
+    "year": 1895
+  },
+  {
+    "event": "Henri Becquerel discovers radioactivity",
+    "year": 1896
+  },
+  {
+    "event": "J. J. Thomson discovers the electron",
+    "year": 1897
+  },
+  {
+    "event": "Marie and Pierre Curie discover polonium and radium",
+    "year": 1898
+  },
+  {
+    "event": "Max Planck formulates Planck's law of black-body radiation",
+    "year": 1900
+  },
+  {
+    "event": "Karl Landsteiner discovers human blood groups",
+    "year": 1901
+  },
+  {
+    "event": "Albert Einstein publishes his Annus Mirabilis papers",
+    "year": 1905
+  },
+  {
+    "event": "The Geiger-Marsden experiment is conducted",
+    "year": 1909
+  },
+  {
+    "event": "Ernest Rutherford proposes the planetary model of the atom",
+    "year": 1911
+  },
+  {
+    "event": "Alfred Wegener proposes continental drift",
+    "year": 1912
+  },
+  {
+    "event": "Niels Bohr proposes the Bohr model of the atom",
+    "year": 1913
+  },
+  {
+    "event": "Albert Einstein formulates general relativity",
+    "year": 1915
+  },
+  {
+    "event": "Arthur Eddington's eclipse expedition confirms general relativity",
+    "year": 1919
+  },
+  {
+    "event": "Alexander Friedmann predicts the expansion of the universe",
+    "year": 1922
+  },
+  {
+    "event": "Louis de Broglie proposes wave-particle duality",
+    "year": 1924
+  },
+  {
+    "event": "Wolfgang Pauli formulates the Pauli exclusion principle",
+    "year": 1925
+  },
+  {
+    "event": "Erwin Schrödinger publishes the Schrödinger equation",
+    "year": 1926
+  },
+  {
+    "event": "Werner Heisenberg formulates the uncertainty principle",
+    "year": 1927
+  },
+  {
+    "event": "Alexander Fleming discovers penicillin",
+    "year": 1928
+  },
+  {
+    "event": "Edwin Hubble discovers the expansion of the universe",
+    "year": 1929
+  },
+  {
+    "event": "Clyde Tombaugh discovers Pluto",
+    "year": 1930
+  },
+  {
+    "event": "James Chadwick discovers the neutron",
+    "year": 1932
+  },
+  {
+    "event": "Otto Hahn and Fritz Strassmann discover nuclear fission",
+    "year": 1938
+  },
+  {
+    "event": "Enrico Fermi oversees the first controlled nuclear chain reaction",
+    "year": 1942
+  },
+  {
+    "event": "Oswald Avery proves DNA is the genetic material",
+    "year": 1944
+  },
+  {
+    "event": "The transistor is invented at Bell Labs",
+    "year": 1947
+  },
+  {
+    "event": "George Gamow, Ralph Alpher, and Robert Herman propose the Big Bang theory",
+    "year": 1948
+  },
+  {
+    "event": "Rosalind Franklin captures Photograph 51 of DNA",
+    "year": 1951
+  },
+  {
+    "event": "The Hershey-Chase experiment confirms DNA is the genetic material",
+    "year": 1952
+  },
+  {
+    "event": "James Watson and Francis Crick propose the double helix structure of DNA",
+    "year": 1953
+  },
+  {
+    "event": "The Soviet Union launches Sputnik 1",
+    "year": 1957
+  },
+  {
+    "event": "Theodore Maiman builds the first working laser",
+    "year": 1960
+  },
+  {
+    "event": "Yuri Gagarin becomes the first human in space",
+    "year": 1961
+  },
+  {
+    "event": "Murray Gell-Mann and George Zweig propose the quark model",
+    "year": 1964
+  },
+  {
+    "event": "Arno Penzias and Robert Wilson discover the cosmic microwave background radiation",
+    "year": 1965
+  },
+  {
+    "event": "Jocelyn Bell Burnell discovers the first pulsar",
+    "year": 1967
+  },
+  {
+    "event": "Apollo 11 lands the first humans on the Moon",
+    "year": 1969
+  },
+  {
+    "event": "Stephen Hawking predicts Hawking radiation",
+    "year": 1974
+  },
+  {
+    "event": "The Voyager spacecraft are launched",
+    "year": 1977
+  },
+  {
+    "event": "Alan Guth proposes cosmic inflation",
+    "year": 1980
+  },
+  {
+    "event": "The Scanning Tunneling Microscope is invented",
+    "year": 1981
+  },
+  {
+    "event": "Kary Mullis invents the polymerase chain reaction",
+    "year": 1983
+  },
+  {
+    "event": "High-temperature superconductivity is discovered",
+    "year": 1986
+  },
+  {
+    "event": "The Human Genome Project begins",
+    "year": 1990
+  },
+  {
+    "event": "The first exoplanet around a main-sequence star, 51 Pegasi b, is discovered",
+    "year": 1995
+  },
+  {
+    "event": "Dolly the sheep becomes the first cloned mammal",
+    "year": 1996
+  },
+  {
+    "event": "The accelerated expansion of the universe is discovered",
+    "year": 1998
+  }
+]

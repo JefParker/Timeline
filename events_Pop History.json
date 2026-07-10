@@ -1,0 +1,534 @@
+[
+  {
+    "event": "Bob Dylan, born Robert Zimmerman",
+    "year": 1941
+  },
+  {
+    "event": "Freddie Mercury, born Farrokh Bulsara",
+    "year": 1946
+  },
+  {
+    "event": "Elton John, born Reginald Kenneth Dwight",
+    "year": 1947
+  },
+  {
+    "event": "Madonna, born Madonna Louise Ciccone",
+    "year": 1958
+  },
+  {
+    "event": "Lady Gaga, born Stefani Joanne Angelina Germanotta",
+    "year": 1986
+  },
+  {
+    "event": "Bruno Mars, born Peter Gene Hernandez",
+    "year": 1985
+  },
+  {
+    "event": "Miley Cyrus, born Destiny Hope Cyrus",
+    "year": 1992
+  },
+  {
+    "event": "Sputnik 1 becomes the first artificial satellite",
+    "year": 1957
+  },
+  {
+    "event": "Yuri Gagarin becomes the first human in space",
+    "year": 1961
+  },
+  {
+    "event": "Valentina Tereshkova becomes the first woman in space",
+    "year": 1963
+  },
+  {
+    "event": "Alexei Leonov performs the first spacewalk",
+    "year": 1965
+  },
+  {
+    "event": "Neil Armstrong becomes the first person to walk on the moon",
+    "year": 1969
+  },
+  {
+    "event": "Salyut 1 becomes the first space station",
+    "year": 1971
+  },
+  {
+    "event": "Dennis Tito becomes the first space tourist",
+    "year": 2001
+  },
+  {
+    "event": "Monopoly – Charles Darrow patents his version of the property trading game",
+    "year": 1935
+  },
+  {
+    "event": "Scrabble – James Brunot trademarks the name for Alfred Butts' word game",
+    "year": 1948
+  },
+  {
+    "event": "Clue – Waddington's releases 'Cluedo' in the UK",
+    "year": 1949
+  },
+  {
+    "event": "Risk – Parker Brothers releases the game of global domination",
+    "year": 1959
+  },
+  {
+    "event": "Twister – Milton Bradley releases the first game using human bodies as playing pieces",
+    "year": 1966
+  },
+  {
+    "event": "Uno – Merle Robbins invents the shedding-type card game",
+    "year": 1971
+  },
+  {
+    "event": "Catan – Klaus Teuber releases 'The Settlers of Catan' in Germany",
+    "year": 1995
+  },
+  {
+    "event": "Mark Twain, born Samuel Langhorne Clemens",
+    "year": 1835
+  },
+  {
+    "event": "Lewis Carroll, born Charles Lutwidge Dodgson",
+    "year": 1832
+  },
+  {
+    "event": "George Orwell, born Eric Arthur Blair",
+    "year": 1903
+  },
+  {
+    "event": "Dr. Seuss, born Theodor Seuss Geisel",
+    "year": 1904
+  },
+  {
+    "event": "Stan Lee, born Stanley Martin Lieber",
+    "year": 1922
+  },
+  {
+    "event": "John le Carré, born David John Moore Cornwell",
+    "year": 1931
+  },
+  {
+    "event": "Lemony Snicket, born Daniel Handler",
+    "year": 1970
+  },
+  {
+    "event": "Sony Walkman – The TPS-L2 revolutionizes portable music",
+    "year": 1979
+  },
+  {
+    "event": "IBM Personal Computer – The IBM 5150 brings computing to the masses",
+    "year": 1981
+  },
+  {
+    "event": "Nintendo Entertainment System – The NES revitalizes home video gaming in North America",
+    "year": 1985
+  },
+  {
+    "event": "Game Boy – Nintendo introduces its incredibly popular handheld console",
+    "year": 1989
+  },
+  {
+    "event": "Apple iPod – '1,000 songs in your pocket' changes the music industry",
+    "year": 2001
+  },
+  {
+    "event": "Apple iPhone – The first mobile phone to use multi-touch technology",
+    "year": 2007
+  },
+  {
+    "event": "Amazon Echo – The first smart speaker featuring the Alexa voice assistant",
+    "year": 2014
+  },
+  {
+    "event": "Miracle on 34th Street – The original film starring Maureen O'Hara and Edmund Gwenn",
+    "year": 1947
+  },
+  {
+    "event": "Rudolph the Red-Nosed Reindeer – The Rankin/Bass stop-motion television special premieres",
+    "year": 1964
+  },
+  {
+    "event": "A Charlie Brown Christmas – The Peanuts gang makes their animated TV debut",
+    "year": 1965
+  },
+  {
+    "event": "A Christmas Story – Ralphie Parker begins his quest for a Red Ryder BB gun",
+    "year": 1983
+  },
+  {
+    "event": "Home Alone – Kevin McCallister defends his house from the Wet Bandits",
+    "year": 1990
+  },
+  {
+    "event": "The Nightmare Before Christmas – Jack Skellington discovers Christmas Town",
+    "year": 1993
+  },
+  {
+    "event": "Elf – Buddy the Elf travels from the North Pole to New York City",
+    "year": 2003
+  },
+  {
+    "event": "McDonald's – Founded by Richard and Maurice McDonald in San Bernardino",
+    "year": 1940
+  },
+  {
+    "event": "In-N-Out Burger – California's first drive-thru hamburger stand opens",
+    "year": 1948
+  },
+  {
+    "event": "Burger King – Founded in Miami, originally as Insta-Burger King",
+    "year": 1954
+  },
+  {
+    "event": "Taco Bell – Glen Bell opens the first location in California",
+    "year": 1962
+  },
+  {
+    "event": "Subway – Opened originally as 'Pete\\'s Super Submarines'",
+    "year": 1965
+  },
+  {
+    "event": "Wendy's – Dave Thomas opens the first restaurant in Ohio",
+    "year": 1969
+  },
+  {
+    "event": "Starbucks – The first store opens at Seattle's Pike Place Market",
+    "year": 1971
+  },
+  {
+    "event": "Superman – Debuts in Action Comics #1",
+    "year": 1938
+  },
+  {
+    "event": "Batman – Debuts in Detective Comics #27",
+    "year": 1939
+  },
+  {
+    "event": "Wonder Woman – Debuts in All Star Comics #8",
+    "year": 1941
+  },
+  {
+    "event": "Spider-Man – Debuts in Amazing Fantasy #15",
+    "year": 1962
+  },
+  {
+    "event": "Wolverine – Debuts in a cameo in The Incredible Hulk #180",
+    "year": 1974
+  },
+  {
+    "event": "Teenage Mutant Ninja Turtles – Debuts in a self-published comic",
+    "year": 1984
+  },
+  {
+    "event": "Deadpool – Debuts in The New Mutants #98",
+    "year": 1991
+  },
+  {
+    "event": "The Teddy Bear – Created and named after President 'Teddy' Roosevelt",
+    "year": 1902
+  },
+  {
+    "event": "The Slinky – Invented by a naval engineer and hits store shelves",
+    "year": 1945
+  },
+  {
+    "event": "Mr. Potato Head – The first toy advertised on television",
+    "year": 1952
+  },
+  {
+    "event": "Barbie – Ruth Handler's iconic fashion doll debuts at the toy fair",
+    "year": 1959
+  },
+  {
+    "event": "Hot Wheels – Mattel introduces the ultimate die-cast toy cars",
+    "year": 1968
+  },
+  {
+    "event": "Rubik's Cube – Invented by Hungarian architecture professor Ernő Rubik",
+    "year": 1974
+  },
+  {
+    "event": "Furby – The robotic electronic pet becomes a massive holiday craze",
+    "year": 1998
+  },
+  {
+    "event": "SixDegrees.com – Widely considered the very first social media site",
+    "year": 1997
+  },
+  {
+    "event": "Friendster – Launched as one of the first major global social networks",
+    "year": 2002
+  },
+  {
+    "event": "Facebook – Mark Zuckerberg launches 'TheFacebook' at Harvard",
+    "year": 2004
+  },
+  {
+    "event": "YouTube – The first video, 'Me at the zoo,' is uploaded",
+    "year": 2005
+  },
+  {
+    "event": "Twitter – Jack Dorsey sends the first tweet: 'just setting up my twttr'",
+    "year": 2006
+  },
+  {
+    "event": "Instagram – The photo-sharing app launches exclusively on iOS",
+    "year": 2010
+  },
+  {
+    "event": "TikTok – Launched internationally by ByteDance",
+    "year": 2016
+  },
+  {
+    "event": "Oklahoma! – Rodgers and Hammerstein's groundbreaking first collaboration",
+    "year": 1943
+  },
+  {
+    "event": "West Side Story – Stephen Sondheim and Leonard Bernstein's tragic romance debuts",
+    "year": 1957
+  },
+  {
+    "event": "Hair – The revolutionary rock musical premieres",
+    "year": 1967
+  },
+  {
+    "event": "A Chorus Line – The definitive backstage musical opens on Broadway",
+    "year": 1975
+  },
+  {
+    "event": "The Phantom of the Opera – Andrew Lloyd Webber's masterpiece opens in the West End",
+    "year": 1986
+  },
+  {
+    "event": "Rent – Jonathan Larson's rock musical revitalizes Broadway",
+    "year": 1996
+  },
+  {
+    "event": "Hamilton – Lin-Manuel Miranda's historical hip-hop musical premieres",
+    "year": 2015
+  },
+  {
+    "event": "Snow White and the Seven Dwarfs – Disney's first full-length animated feature",
+    "year": 1937
+  },
+  {
+    "event": "Cinderella – Disney bounces back after WWII with a massive fairy tale hit",
+    "year": 1950
+  },
+  {
+    "event": "The Little Mermaid – The film that kicked off the Disney Renaissance",
+    "year": 1989
+  },
+  {
+    "event": "Toy Story – Pixar releases the first entirely computer-animated feature film",
+    "year": 1995
+  },
+  {
+    "event": "Shrek – DreamWorks turns the traditional fairy tale upside down",
+    "year": 2001
+  },
+  {
+    "event": "Finding Nemo – Pixar takes audiences on an epic underwater journey",
+    "year": 2003
+  },
+  {
+    "event": "Frozen – Elsa and Anna take the world by storm",
+    "year": 2013
+  },
+  {
+    "event": "First Network Email – Ray Tomlinson sends the first message using the '@' symbol",
+    "year": 1971
+  },
+  {
+    "event": "First Domain Registered – 'symbolics.com' becomes the first registered .com domain",
+    "year": 1985
+  },
+  {
+    "event": "World Wide Web Invented – Tim Berners-Lee writes the initial proposal at CERN",
+    "year": 1989
+  },
+  {
+    "event": "First Webcam – Created at Cambridge University just to monitor a coffee pot",
+    "year": 1991
+  },
+  {
+    "event": "First eBay Sale – Founder Pierre Omidyar sells a broken laser pointer",
+    "year": 1995
+  },
+  {
+    "event": "First Wikipedia Article – The crowdsourced encyclopedia officially launches",
+    "year": 2001
+  },
+  {
+    "event": "First Bitcoin Transaction – Satoshi Nakamoto sends 10 BTC to Hal Finney",
+    "year": 2009
+  },
+  {
+    "event": "Oreo – Nabisco introduces the 'Oreo Biscuit' to the market",
+    "year": 1912
+  },
+  {
+    "event": "Ritz Crackers – Introduced as a buttery, circular cracker during the Great Depression",
+    "year": 1934
+  },
+  {
+    "event": "Cheetos – Invented by Fritos creator Charles Elmer Doolin",
+    "year": 1948
+  },
+  {
+    "event": "Pop-Tarts – Kellogg's introduces the legendary toaster pastry",
+    "year": 1964
+  },
+  {
+    "event": "Doritos – Originally created at a restaurant in Disneyland and released nationwide",
+    "year": 1966
+  },
+  {
+    "event": "Pringles – Procter & Gamble introduces 'Pringle\\'s Newfangled Potato Chips'",
+    "year": 1968
+  },
+  {
+    "event": "Lunchables – Oscar Mayer launches the pre-packaged, build-your-own lunch",
+    "year": 1988
+  },
+  {
+    "event": "The Tale of Peter Rabbit – Beatrix Potter publishes her famous tale",
+    "year": 1902
+  },
+  {
+    "event": "Winnie-the-Pooh – A. A. Milne publishes the first collection of Pooh stories",
+    "year": 1926
+  },
+  {
+    "event": "Charlotte's Web – E. B. White publishes the classic farmyard tale",
+    "year": 1952
+  },
+  {
+    "event": "The Cat in the Hat – Dr. Seuss revolutionizes beginner reading books",
+    "year": 1957
+  },
+  {
+    "event": "Where the Wild Things Are – Maurice Sendak publishes his wildly imaginative book",
+    "year": 1963
+  },
+  {
+    "event": "The Very Hungry Caterpillar – Eric Carle introduces the hungry, hole-punching bug",
+    "year": 1969
+  },
+  {
+    "event": "Harry Potter and the Sorcerer's Stone – J.K. Rowling launches the wizarding world",
+    "year": 1997
+  },
+  {
+    "event": "Pong – Atari releases the wildly successful arcade table-tennis game",
+    "year": 1972
+  },
+  {
+    "event": "Pac-Man – Namco's yellow dot-munching mascot hits the arcades",
+    "year": 1980
+  },
+  {
+    "event": "Super Mario Bros. – Mario and Luigi save the Mushroom Kingdom on the NES",
+    "year": 1985
+  },
+  {
+    "event": "The Legend of Zelda – Link's first top-down adventure in Hyrule is released",
+    "year": 1986
+  },
+  {
+    "event": "Doom – id Software popularizes the first-person shooter genre",
+    "year": 1993
+  },
+  {
+    "event": "Final Fantasy VII – Square brings massive 3D cinematic RPGs to the PlayStation",
+    "year": 1997
+  },
+  {
+    "event": "Halo: Combat Evolved – Master Chief debuts alongside the original Xbox",
+    "year": 2001
+  },
+  {
+    "event": "Disneyland – Walt Disney opens his original park in Anaheim, California",
+    "year": 1955
+  },
+  {
+    "event": "Six Flags Over Texas – The first-ever Six Flags park opens in Arlington",
+    "year": 1961
+  },
+  {
+    "event": "Walt Disney World (Magic Kingdom) – The massive Florida resort opens its doors",
+    "year": 1971
+  },
+  {
+    "event": "Epcot – Disney's vision of a permanent World's Fair opens",
+    "year": 1982
+  },
+  {
+    "event": "Universal Studios Florida – Universal opens a theme park to rival Disney in Orlando",
+    "year": 1990
+  },
+  {
+    "event": "Disney's Animal Kingdom – Disney blends a zoo with high-tech theme park rides",
+    "year": 1998
+  },
+  {
+    "event": "The Wizarding World of Harry Potter – The immersive Hogsmeade land opens at Universal",
+    "year": 2010
+  },
+  {
+    "event": "Ford Model T – Henry Ford introduces the first affordable, mass-produced automobile",
+    "year": 1908
+  },
+  {
+    "event": "Volkswagen Beetle – Production begins on the iconic 'Bug'",
+    "year": 1938
+  },
+  {
+    "event": "Chevrolet Corvette – The quintessential American sports car is introduced",
+    "year": 1953
+  },
+  {
+    "event": "Ford Mustang – The original 'pony car' makes a wildly successful debut",
+    "year": 1964
+  },
+  {
+    "event": "Toyota Prius – The world's first mass-produced hybrid passenger car goes on sale",
+    "year": 1997
+  },
+  {
+    "event": "Tesla Model S – Tesla releases its revolutionary luxury all-electric sedan",
+    "year": 2012
+  },
+  {
+    "event": "Ford F-150 Lightning – Ford launches the all-electric version of its best-selling truck",
+    "year": 2022
+  },
+  {
+    "event": "The Microwave Oven – Percy Spencer accidentally discovers microwave cooking using radar tech",
+    "year": 1945
+  },
+  {
+    "event": "The Credit Card – Diners Club introduces the first modern multipurpose charge card",
+    "year": 1950
+  },
+  {
+    "event": "The Barcode – Norman Joseph Woodland and Bernard Silver receive the patent",
+    "year": 1952
+  },
+  {
+    "event": "The Computer Mouse – Douglas Engelbart publicly demonstrates the device for the first time",
+    "year": 1968
+  },
+  {
+    "event": "The Digital Camera – Steven Sasson at Kodak creates the first digital camera",
+    "year": 1975
+  },
+  {
+    "event": "The Compact Disc (CD) – Commercially released by Sony and Philips",
+    "year": 1982
+  },
+  {
+    "event": "The Smartphone – The IBM Simon goes on sale, featuring apps and a touchscreen",
+    "year": 1994
+  }
+]
