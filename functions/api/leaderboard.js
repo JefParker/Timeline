@@ -118,18 +118,10 @@ export async function onRequestPost(context) {
                  ON CONFLICT(id) DO UPDATE SET display_name = excluded.display_name`
             ).bind(user_id, display_name).run();
         } else {
-            const RANDOM_NAMES = ["Brainiac", "Whiz Kid", "Einstein", "Professor", "Egghead", "Sharpie", "Bright Bulb", "Kid Genius", "Know-It-All", "Walking Encyclopedia"];
-            let hash = 0;
-            for (let i = 0; i < user_id.length; i++) {
-                hash = Math.imul(31, hash) + user_id.charCodeAt(i) | 0;
-            }
-            const nameIndex = Math.abs(hash) % RANDOM_NAMES.length;
-            const generatedName = RANDOM_NAMES[nameIndex];
-            
-            // Ensure user exists at least with a generated name if missing
+            // Ensure user exists at least with an empty display name if missing
             await env.DB.prepare(
                 `INSERT OR IGNORE INTO users (id, display_name) VALUES (?, ?)`
-            ).bind(user_id, generatedName).run();
+            ).bind(user_id, '').run();
         }
 
         // Delete any existing score for this user and puzzle_date to prevent duplicates

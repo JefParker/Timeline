@@ -120,7 +120,10 @@
         <h2 class="modal-title">Enter your name</h2>
         <p style="text-align: center; color: var(--text-secondary);">You made it to the leaderboard! How should we display your name?</p>
         <input type="text" id="name-input" placeholder="Your Name" maxlength="20">
-        <button id="save-name-btn" class="modal-btn primary" disabled>Save</button>
+        <div style="display: flex; gap: 1rem; width: 100%; flex-direction: column; margin-top: 1rem;">
+            <button id="save-name-btn" class="modal-btn primary" disabled>Save</button>
+            <button id="skip-name-btn" class="modal-btn outline">Skip</button>
+        </div>
     </div>
 
     <div id="settings-modal" class="modal hidden">
@@ -137,16 +140,16 @@
                 <option value="theme-steampunk">Steampunk</option>
             </select>
         </div>
-        <div class="setting-group" style="display: flex; align-items: center; justify-content: space-between; margin-top: 1.5rem;">
+        <div class="setting-group" style="display: flex; align-items: center; justify-content: space-between; margin-top: 1rem; margin-bottom: 0.5rem;">
             <label for="sound-toggle" style="margin-bottom: 0;">Sound Effects</label>
             <input type="checkbox" id="sound-toggle" style="width: 20px; height: 20px; cursor: pointer;">
         </div>
-        <div class="setting-group" style="display: flex; align-items: center; justify-content: space-between; margin-top: 1rem;">
+        <div class="setting-group" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
             <label for="music-toggle" style="margin-bottom: 0;">Music</label>
             <input type="checkbox" id="music-toggle" style="width: 20px; height: 20px; cursor: pointer;">
         </div>
-        <div class="setting-group" id="volume-group" style="margin-top: 0.5rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+        <div class="setting-group" id="volume-group" style="margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
                 <label for="music-volume" style="margin-bottom: 0; font-size: 0.9rem; color: var(--text-secondary);">Volume</label>
             </div>
             <input type="range" id="music-volume" min="0" max="1" step="0.05" value="0.25" style="width: 100%; cursor: pointer;">
@@ -154,7 +157,7 @@
         <div class="setting-group">
             <label>Display Name</label>
             <input type="text" id="settings-name-input" placeholder="Your Name" maxlength="20">
-            <button id="update-name-btn" class="modal-btn outline" disabled style="margin-top: 0.5rem;">Update</button>
+            <button id="update-name-btn" class="modal-btn outline" disabled style="margin-top: 0.5rem; display: none;">Update</button>
         </div>
         <div class="setting-group">
             <label>Player ID</label>
@@ -176,7 +179,7 @@
             <button id="update-uuid-btn" class="modal-btn" style="margin-top: 0.5rem; display: none; background-color: darkred; color: white; border: none;">Update Player ID</button>
         </div>
         <div id="install-app-container" style="display: none; width: 100%; margin-bottom: 1rem;">
-            <button id="install-app-btn" class="modal-btn outline" style="width: 100%;">Install App</button>
+            <button id="install-app-btn" class="modal-btn" style="width: 100%; background-color: darkgreen; color: white; border: none;">Install Timeline</button>
         </div>
         <div style="display: flex; gap: 1rem; width: 100%;">
             <button id="close-settings-btn" class="modal-btn primary" style="flex: 1;">Close</button>
@@ -203,7 +206,7 @@
             <button id="close-about-btn" class="modal-btn primary" style="flex: 1;">Got it</button>
         </div>
         <div style="text-align: center; margin-top: 1rem; font-family: var(--font-sans); color: var(--text-secondary); font-size: 0.8rem;">
-            v1.2.1
+            v1.2.2
         </div>
     </div>
 

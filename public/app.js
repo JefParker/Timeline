@@ -7,7 +7,6 @@ function generateUUID() {
 }
 
 // Game State
-const RANDOM_NAMES = ["Brainiac", "Whiz Kid", "Einstein", "Professor", "Egghead", "Sharpie", "Bright Bulb", "Kid Genius", "Know-It-All", "Walking Encyclopedia"];
 
 let gameState = {
     userId: localStorage.getItem('timeline_user_id') || generateUUID(),
@@ -28,17 +27,6 @@ let gameState = {
 
 if (!localStorage.getItem('timeline_user_id')) {
     localStorage.setItem('timeline_user_id', gameState.userId);
-}
-
-if (!gameState.displayName) {
-    // Pick deterministic name based on user ID so it's consistent
-    let hash = 0;
-    for (let i = 0; i < gameState.userId.length; i++) {
-        hash = Math.imul(31, hash) + gameState.userId.charCodeAt(i) | 0;
-    }
-    const nameIndex = Math.abs(hash) % RANDOM_NAMES.length;
-    gameState.displayName = RANDOM_NAMES[nameIndex];
-    localStorage.setItem('timeline_display_name', gameState.displayName);
 }
 
 // Initialize Theme
@@ -993,7 +981,7 @@ async function showLeaderboard(result) {
             const item = document.createElement('div');
             const isMe = l.user_id === gameState.userId || (gameState.displayName && l.display_name === gameState.displayName);
             item.className = 'leaderboard-item' + (isMe ? ' is-me' : '');
-            const nameDisplay = isMe ? `<strong>${l.display_name} (You)</strong>` : l.display_name;
+            const nameDisplay = isMe ? `<strong>${l.display_name || 'Anonymous'} (You)</strong>` : (l.display_name || 'Anonymous');
             
             const badge = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
             item.innerHTML = `
@@ -1026,7 +1014,7 @@ async function showLeaderboard(result) {
             item.innerHTML = `
                 <div class="left-col">
                     <span class="rank">${leaderboardData.userRank}</span>
-                    <span class="player-name"><strong>${l.display_name} (You)</strong></span>
+                    <span class="player-name"><strong>${l.display_name || 'Anonymous'} (You)</strong></span>
                 </div>
                 <div class="right-col">
                     <span class="score">${l.score}/7</span>
@@ -1075,6 +1063,11 @@ document.getElementById('save-name-btn')?.addEventListener('click', async () => 
     }
 });
 
+document.getElementById('skip-name-btn')?.addEventListener('click', () => {
+    nameModal.classList.add('hidden');
+    endModal.classList.remove('hidden');
+});
+
 document.getElementById('settings-btn')?.addEventListener('click', () => {
     overlay.classList.remove('hidden');
     settingsModal.classList.remove('hidden');
@@ -1100,6 +1093,7 @@ document.getElementById('settings-btn')?.addEventListener('click', () => {
     const updateBtn = document.getElementById('update-name-btn');
     const closeBtn = document.getElementById('close-settings-btn');
     updateBtn.disabled = true;
+    updateBtn.style.display = 'none';
     updateBtn.className = 'modal-btn outline';
     closeBtn.className = 'modal-btn primary';
 });
@@ -1111,10 +1105,12 @@ document.getElementById('settings-name-input')?.addEventListener('input', (e) =>
     
     if (val && val !== (gameState.displayName || '')) {
         updateBtn.disabled = false;
+        updateBtn.style.display = '';
         updateBtn.className = 'modal-btn primary';
         closeBtn.className = 'modal-btn outline';
     } else {
         updateBtn.disabled = true;
+        updateBtn.style.display = 'none';
         updateBtn.className = 'modal-btn outline';
         closeBtn.className = 'modal-btn primary';
     }
@@ -1216,6 +1212,7 @@ document.getElementById('update-name-btn')?.addEventListener('click', async () =
         const updateBtn = document.getElementById('update-name-btn');
         const closeBtn = document.getElementById('close-settings-btn');
         updateBtn.disabled = true;
+        updateBtn.style.display = 'none';
         updateBtn.className = 'modal-btn outline';
         closeBtn.className = 'modal-btn primary';
     }
@@ -1655,13 +1652,13 @@ const installAppContainer = document.getElementById('install-app-container');
 const installAppBtn = document.getElementById('install-app-btn');
 
 window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent the mini-infobar from appearing on mobile
-    e.preventDefault();
     // Stash the event so it can be triggered later.
     deferredPrompt = e;
     // Update UI notify the user they can install the PWA
     if (installAppContainer) {
         installAppContainer.style.display = 'flex';
+        const closeBtn = document.getElementById('close-settings-btn');
+        if (closeBtn) closeBtn.style.display = 'none';
     }
 });
 
@@ -1678,6 +1675,8 @@ if (installAppBtn) {
         // Hide the install button
         if (installAppContainer) {
             installAppContainer.style.display = 'none';
+            const closeBtn = document.getElementById('close-settings-btn');
+            if (closeBtn) closeBtn.style.display = '';
         }
     });
 }
