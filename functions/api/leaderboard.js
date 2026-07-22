@@ -11,9 +11,9 @@ export async function onRequestGet(context) {
 
     try {
         const { results } = await env.DB.prepare(
-            `SELECT l.user_id, l.score, l.time_ms, u.display_name 
+            `SELECT l.user_id, l.score, l.time_ms, COALESCE(u.display_name, '') as display_name 
              FROM leaderboard l 
-             JOIN users u ON l.user_id = u.id 
+             LEFT JOIN users u ON l.user_id = u.id 
              WHERE l.puzzle_date = ? 
              ORDER BY l.score DESC, l.time_ms ASC`
         ).bind(date).all();

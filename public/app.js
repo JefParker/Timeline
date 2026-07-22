@@ -968,8 +968,10 @@ async function fetchLeaderboard() {
         if (res.ok) {
             return await res.json();
         }
-    } catch(e) {}
-    return { isOffline: true, top10: [], userRank: -1, userData: null };
+    } catch(e) {
+        console.error("Leaderboard fetch error:", e);
+    }
+    return { isError: true, top10: [], userRank: -1, userData: null };
 }
 
 function renderLeaderboardItems(leaderboardData, listEl) {
@@ -977,6 +979,11 @@ function renderLeaderboardItems(leaderboardData, listEl) {
     
     if (!navigator.onLine || leaderboardData.isOffline) {
         listEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 0.75rem 0; font-size: 0.9rem;">Leaderboard unavailable while offline.</p>';
+        return;
+    }
+    
+    if (leaderboardData.isError) {
+        listEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 0.75rem 0; font-size: 0.9rem;">Unable to load leaderboard data.</p>';
         return;
     }
     
@@ -1126,6 +1133,7 @@ async function showLeaderboard(result) {
     const listEl = document.getElementById('leaderboard-list');
     listEl.innerHTML = '<div class="loading-spinner">Loading...</div>';
     
+    const leaderboardData = await fetchLeaderboard();
     renderLeaderboardItems(leaderboardData, listEl);
     
     // If no display name, prompt them
@@ -1720,7 +1728,11 @@ async function fetchLeaderboardForDashboard(dateStr) {
     
     try {
         const res = await fetch(`/api/leaderboard?date=${dateStr}`);
-        if (!res.ok) return;
+        if (!res.ok) {
+            leaderboardDisplay.classList.remove('hidden');
+            leaderboardContent.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Unable to load leaderboard data.</p>';
+            return;
+        }
         const data = await res.json();
         const top10 = data.all || data.top10;
         
