@@ -72,6 +72,9 @@ function updateThemeColorMeta(theme) {
         case 'theme-steampunk':
             metaTag.setAttribute('content', '#1c1614');
             break;
+        case 'theme-new-yorker':
+            metaTag.setAttribute('content', '#171b26');
+            break;
         default:
             metaTag.setAttribute('content', '#0f0f11');
             break;
@@ -182,27 +185,91 @@ function animateLogo() {
     });
 }
 
-// 2. Fetch & Cache Puzzles
+// Online/Offline status banner controller
+function updateOnlineStatus() {
+    const isOnline = navigator.onLine;
+    const banner = document.getElementById('offline-banner');
+    const bannerText = document.getElementById('offline-banner-text');
+    const bannerIcon = banner?.querySelector('.offline-banner-icon');
+
+    if (!banner) return;
+
+    if (!isOnline) {
+        banner.classList.remove('hidden', 'online-restored');
+        if (bannerText) bannerText.textContent = "Offline Mode — Progress & scores saved locally";
+        if (bannerIcon) bannerIcon.textContent = "⚡";
+    } else {
+        if (!banner.classList.contains('hidden') && !banner.classList.contains('online-restored')) {
+            banner.classList.add('online-restored');
+            if (bannerText) bannerText.textContent = "Back Online — Syncing scores...";
+            if (bannerIcon) bannerIcon.textContent = "🟢";
+            setTimeout(() => {
+                banner.classList.add('hidden');
+                banner.classList.remove('online-restored');
+            }, 3000);
+        } else {
+            banner.classList.add('hidden');
+        }
+    }
+}
+
+window.addEventListener('online', () => {
+    updateOnlineStatus();
+    syncOfflineQueue();
+});
+
+window.addEventListener('offline', () => {
+    updateOnlineStatus();
+});
+
+// 2. Fetch & Cache Puzzles (Network -> localStorage -> static precached /puzzles.json)
 async function loadPuzzles() {
+    // Tier 1: Try API network fetch first
     try {
-        // Try network first, bypass browser cache
         const res = await fetch('/api/puzzles?t=' + Date.now());
         if (res.ok) {
             const data = await res.json();
-            localStorage.setItem('timeline_puzzles', JSON.stringify(data));
-            gameState.puzzles = data;
-        } else {
-            throw new Error("API response not ok");
+            if (Array.isArray(data) && data.length > 0) {
+                localStorage.setItem('timeline_puzzles', JSON.stringify(data));
+                gameState.puzzles = data;
+                return;
+            }
         }
     } catch (e) {
-        // Fallback to cache if offline
-        const cached = localStorage.getItem('timeline_puzzles');
-        if (cached) {
-            gameState.puzzles = JSON.parse(cached);
-        } else {
-            console.error("Offline and no cached puzzles");
+        console.warn("API puzzle fetch unavailable, attempting local cache fallbacks");
+    }
+
+    // Tier 2: Read from localStorage cache
+    const cached = localStorage.getItem('timeline_puzzles');
+    if (cached) {
+        try {
+            const parsed = JSON.parse(cached);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+                gameState.puzzles = parsed;
+                return;
+            }
+        } catch (e) {
+            console.error("Failed to parse cached puzzles", e);
         }
     }
+
+    // Tier 3: Fetch static precached puzzles.json file
+    try {
+        const res = await fetch('/puzzles.json');
+        if (res.ok) {
+            const data = await res.json();
+            if (Array.isArray(data) && data.length > 0) {
+                localStorage.setItem('timeline_puzzles', JSON.stringify(data));
+                gameState.puzzles = data;
+                console.log("Loaded static fallback puzzles.json successfully");
+                return;
+            }
+        }
+    } catch (e) {
+        console.error("Static puzzles.json fallback fetch failed", e);
+    }
+
+    console.error("Offline and no cached puzzles available");
 }
 
 // Get LA Date
@@ -339,6 +406,7 @@ function showNextPuzzleScreen() {
 }
 
 async function initGame() {
+    updateOnlineStatus();
     animateLogoElement('logo');
     await loadPuzzles();
     syncOfflineQueue();
@@ -818,6 +886,7 @@ async function syncOfflineQueue() {
     if (queue.length === 0) return;
     
     const failedQueue = [];
+    let syncedCount = 0;
     
     for (const payload of queue) {
         try {
@@ -826,7 +895,9 @@ async function syncOfflineQueue() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
-            if (!res.ok) {
+            if (res.ok) {
+                syncedCount++;
+            } else {
                 failedQueue.push(payload);
             }
         } catch(e) {
@@ -836,9 +907,20 @@ async function syncOfflineQueue() {
     }
     
     localStorage.setItem('timeline_offline_results', JSON.stringify(failedQueue));
-}
 
-window.addEventListener('online', syncOfflineQueue);
+    if (syncedCount > 0) {
+        showToast(`Synced ${syncedCount} score${syncedCount > 1 ? 's' : ''} to leaderboard!`);
+        const offlineBox = document.getElementById('offline-notice-box');
+        if (offlineBox) offlineBox.classList.add('hidden');
+        
+        const listEl = document.getElementById('leaderboard-list');
+        const endModal = document.getElementById('end-modal');
+        if (listEl && endModal && !endModal.classList.contains('hidden')) {
+            const leaderboardData = await fetchLeaderboard();
+            renderLeaderboardItems(leaderboardData, listEl);
+        }
+    }
+}
 
 async function submitScore(result) {
     const payload = {
@@ -873,7 +955,7 @@ async function submitScore(result) {
 
 async function fetchLeaderboard() {
     if (!navigator.onLine) {
-        return { top10: [{ display_name: 'Offline Mode', score: '-', time_ms: 0 }], userRank: -1, userData: null };
+        return { isOffline: true, top10: [], userRank: -1, userData: null };
     }
     try {
         const urlParams = new URLSearchParams({
@@ -887,7 +969,69 @@ async function fetchLeaderboard() {
             return await res.json();
         }
     } catch(e) {}
-    return { top10: [], userRank: -1, userData: null };
+    return { isOffline: true, top10: [], userRank: -1, userData: null };
+}
+
+function renderLeaderboardItems(leaderboardData, listEl) {
+    listEl.innerHTML = '';
+    
+    if (!navigator.onLine || leaderboardData.isOffline) {
+        listEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 0.75rem 0; font-size: 0.9rem;">Leaderboard unavailable while offline.</p>';
+        return;
+    }
+    
+    if (!leaderboardData.top10 || leaderboardData.top10.length === 0) {
+        listEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 0.75rem 0; font-size: 0.9rem;">No scores yet today!</p>';
+    } else {
+        leaderboardData.top10.forEach((l, i) => {
+            const secs = Math.floor(l.time_ms / 1000);
+            const time = `${Math.floor(secs/60)}:${String(secs%60).padStart(2,'0')}`;
+            const item = document.createElement('div');
+            const isMe = l.user_id === gameState.userId || (gameState.displayName && l.display_name === gameState.displayName);
+            item.className = 'leaderboard-item' + (isMe ? ' is-me' : '');
+            const nameDisplay = isMe ? `<strong>${l.display_name || 'Anonymous'} (You)</strong>` : (l.display_name || 'Anonymous');
+            
+            const badge = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
+            item.innerHTML = `
+                <div class="left-col">
+                    <span class="rank">${i+1}</span>
+                    <span class="player-name">${nameDisplay}</span>
+                </div>
+                <div class="right-col">
+                    <span class="score">${l.score}/7</span>
+                    <span style="font-size: 0.8rem; color: var(--text-secondary); margin-right: 0.25rem;">${time}</span>
+                    ${badge ? `<span style="font-size: 1.2em;">${badge}</span>` : ''}
+                </div>
+            `;
+            listEl.appendChild(item);
+        });
+        
+        if (leaderboardData.userRank > 10 && leaderboardData.userData) {
+            const separator = document.createElement('div');
+            separator.style.textAlign = 'center';
+            separator.style.color = 'var(--text-secondary)';
+            separator.style.margin = '0.5rem 0';
+            separator.textContent = '...';
+            listEl.appendChild(separator);
+            
+            const l = leaderboardData.userData;
+            const secs = Math.floor(l.time_ms / 1000);
+            const time = `${Math.floor(secs/60)}:${String(secs%60).padStart(2,'0')}`;
+            const item = document.createElement('div');
+            item.className = 'leaderboard-item is-me';
+            item.innerHTML = `
+                <div class="left-col">
+                    <span class="rank">${leaderboardData.userRank}</span>
+                    <span class="player-name"><strong>${l.display_name || 'Anonymous'} (You)</strong></span>
+                </div>
+                <div class="right-col">
+                    <span class="score">${l.score}/7</span>
+                    <span style="font-size: 0.8rem; color: var(--text-secondary); margin-right: 0.25rem;">${time}</span>
+                </div>
+            `;
+            listEl.appendChild(item);
+        }
+    }
 }
 
 async function showLeaderboard(result) {
@@ -946,7 +1090,7 @@ async function showLeaderboard(result) {
                 const statItem = document.createElement('div');
                 statItem.className = 'leaderboard-item';
                 statItem.style.padding = '0.25rem 0';
-                statItem.style.borderBottom = 'none'; // Overriding leaderboard-item bottom border if desired, or keep it. Let's keep default styling but add minor flex.
+                statItem.style.borderBottom = 'none';
                 
                 const leftCol = document.createElement('div');
                 leftCol.className = 'left-col';
@@ -965,72 +1109,30 @@ async function showLeaderboard(result) {
         statsSection.classList.add('hidden');
     }
 
+    // Toggle offline notice box inside modal
+    const offlineNoticeBox = document.getElementById('offline-notice-box');
+    const offlineNoticeText = document.getElementById('offline-notice-text');
+    if (!navigator.onLine) {
+        if (offlineNoticeBox) offlineNoticeBox.classList.remove('hidden');
+        if (offlineNoticeText) {
+            const queue = getOfflineQueue();
+            const queueMsg = queue.length > 0 ? ` (${queue.length} score${queue.length > 1 ? 's' : ''} queued for sync)` : '';
+            offlineNoticeText.textContent = `You are offline. Your score is saved locally and will auto-submit when connected.${queueMsg}`;
+        }
+    } else {
+        if (offlineNoticeBox) offlineNoticeBox.classList.add('hidden');
+    }
     
     const listEl = document.getElementById('leaderboard-list');
     listEl.innerHTML = '<div class="loading-spinner">Loading...</div>';
     
-    const leaderboardData = await fetchLeaderboard();
-    listEl.innerHTML = '';
-    
-    if (!leaderboardData.top10 || leaderboardData.top10.length === 0) {
-        listEl.innerHTML = '<p>No scores yet today!</p>';
-    } else {
-        leaderboardData.top10.forEach((l, i) => {
-            const secs = Math.floor(l.time_ms / 1000);
-            const time = `${Math.floor(secs/60)}:${String(secs%60).padStart(2,'0')}`;
-            const item = document.createElement('div');
-            const isMe = l.user_id === gameState.userId || (gameState.displayName && l.display_name === gameState.displayName);
-            item.className = 'leaderboard-item' + (isMe ? ' is-me' : '');
-            const nameDisplay = isMe ? `<strong>${l.display_name || 'Anonymous'} (You)</strong>` : (l.display_name || 'Anonymous');
-            
-            const badge = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
-            item.innerHTML = `
-                <div class="left-col">
-                    <span class="rank">${i+1}</span>
-                    <span class="player-name">${nameDisplay}</span>
-                </div>
-                <div class="right-col">
-                    <span class="score">${l.score}/7</span>
-                    <span style="font-size: 0.8rem; color: var(--text-secondary); margin-right: 0.25rem;">${time}</span>
-                    ${badge ? `<span style="font-size: 1.2em;">${badge}</span>` : ''}
-                </div>
-            `;
-            listEl.appendChild(item);
-        });
-        
-        if (leaderboardData.userRank > 10 && leaderboardData.userData) {
-            const separator = document.createElement('div');
-            separator.style.textAlign = 'center';
-            separator.style.color = 'var(--text-secondary)';
-            separator.style.margin = '0.5rem 0';
-            separator.textContent = '...';
-            listEl.appendChild(separator);
-            
-            const l = leaderboardData.userData;
-            const secs = Math.floor(l.time_ms / 1000);
-            const time = `${Math.floor(secs/60)}:${String(secs%60).padStart(2,'0')}`;
-            const item = document.createElement('div');
-            item.className = 'leaderboard-item is-me';
-            item.innerHTML = `
-                <div class="left-col">
-                    <span class="rank">${leaderboardData.userRank}</span>
-                    <span class="player-name"><strong>${l.display_name || 'Anonymous'} (You)</strong></span>
-                </div>
-                <div class="right-col">
-                    <span class="score">${l.score}/7</span>
-                    <span style="font-size: 0.8rem; color: var(--text-secondary); margin-right: 0.25rem;">${time}</span>
-                </div>
-            `;
-            listEl.appendChild(item);
-        }
-    }
+    renderLeaderboardItems(leaderboardData, listEl);
     
     // If no display name, prompt them
     if (!gameState.displayName) {
         endModal.classList.add('hidden');
         nameModal.classList.remove('hidden');
     }
-    
 }
 
 
@@ -1561,18 +1663,28 @@ async function fetchPuzzleForDashboard(dateStr) {
     puzzleDisplay.classList.add('hidden');
     leaderboardDisplay.classList.add('hidden');
     
-    try {
-        const res = await fetch(`/api/puzzles?date=${dateStr}`);
-        if (!res.ok) throw new Error('Fetch failed');
-        const data = await res.json();
-        
-        if (!data || data.length === 0) {
-            errorMsg.textContent = "No puzzle found for the selected date.";
-            errorMsg.classList.remove('hidden');
-            return;
+    let puzzle = null;
+
+    // Check local gameState.puzzles array first
+    if (Array.isArray(gameState.puzzles)) {
+        puzzle = gameState.puzzles.find(p => p.date === dateStr);
+    }
+
+    if (!puzzle) {
+        try {
+            const res = await fetch(`/api/puzzles?date=${dateStr}`);
+            if (res.ok) {
+                const data = await res.json();
+                if (Array.isArray(data) && data.length > 0) {
+                    puzzle = data[0];
+                }
+            }
+        } catch (e) {
+            console.warn("Error fetching dashboard puzzle", e);
         }
-        
-        const puzzle = data[0];
+    }
+
+    if (puzzle) {
         puzzleCategory.textContent = puzzle.category;
         
         const sortedEvents = [...puzzle.events].sort((a, b) => a.year - b.year);
@@ -1586,8 +1698,12 @@ async function fetchPuzzleForDashboard(dateStr) {
         
         puzzleDisplay.classList.remove('hidden');
         fetchLeaderboardForDashboard(dateStr);
-    } catch (e) {
-        errorMsg.textContent = "Error fetching puzzle.";
+    } else {
+        if (!navigator.onLine) {
+            errorMsg.textContent = "You are offline. Connect to the internet to fetch un-cached archive puzzles.";
+        } else {
+            errorMsg.textContent = "No puzzle found for the selected date.";
+        }
         errorMsg.classList.remove('hidden');
     }
 }
@@ -1595,6 +1711,13 @@ async function fetchPuzzleForDashboard(dateStr) {
 async function fetchLeaderboardForDashboard(dateStr) {
     const leaderboardDisplay = document.getElementById('leaderboard-display');
     const leaderboardContent = document.getElementById('leaderboard-content');
+    
+    if (!navigator.onLine) {
+        leaderboardDisplay.classList.remove('hidden');
+        leaderboardContent.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Leaderboard data unavailable while offline.</p>';
+        return;
+    }
+    
     try {
         const res = await fetch(`/api/leaderboard?date=${dateStr}`);
         if (!res.ok) return;
@@ -1621,6 +1744,8 @@ async function fetchLeaderboardForDashboard(dateStr) {
         leaderboardContent.innerHTML = html;
     } catch (e) {
         console.error("Leaderboard fetch error:", e);
+        leaderboardDisplay.classList.remove('hidden');
+        leaderboardContent.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Unable to load leaderboard data.</p>';
     }
 }
 

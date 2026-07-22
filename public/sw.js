@@ -1,14 +1,23 @@
-const CACHE_NAME = 'timeline-cache-v35';
+const CACHE_NAME = 'timeline-cache-v40';
 const ASSETS = [
     '/',
     '/index.html',
     '/style.css',
     '/app.js',
     '/manifest.json',
+    '/puzzles.json',
     '/icon.png',
+    '/fonts/NewYorker.otf',
     '/images/bg_elegant_dark.jpg',
     '/images/bg_elegant_light.jpg',
     '/images/bg_steampunk.jpg',
+    '/images/bg_new_yorker_dark.jpg',
+    '/images/bg_new_yorker_paper.jpg',
+    '/images/bg_ny_ribbon.jpg',
+    '/images/bg_ny_ribbon_wide.jpg',
+    '/images/icon_ny_compass.jpg',
+    '/images/icon_ny_info.jpg',
+    '/images/icon_ny_gear.jpg',
     '/sounds/default_drop.mp3',
     '/sounds/default_confirm.mp3',
     '/sounds/default_complete.mp3',
@@ -53,8 +62,13 @@ self.addEventListener('fetch', event => {
         return;
     }
 
+    // Fix for Chrome 'only-if-cached' bug
+    if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
+        return;
+    }
+
     event.respondWith(
-        caches.match(event.request)
+        caches.match(event.request, { ignoreSearch: true })
             .then(cachedResponse => {
                 // Return cached response if found
                 if (cachedResponse) {
@@ -71,7 +85,10 @@ self.addEventListener('fetch', event => {
                 }
                 
                 // If not in cache, fetch from network
-                return fetch(event.request);
+                return fetch(event.request).catch(error => {
+                    console.error('Fetch failed:', error, event.request.url);
+                    throw error;
+                });
             })
     );
 });
