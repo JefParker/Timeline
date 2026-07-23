@@ -1396,9 +1396,10 @@ confirmUuidYes.addEventListener('click', () => {
     }
 });
 
-document.getElementById('share-btn')?.addEventListener('click', async () => {
-    const history = JSON.parse(localStorage.getItem('timeline_history'));
+function getShareText() {
+    const history = JSON.parse(localStorage.getItem('timeline_history') || '{}');
     const res = history[gameState.todayDate];
+    if (!res) return '';
     
     const [year, month, day] = gameState.todayDate.split('-');
     const dateStr = `${parseInt(month)}/${parseInt(day)}/${year.slice(-2)}`;
@@ -1406,8 +1407,10 @@ document.getElementById('share-btn')?.addEventListener('click', async () => {
     const secs = Math.floor(res.timeMs / 1000);
     const timeFormatted = `${Math.floor(secs/60)}:${String(secs%60).padStart(2,'0')}`;
     
-    const text = `📅 Timeline, ${dateStr}\nhttps://timeline-74i.pages.dev\nCategory: ${res.category}\nScore: ${res.score}/7  (${timeFormatted})`;
-    
+    return `📅 Timeline, ${dateStr}\nhttps://timeline-74i.pages.dev\nCategory: ${res.category}\nScore: ${res.score}/7  (${timeFormatted})`;
+}
+
+async function copyToClipboard(text) {
     try {
         await navigator.clipboard.writeText(text);
         showToast("Copied to clipboard!");
@@ -1424,6 +1427,33 @@ document.getElementById('share-btn')?.addEventListener('click', async () => {
         } catch(e) {}
         document.body.removeChild(textArea);
     }
+}
+
+document.getElementById('share-btn')?.addEventListener('click', async () => {
+    const text = getShareText();
+    if (!text) return;
+    
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: 'Timeline Result',
+                text: text,
+                url: 'https://timeline-74i.pages.dev'
+            });
+        } catch (err) {
+            if (err.name !== 'AbortError') {
+                await copyToClipboard(text);
+            }
+        }
+    } else {
+        await copyToClipboard(text);
+    }
+});
+
+document.getElementById('copy-btn')?.addEventListener('click', async () => {
+    const text = getShareText();
+    if (!text) return;
+    await copyToClipboard(text);
 });
 
 function showToast(msg) {
