@@ -1,3 +1,11 @@
+// OBSOLETE — DO NOT RUN. Overwrites public/puzzles.json with 60 puzzles built
+// from a stale category list (includes "Television", omits Science/Pop History/
+// Geography), a miniature 15-event dataset, and Math.random() instead of the
+// seeded PRNG — so its output does not match what /api/puzzles serves.
+// Use `npm run build:puzzles` instead. Move to scripts/archive/.
+console.error('generate-puzzles.js is obsolete and would overwrite public/puzzles.json with non-matching data. Refusing to run.');
+process.exit(1);
+
 const fs = require('fs');
 
 const CATEGORIES = ['Sports', 'Landmarks', 'History', 'Entertainment', 'Business', 'Technology', 'Cinema', 'Television'];

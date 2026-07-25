@@ -40,6 +40,8 @@ LEGACY=(
     test_run4.js
     test_run5.js
     scripts/add_brainstormed_puzzles.js
+    scripts/generate-puzzles.js
+    scripts/test-wikidata.js
 )
 
 moved=0
