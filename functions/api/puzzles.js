@@ -4019,14 +4019,18 @@ function applyOverrides(puzzles) {
             puzzles[i] = {
                 date: "2026-08-01",
                 category: "Internet History",
+                // Amazon (1995) and YouTube (2005) sat within two years of
+                // their neighbours, making two placements close to coin flips.
+                // Replaced with the TCP/IP switchover — arguably the single
+                // most important date in the category — and Instagram.
                 events: [
                     { event: "First ARPANET message sent", year: 1969 },
+                    { event: "ARPANET adopts TCP/IP, creating the modern internet", year: 1983 },
                     { event: "Tim Berners-Lee invents the World Wide Web", year: 1989 },
                     { event: "Mosaic (first popular web browser) released", year: 1993 },
-                    { event: "Amazon.com goes online", year: 1995 },
                     { event: "Google is founded", year: 1998 },
                     { event: "Facebook is launched", year: 2004 },
-                    { event: "First video uploaded to YouTube", year: 2005 }
+                    { event: "Instagram is launched", year: 2010 }
                 ]
             };
         }
@@ -4727,8 +4731,8 @@ function applyOverrides(puzzles) {
                               "year": 2003
                     },
                     {
-                              "event": "House M.D. premieres, applying the Sherlock Holmes detective formula to rare medical diagnoses.",
-                              "year": 2004
+                              "event": "Sherlock premieres on the BBC, transplanting Conan Doyle's detective into the smartphone era.",
+                              "year": 2010
                     }
           ]
 };
@@ -4755,12 +4759,12 @@ function applyOverrides(puzzles) {
                               "year": 2002
                     },
                     {
-                              "event": "Mad Men debuts on AMC, utilizing the 1960s advertising world for deep character studies.",
-                              "year": 2007
-                    },
-                    {
                               "event": "Breaking Bad premieres, tracking a mild-mannered chemistry teacher's descent into a ruthless drug kingpin.",
                               "year": 2008
+                    },
+                    {
+                              "event": "Game of Thrones premieres on HBO, turning epic fantasy into mainstream prestige television.",
+                              "year": 2011
                     },
                     {
                               "event": "True Detective debuts, setting the gold standard for the modern prestige anthology format.",
