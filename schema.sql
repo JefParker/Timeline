@@ -29,8 +29,11 @@ CREATE INDEX IF NOT EXISTS idx_leaderboard_score_time ON leaderboard(puzzle_date
 
 -- Supports the per-user history lookup in /api/user and the delete-then-insert
 -- in /api/leaderboard, both of which filter on user_id.
-CREATE INDEX IF NOT EXISTS idx_leaderboard_user ON leaderboard(user_id, puzzle_date);
-
+--
 -- To additionally enforce one score per player per day at the database level,
 -- run migrations/001_unique_user_date.sql. It is kept separate because it will
 -- fail if any duplicate rows already exist.
+--
+-- Keep a real statement last: wrangler's SQL ingest warns about a "leftover
+-- buffer" if the file ends with a trailing comment.
+CREATE INDEX IF NOT EXISTS idx_leaderboard_user ON leaderboard(user_id, puzzle_date);
