@@ -79,6 +79,58 @@ The script fetches each day from `/api/puzzles`, so the fallback always matches
 what the API serves. It warns about gaps and missing days. **After regenerating,
 bump `CACHE_NAME` in `public/sw.js`** so existing installs pick up the new file.
 
+## Authoring puzzle content
+
+Puzzles are not stored — they are generated deterministically from the
+`FALLBACK_DATA` pool in `functions/api/puzzles.js`. A seeded PRNG picks a
+category per day and draws 7 events with distinct years.
+
+### Previewing
+
+```bash
+npm run preview:puzzles                                   # next 14 days
+node scripts/preview-puzzles.mjs 30                       # next 30 days
+node scripts/preview-puzzles.mjs 60 --quiet               # warnings only
+node scripts/preview-puzzles.mjs 30 https://timeline-74i.pages.dev
+```
+
+Read-only. Flags puzzles that are hard or malformed — duplicate years, all
+events clustered within a few decades, repeated near-ties — and reports
+categories that recur inside the window.
+
+### Adding events
+
+```bash
+npm run events:list                                       # pool sizes per category
+node scripts/add-events.mjs Sports new-events.json --dry-run
+node scripts/add-events.mjs Sports new-events.json
+```
+
+`new-events.json` is a plain array:
+
+```json
+[
+  { "event": "Rugby World Cup is first contested", "year": 1987 }
+]
+```
+
+Duplicate event text is skipped, years are range-checked, and the file is only
+written if the rebuilt array re-parses cleanly.
+
+> **Adding events reshuffles that category's entire history.** Generation
+> shuffles the whole category array with a per-date seed, so changing its length
+> changes every permutation — past dates included. Recorded scores are keyed by
+> date and are unaffected, but the dashboard archive will no longer show what
+> players actually played. Batch your additions, do them rarely, and re-run
+> `npm run build:puzzles` afterwards.
+
+### Special-date puzzles
+
+One-off themed puzzles (World Chocolate Day, the Oscars) are hand-written
+override blocks near the bottom of `functions/api/puzzles.js`, applied after
+generation. They are immune to the reshuffling caveat above. Copy an existing
+block to add another.
+
 ## API
 
 | Route | Method | Notes |

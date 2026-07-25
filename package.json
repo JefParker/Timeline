@@ -7,6 +7,8 @@
     "dev": "wrangler pages dev public",
     "start": "wrangler pages dev public",
     "build:puzzles": "node scripts/build-puzzles-json.mjs",
+    "preview:puzzles": "node scripts/preview-puzzles.mjs",
+    "events:list": "node scripts/add-events.mjs --list",
     "db:schema": "wrangler d1 execute timeline-db --remote --file=./schema.sql",
     "test": "node --test test/*.test.mjs"
   },

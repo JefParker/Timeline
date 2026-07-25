@@ -3837,6 +3837,17 @@ const EPOCH_MS = Date.UTC(2024, 0, 1);
 const DAY_MS = 24 * 60 * 60 * 1000;
 const WINDOW_DAYS = 60;
 const MEMORY_BANK_DAYS = 60;
+const EVENTS_PER_PUZZLE = 7;
+
+// Preferred minimum spacing, in years, between any two events in a puzzle.
+// Cards a year or two apart are close to a coin flip for most players. This is
+// a preference, not a guarantee: selection relaxes it rather than ever
+// returning a short puzzle.
+//
+// Changing this changes every generated puzzle, past and future, because the
+// selection order shifts. Setting it to 1 restores the original selection
+// order; the duplicate-year fix below is unconditional and is not reverted.
+const MIN_YEAR_GAP = 3;
 
 function dateStrForIndex(index) {
     const d = new Date(EPOCH_MS + index * DAY_MS);
@@ -3899,24 +3910,42 @@ function generateThroughIndex(lastIndex) {
         const selected = [];
         const usedYears = new Set();
 
-        for (const ev of shuffledList) {
-            if (!usedYears.has(ev.year) && !generation.usedEvents.has(ev.event)) {
+        const fits = (ev, minGap, respectRecentlyUsed) => {
+            if (usedYears.has(ev.year)) return false;
+            if (respectRecentlyUsed && generation.usedEvents.has(ev.event)) return false;
+            if (minGap > 1) {
+                for (const chosen of selected) {
+                    if (Math.abs(chosen.year - ev.year) < minGap) return false;
+                }
+            }
+            return true;
+        };
+
+        const take = (minGap, respectRecentlyUsed) => {
+            for (const ev of shuffledList) {
+                if (selected.length === EVENTS_PER_PUZZLE) return;
+                if (selected.includes(ev)) continue;
+                if (!fits(ev, minGap, respectRecentlyUsed)) continue;
+
                 usedYears.add(ev.year);
                 selected.push(ev);
                 generation.usedEvents.add(ev.event);
-                if (selected.length === 7) break;
             }
-        }
+        };
 
-        // Fallback in case a category doesn't have 7 unique years
-        if (selected.length < 7) {
-            for (const ev of shuffledList) {
-                if (!selected.includes(ev)) {
-                    selected.push(ev);
-                    if (selected.length === 7) break;
-                }
-            }
-        }
+        // Tiered selection, each pass relaxing one constraint. Earlier passes
+        // produce better puzzles; later ones guarantee we still reach seven.
+        //
+        //   1. spread out, and avoid events used in the last 60 days
+        //   2. drop the spacing requirement
+        //   3. allow recently-used events back in
+        //
+        // Every pass keeps years unique, so — unlike the previous fallback,
+        // which appended blindly — a puzzle can no longer contain two cards
+        // sharing a year, which would be impossible to order.
+        take(MIN_YEAR_GAP, true);
+        take(1, true);
+        take(1, false);
 
         generation.puzzles.push({ date: dateStr, category: category, events: selected });
 
@@ -4966,19 +4995,26 @@ function applyOverrides(puzzles) {
     }
 
     // Special Override: Moved July 26 puzzle to July 28 (2026-07-28)
+    //
+    // Previously authored from an old, since-retired mini dataset that listed
+    // both Tiger Woods' first Masters and Jordan's "Flu Game" as 1997. Two
+    // cards sharing a year cannot be ordered, so the day was effectively a
+    // six-card puzzle. Jordan is replaced by the Miracle on Ice (1980), which
+    // also fills the otherwise empty 1954-1997 gap. Usain Bolt's world records
+    // were set in Beijing in 2008, not 2009. Wording now matches FALLBACK_DATA.
     for (let i = 0; i < puzzles.length; i++) {
         if (puzzles[i].date === "2026-07-28") {
             puzzles[i] = {
                 date: "2026-07-28",
                 category: "Sports",
                 events: [
-                    { event: "Usain Bolt sets 100m world record", year: 2009 },
-                    { event: "First Wimbledon Championship", year: 1877 },
-                    { event: "First FIFA World Cup", year: 1930 },
-                    { event: "Jackie Robinson breaks baseball color barrier", year: 1947 },
-                    { event: "Tiger Woods wins first Masters", year: 1997 },
-                    { event: "Michael Jordan's 'Flu Game'", year: 1997 },
-                    { event: "Roger Bannister breaks 4-minute mile", year: 1954 }
+                    { event: "First Wimbledon tennis championship is held", year: 1877 },
+                    { event: "First FIFA World Cup is held in Uruguay", year: 1930 },
+                    { event: "Jackie Robinson breaks the baseball color line", year: 1947 },
+                    { event: "Roger Bannister breaks the four-minute mile", year: 1954 },
+                    { event: "The 'Miracle on Ice' at the Lake Placid Winter Olympics", year: 1980 },
+                    { event: "Tiger Woods wins his first Masters at age 21", year: 1997 },
+                    { event: "Usain Bolt sets 100m and 200m world records at the Beijing Olympics", year: 2008 }
                 ]
             };
         }
