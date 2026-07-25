@@ -1,20 +1,25 @@
 {
   "name": "timeline",
-  "version": "1.2.2",
-  "description": "",
-  "main": "index.js",
+  "version": "1.2.3",
+  "description": "Daily historical event ordering game, deployed on Cloudflare Pages",
+  "private": true,
   "scripts": {
-    "test": "wrangler pages dev public",
-    "dev": "wrangler pages dev public"
+    "dev": "wrangler pages dev public",
+    "start": "wrangler pages dev public",
+    "build:puzzles": "node scripts/build-puzzles-json.mjs",
+    "db:schema": "wrangler d1 execute timeline-db --remote --file=./schema.sql",
+    "test": "node --test test/*.test.mjs"
   },
-  "keywords": [],
+  "keywords": [
+    "puzzle",
+    "game",
+    "cloudflare-pages"
+  ],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "puppeteer": "^25.3.0",
     "wrangler": "^4.107.0"
-  },
-  "dependencies": {
-    "puppeteer": "^25.3.0"
   }
 }

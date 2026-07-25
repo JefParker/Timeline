@@ -1,12 +1,22 @@
-const CACHE_NAME = 'timeline-cache-v40';
-const ASSETS = [
+const CACHE_NAME = 'timeline-cache-v43';
+
+// Assets the app cannot work without. If any of these fail the install should
+// fail, because an incomplete cache would break offline play.
+const CORE_ASSETS = [
     '/',
     '/index.html',
     '/style.css',
     '/app.js',
     '/manifest.json',
     '/puzzles.json',
-    '/icon.png',
+    '/icon.png'
+];
+
+// Nice-to-have assets. These are cached individually so that one bad URL — a
+// renamed image, a CDN blip, an offline first load — cannot abort the whole
+// install and leave the app with no service worker at all. `cache.addAll()`
+// is all-or-nothing, which is what used to happen here.
+const OPTIONAL_ASSETS = [
     '/fonts/NewYorker.otf',
     '/images/bg_elegant_dark.jpg',
     '/images/bg_elegant_light.jpg',
@@ -35,29 +45,57 @@ const ASSETS = [
     'https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js'
 ];
 
+async function cacheOptional(cache, urls) {
+    await Promise.all(
+        urls.map(async (url) => {
+            try {
+                await cache.add(new Request(url, { cache: 'reload' }));
+            } catch (err) {
+                console.warn('[sw] optional asset skipped:', url, err);
+            }
+        })
+    );
+}
+
 self.addEventListener('install', event => {
     event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then(cache => cache.addAll(ASSETS))
+        (async () => {
+            const cache = await caches.open(CACHE_NAME);
+            await cache.addAll(CORE_ASSETS);
+            await cacheOptional(cache, OPTIONAL_ASSETS);
+            await self.skipWaiting();
+        })()
     );
 });
 
 self.addEventListener('activate', event => {
     event.waitUntil(
-        caches.keys().then(keys => {
-            return Promise.all(
-                keys.filter(key => key !== CACHE_NAME)
-                    .map(key => caches.delete(key))
+        (async () => {
+            const keys = await caches.keys();
+            await Promise.all(
+                keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
             );
-        })
+            await self.clients.claim();
+        })()
     );
 });
+
+// Cache lookups use ignoreSearch, so same-origin entries are keyed without the
+// query string to keep reads and writes consistent.
+function cacheKeyFor(request) {
+    const url = new URL(request.url);
+    if (url.origin === self.location.origin && url.search) {
+        return new Request(url.origin + url.pathname);
+    }
+    return request;
+}
 
 self.addEventListener('fetch', event => {
     // Only cache GET requests
     if (event.request.method !== 'GET') return;
-    
-    // Don't intercept API calls except allowing them to fail gracefully to offline logic
+
+    // Never intercept API calls; they must fail through to the app's own
+    // offline handling rather than being served stale.
     if (event.request.url.includes('/api/')) {
         return;
     }
@@ -68,27 +106,41 @@ self.addEventListener('fetch', event => {
     }
 
     event.respondWith(
-        caches.match(event.request, { ignoreSearch: true })
-            .then(cachedResponse => {
-                // Return cached response if found
-                if (cachedResponse) {
-                    // Update cache in the background
-                    fetch(event.request).then(response => {
-                        if (response && response.status === 200) {
-                            caches.open(CACHE_NAME).then(cache => {
-                                cache.put(event.request, response);
-                            });
+        (async () => {
+            const cachedResponse = await caches.match(event.request, { ignoreSearch: true });
+
+            if (cachedResponse) {
+                // Stale-while-revalidate: refresh in the background.
+                event.waitUntil(
+                    (async () => {
+                        try {
+                            const response = await fetch(event.request);
+                            if (response && response.status === 200 && response.type !== 'opaque') {
+                                const cache = await caches.open(CACHE_NAME);
+                                // Write back under the same key the lookup
+                                // matched. Using event.request directly would
+                                // store "/app.js?v=3" alongside "/app.js" and
+                                // grow the cache on every version bump.
+                                await cache.put(cacheKeyFor(event.request), response.clone());
+                            }
+                        } catch (err) {
+                            // Offline; the cached copy is still good.
                         }
-                    }).catch(() => {});
-                    
-                    return cachedResponse;
+                    })()
+                );
+                return cachedResponse;
+            }
+
+            try {
+                return await fetch(event.request);
+            } catch (err) {
+                // Navigations should still land on the app shell when offline.
+                if (event.request.mode === 'navigate') {
+                    const shell = await caches.match('/index.html');
+                    if (shell) return shell;
                 }
-                
-                // If not in cache, fetch from network
-                return fetch(event.request).catch(error => {
-                    console.error('Fetch failed:', error, event.request.url);
-                    throw error;
-                });
-            })
+                throw err;
+            }
+        })()
     );
 });

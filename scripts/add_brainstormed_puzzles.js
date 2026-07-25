@@ -1,3 +1,8 @@
+// OBSOLETE — DO NOT RUN. Rewrites public/puzzles.json and public/sw.js from an
+// old template. Use `npm run build:puzzles` instead. Move to scripts/archive/.
+console.error('add_brainstormed_puzzles.js is obsolete and would overwrite public/sw.js. Refusing to run.');
+process.exit(1);
+
 const fs = require('fs');
 const puzzles = [
     {

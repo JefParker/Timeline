@@ -1,3 +1,10 @@
+// OBSOLETE — DO NOT RUN. This regenerates functions/api/puzzles.js from the
+// events_*.json dumps using the old single-function template, which would
+// destroy the current module structure (memoised generator, applyOverrides,
+// validation). Use `npm run build:puzzles` instead. Move to scripts/archive/.
+console.error('stitch_events.js is obsolete and would overwrite functions/api/puzzles.js. Refusing to run.');
+process.exit(1);
+
 const fs = require('fs');
 
 const categories = ['Sports', 'Landmarks', 'History', 'Entertainment', 'Business', 'Technology', 'Cinema', 'Science', 'Pop History', 'Geography'];

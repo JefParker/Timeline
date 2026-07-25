@@ -1,12 +1,18 @@
-DROP TABLE IF EXISTS users;
-CREATE TABLE users (
+-- Timeline D1 schema.
+--
+-- Safe to run against an existing database: it only creates what is missing and
+-- never drops anything. To wipe and rebuild from scratch, run schema-reset.sql
+-- instead (that one IS destructive).
+--
+--   npx wrangler d1 execute timeline-db --remote --file=./schema.sql
+
+CREATE TABLE IF NOT EXISTS users (
     id TEXT PRIMARY KEY,
     display_name TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-DROP TABLE IF EXISTS leaderboard;
-CREATE TABLE leaderboard (
+CREATE TABLE IF NOT EXISTS leaderboard (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id TEXT NOT NULL,
     puzzle_date TEXT NOT NULL,
@@ -18,5 +24,13 @@ CREATE TABLE leaderboard (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE INDEX idx_leaderboard_puzzle_date ON leaderboard(puzzle_date);
-CREATE INDEX idx_leaderboard_score_time ON leaderboard(puzzle_date, score DESC, time_ms ASC);
+CREATE INDEX IF NOT EXISTS idx_leaderboard_puzzle_date ON leaderboard(puzzle_date);
+CREATE INDEX IF NOT EXISTS idx_leaderboard_score_time ON leaderboard(puzzle_date, score DESC, time_ms ASC);
+
+-- Supports the per-user history lookup in /api/user and the delete-then-insert
+-- in /api/leaderboard, both of which filter on user_id.
+CREATE INDEX IF NOT EXISTS idx_leaderboard_user ON leaderboard(user_id, puzzle_date);
+
+-- To additionally enforce one score per player per day at the database level,
+-- run migrations/001_unique_user_date.sql. It is kept separate because it will
+-- fail if any duplicate rows already exist.

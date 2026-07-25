@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- viewport-fit=cover keeps the layout edge-to-edge on notched devices.
+         maximum-scale / user-scalable=no were removed: they block pinch zoom,
+         which is an accessibility failure (WCAG 1.4.4). -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Timeline</title>
     
     <!-- PWA Meta Tags -->
@@ -217,9 +220,9 @@
         <div style="text-align: left; font-family: var(--font-sans); margin-bottom: 1.5rem; color: var(--text-primary); font-size: 0.95rem;">
             <p style="margin-bottom: 0.75rem;"><strong>The Goal</strong><br>Place the 7 historical events in chronological order on the timeline. A new puzzle is released every day at midnight <span id="release-time-info" style="color: var(--text-secondary); font-size: 0.8rem;">(Los Angeles time)</span>.</p>
             
-            <p style="margin-bottom: 0.75rem;"><strong>Categories</strong><br>Puzzle categories rotate daily and include Sports, Landmarks, History, Entertainment, Business, Technology, and Cinema.</p>
+            <p style="margin-bottom: 0.75rem;"><strong>Categories</strong><br>Puzzle categories rotate daily and include Sports, Landmarks, History, Entertainment, Business, Technology, Cinema, Science, Pop History, and Geography, plus one-off special editions.</p>
 
-            <p style="margin-bottom: 0.75rem;"><strong>Scoring</strong><br>You start with a Perfect score of 7 out of 7. For every incorrect placement, you lose 1 point. See how high you can score on the daily leaderboard!</p>
+            <p style="margin-bottom: 0.75rem;"><strong>Scoring</strong><br>The first card is placed for you. You start with a Perfect score of 7 out of 7, and lose 1 point for every incorrect placement. See how high you can score on the daily leaderboard!</p>
             
             <p style="margin-bottom: 0.75rem;"><strong>Syncing Devices</strong><br>Want to sync your progress between your phone and your computer?<br>1. Tap the <strong>⚙ Settings</strong> icon on the device with your progress.<br>2. <strong>Copy</strong> your Player ID.<br>3. Open settings on your other device, <strong>Paste</strong> the ID, and tap <strong>Update</strong>.</p>
         </div>

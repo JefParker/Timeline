@@ -1,9 +1,56 @@
 // UUID generation
 function generateUUID() {
+    // crypto.randomUUID is available in every browser that supports service
+    // workers; Math.random is only a last-resort fallback.
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+        return window.crypto.randomUUID();
+    }
+    if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
+        const bytes = new Uint8Array(16);
+        window.crypto.getRandomValues(bytes);
+        bytes[6] = (bytes[6] & 0x0f) | 0x40;
+        bytes[8] = (bytes[8] & 0x3f) | 0x80;
+        const hex = Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
+        return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+    }
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
+}
+
+// --- Safe DOM helpers -------------------------------------------------------
+// Display names and event text are user- or server-supplied. They are never
+// interpolated into innerHTML; everything goes through textContent so a name
+// like `<img src=x onerror=...>` renders as literal text.
+
+function createEl(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined && text !== null) node.textContent = String(text);
+    return node;
+}
+
+function readJson(key, fallback) {
+    try {
+        const raw = localStorage.getItem(key);
+        if (!raw) return fallback;
+        const parsed = JSON.parse(raw);
+        return parsed === null || parsed === undefined ? fallback : parsed;
+    } catch (e) {
+        console.error(`Failed to parse localStorage key "${key}"`, e);
+        return fallback;
+    }
+}
+
+function getHistory() {
+    const history = readJson('timeline_history', {});
+    return (history && typeof history === 'object' && !Array.isArray(history)) ? history : {};
+}
+
+function formatClock(timeMs) {
+    const secs = Math.max(0, Math.floor((Number(timeMs) || 0) / 1000));
+    return `${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, '0')}`;
 }
 
 // Game State
@@ -13,6 +60,7 @@ let gameState = {
     displayName: localStorage.getItem('timeline_display_name') || '',
     todayDate: '',
     puzzle: null,
+    puzzles: [],
     remainingEvents: [],
     placedCards: [],
     score: 0,
@@ -172,19 +220,6 @@ const settingsModal = document.getElementById('settings-modal');
 const aboutModal = document.getElementById('about-modal');
 const overlay = document.getElementById('modal-overlay');
 
-// 1. Logo Animation
-function animateLogo() {
-    logoEl.innerHTML = '';
-    const text = "TIMELINE";
-    text.split('').forEach((char, i) => {
-        const span = document.createElement('span');
-        span.className = 'letter';
-        span.textContent = char;
-        span.style.animation = `slideLetters 0.5s ease forwards ${i * 0.05}s`;
-        logoEl.appendChild(span);
-    });
-}
-
 // Online/Offline status banner controller
 function updateOnlineStatus() {
     const isOnline = navigator.onLine;
@@ -223,34 +258,42 @@ window.addEventListener('offline', () => {
 });
 
 // 2. Fetch & Cache Puzzles (Network -> localStorage -> static precached /puzzles.json)
+// Always leaves gameState.puzzles as an array. Returns true when a usable set
+// was found, so callers can show an error instead of crashing on undefined.
 async function loadPuzzles() {
-    // Tier 1: Try API network fetch first
+    gameState.puzzles = Array.isArray(gameState.puzzles) ? gameState.puzzles : [];
+
+    const isUsable = (data) => Array.isArray(data) && data.length > 0;
+
+    const cacheAndUse = (data) => {
+        gameState.puzzles = data;
+        try {
+            localStorage.setItem('timeline_puzzles', JSON.stringify(data));
+        } catch (e) {
+            // Quota exceeded or private mode; the in-memory copy still works.
+            console.warn("Could not cache puzzles locally", e);
+        }
+        return true;
+    };
+
+    // Tier 1: Try API network fetch first.
+    // No cache-busting query param: the endpoint sets a 5 minute Cache-Control,
+    // and a unique URL per request would make that header useless.
     try {
-        const res = await fetch('/api/puzzles?t=' + Date.now());
+        const res = await fetch('/api/puzzles');
         if (res.ok) {
             const data = await res.json();
-            if (Array.isArray(data) && data.length > 0) {
-                localStorage.setItem('timeline_puzzles', JSON.stringify(data));
-                gameState.puzzles = data;
-                return;
-            }
+            if (isUsable(data)) return cacheAndUse(data);
         }
     } catch (e) {
         console.warn("API puzzle fetch unavailable, attempting local cache fallbacks");
     }
 
     // Tier 2: Read from localStorage cache
-    const cached = localStorage.getItem('timeline_puzzles');
-    if (cached) {
-        try {
-            const parsed = JSON.parse(cached);
-            if (Array.isArray(parsed) && parsed.length > 0) {
-                gameState.puzzles = parsed;
-                return;
-            }
-        } catch (e) {
-            console.error("Failed to parse cached puzzles", e);
-        }
+    const cached = readJson('timeline_puzzles', null);
+    if (isUsable(cached)) {
+        gameState.puzzles = cached;
+        return true;
     }
 
     // Tier 3: Fetch static precached puzzles.json file
@@ -258,11 +301,9 @@ async function loadPuzzles() {
         const res = await fetch('/puzzles.json');
         if (res.ok) {
             const data = await res.json();
-            if (Array.isArray(data) && data.length > 0) {
-                localStorage.setItem('timeline_puzzles', JSON.stringify(data));
-                gameState.puzzles = data;
+            if (isUsable(data)) {
                 console.log("Loaded static fallback puzzles.json successfully");
-                return;
+                return cacheAndUse(data);
             }
         }
     } catch (e) {
@@ -270,13 +311,46 @@ async function loadPuzzles() {
     }
 
     console.error("Offline and no cached puzzles available");
+    return false;
 }
 
-// Get LA Date
-function getLADateStr() {
-    const laTime = new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
-    const d = new Date(laTime);
-    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+// Get LA Date.
+// en-CA formats as YYYY-MM-DD directly, so we never have to parse a localised
+// date string back through the Date constructor (which is implementation
+// defined and has historically differed between Safari and Chrome).
+const LA_DATE_FORMATTER = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/Los_Angeles',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+});
+
+function getLADateStr(now = new Date()) {
+    return LA_DATE_FORMATTER.format(now);
+}
+
+const LA_TIME_FORMATTER = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'America/Los_Angeles',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false
+});
+
+// Milliseconds until the next midnight in Los Angeles, derived from the LA
+// wall clock rather than from arithmetic on a re-parsed date string.
+function msUntilLAMidnight(now = new Date()) {
+    const parts = {};
+    for (const part of LA_TIME_FORMATTER.formatToParts(now)) {
+        parts[part.type] = part.value;
+    }
+
+    const hour = Number(parts.hour) % 24; // h23 cycles can report "24"
+    const minute = Number(parts.minute);
+    const second = Number(parts.second);
+
+    const elapsedMs = ((hour * 60 + minute) * 60 + second) * 1000 + now.getMilliseconds();
+    return Math.max(1000, 24 * 60 * 60 * 1000 - elapsedMs);
 }
 
 function animateLogoElement(elementId, baseDelay = 0) {
@@ -305,17 +379,19 @@ function animateLogoElement(elementId, baseDelay = 0) {
 async function syncUserData() {
     if (!navigator.onLine) return;
     try {
-        const res = await fetch(`/api/user?user_id=${gameState.userId}`);
+        const res = await fetch(`/api/user?user_id=${encodeURIComponent(gameState.userId)}`);
         if (res.ok) {
             const data = await res.json();
             if (data.display_name && data.display_name !== gameState.displayName) {
                 gameState.displayName = data.display_name;
                 localStorage.setItem('timeline_display_name', data.display_name);
-                document.getElementById('name-input').value = data.display_name;
-                document.getElementById('settings-name-input').value = data.display_name;
+                const nameInput = document.getElementById('name-input');
+                const settingsNameInput = document.getElementById('settings-name-input');
+                if (nameInput) nameInput.value = data.display_name;
+                if (settingsNameInput) settingsNameInput.value = data.display_name;
             }
             if (data.history && data.history.length > 0) {
-                const history = JSON.parse(localStorage.getItem('timeline_history') || '{}');
+                const history = getHistory();
                 let updated = false;
                 data.history.forEach(row => {
                     if (!history[row.puzzle_date] || history[row.puzzle_date].score < row.score) {
@@ -350,14 +426,7 @@ async function syncUserData() {
 
 function updateReleaseTimeText() {
     const now = new Date();
-    const ptStr = now.toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
-    const ptDate = new Date(ptStr);
-    
-    const nextMidnightPT = new Date(ptDate);
-    nextMidnightPT.setHours(24, 0, 0, 0);
-    const diff = nextMidnightPT - ptDate;
-    
-    const resetTime = new Date(now.getTime() + diff);
+    const resetTime = new Date(now.getTime() + msUntilLAMidnight(now));
     const localTimeStr = resetTime.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
     
     const releaseTextEl = document.getElementById('release-time-info');
@@ -370,119 +439,184 @@ function updateReleaseTimeText() {
     }
 }
 
+let countdownInterval = null;
+
+// Restores the header to its normal "today's puzzle" state. Called on every
+// init so a midnight rollover does not inherit yesterday's end-of-game UI.
+function resetHeaderState() {
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+    }
+
+    const labelEl = document.querySelector('.category-label');
+    const deckCounterEl = document.querySelector('.deck-counter');
+
+    if (labelEl) labelEl.textContent = "Today's Category";
+    if (deckCounterEl) deckCounterEl.style.display = '';
+
+    activeCardContainer.classList.remove('game-over');
+    activeCardContainer.innerHTML = '';
+}
+
 function showNextPuzzleScreen() {
-    const futurePuzzles = gameState.puzzles.filter(p => p.date > gameState.todayDate).sort((a, b) => a.date.localeCompare(b.date));
+    const futurePuzzles = gameState.puzzles
+        .filter(p => p.date > gameState.todayDate)
+        .sort((a, b) => a.date.localeCompare(b.date));
     const nextPuzzle = futurePuzzles.length > 0 ? futurePuzzles[0] : null;
-    
+
     const categoryEl = document.getElementById('category-name');
     const labelEl = document.querySelector('.category-label');
     const deckCounterEl = document.querySelector('.deck-counter');
-    
+
     if (deckCounterEl) deckCounterEl.style.display = 'none';
     if (labelEl) labelEl.textContent = "Tomorrow's Category";
-    
+
+    // Only ever one countdown timer alive; this used to leak an interval on
+    // every call (init, end of game, and each midnight rollover check).
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+    }
+
+    if (!categoryEl) return;
+    categoryEl.textContent = '';
+
     if (nextPuzzle) {
-        categoryEl.innerHTML = `${nextPuzzle.category}<br><span id="next-countdown" style="font-size: 1rem; font-style: normal;"></span>`;
-        
-        setInterval(() => {
-            const now = new Date();
-            const ptStr = now.toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
-            const ptDate = new Date(ptStr);
-            const nextMidnightPT = new Date(ptDate);
-            nextMidnightPT.setHours(24, 0, 0, 0);
-            const diff = nextMidnightPT - ptDate;
-            
+        categoryEl.appendChild(document.createTextNode(nextPuzzle.category));
+        categoryEl.appendChild(document.createElement('br'));
+
+        const countdownEl = createEl('span');
+        countdownEl.id = 'next-countdown';
+        countdownEl.style.fontSize = '1rem';
+        countdownEl.style.fontStyle = 'normal';
+        categoryEl.appendChild(countdownEl);
+
+        const tick = () => {
+            if (!countdownEl.isConnected) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+                return;
+            }
+            const diff = msUntilLAMidnight();
             const h = Math.floor(diff / (1000 * 60 * 60));
             const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((diff % (1000 * 60)) / 1000);
-            const el = document.getElementById('next-countdown');
-            if (el) {
-                el.textContent = `Available in ${h}h ${m}m ${s}s`;
-            }
-        }, 1000);
+            countdownEl.textContent = `Available in ${h}h ${m}m ${s}s`;
+        };
+
+        tick();
+        countdownInterval = setInterval(tick, 1000);
     } else {
         categoryEl.textContent = "You've played today's puzzle!";
     }
 }
 
+// Renders the "view results" button shown once the day's game is finished.
+function showResultsButton(category, result) {
+    const label = String(category || '').split(' ').length > 2
+        ? 'Review Results'
+        : `View ${category} Results`;
+
+    activeCardContainer.classList.add('game-over');
+    activeCardContainer.innerHTML = '';
+
+    const wrapper = createEl('div');
+    wrapper.style.display = 'flex';
+    wrapper.style.justifyContent = 'center';
+    wrapper.style.width = '100%';
+
+    const button = createEl('button', 'primary-btn outline', label);
+    button.addEventListener('click', () => showLeaderboard(result));
+
+    wrapper.appendChild(button);
+    activeCardContainer.appendChild(wrapper);
+}
+
 async function initGame() {
+    // Reset any end-of-game UI left over from the previous day. Without this a
+    // midnight rollover kept "Tomorrow's Category" and hid the event counter.
+    resetHeaderState();
+    gameState.isGameOver = false;
+    gameState.activeEvent = null;
+    gameState.score = 0;
+    gameState.savedTimeMs = 0;
+    gameState.startTime = null;
+    if (window.liveTimerInterval) clearInterval(window.liveTimerInterval);
+
     updateOnlineStatus();
     animateLogoElement('logo');
-    await loadPuzzles();
+
+    const puzzlesLoaded = await loadPuzzles();
     syncOfflineQueue();
     await syncUserData();
-    
+
     updateReleaseTimeText();
-    
+
     gameState.todayDate = getLADateStr();
-    
+
+    if (!puzzlesLoaded) {
+        categoryNameEl.textContent = navigator.onLine
+            ? "Couldn't load today's puzzle"
+            : "Offline — no saved puzzles available";
+        return;
+    }
+
     // Find today's puzzle
     const puzzle = gameState.puzzles.find(p => p.date === gameState.todayDate);
-    if (!puzzle || puzzle.events.length < 7) {
+    if (!puzzle || !Array.isArray(puzzle.events) || puzzle.events.length < 7) {
         // Fallback if missing
         categoryNameEl.textContent = "Error Loading Puzzle";
         return;
     }
-    
+
     // Check if already played today
-    const history = JSON.parse(localStorage.getItem('timeline_history') || '{}');
+    const history = getHistory();
     if (history[gameState.todayDate]) {
         // Game already played today
         gameState.isGameOver = true;
         gameState.placedCards = history[gameState.todayDate].placedCards || [];
-        
+
         // Fallback for games finished before placedCards saving was added
         if (gameState.placedCards.length === 0 && puzzle) {
             gameState.placedCards = [...puzzle.events].sort((a, b) => a.year - b.year);
         }
-        
+
         // Find next puzzle
         showNextPuzzleScreen();
-        
-        activeCardContainer.classList.add('game-over');
-        const category = puzzle.category;
-        const btnText = category.split(' ').length > 2 ? 'Review Results' : `View ${category} Results`;
-        activeCardContainer.innerHTML = `
-            <div style="display: flex; justify-content: center; width: 100%;">
-                <button id="reopen-results-btn" class="primary-btn outline">${btnText}</button>
-            </div>
-        `;
-        document.getElementById('reopen-results-btn')?.addEventListener('click', () => {
-            showLeaderboard(history[gameState.todayDate]);
-        });
-        
+
+        showResultsButton(puzzle.category, history[gameState.todayDate]);
+
         if (gameState.placedCards.length > 0) {
             renderTimeline();
         }
-        
+
         return;
     }
 
-    const autosaveStr = localStorage.getItem('timeline_autosave');
-    let loadedAutosave = null;
-    if (autosaveStr) {
-        try {
-            const save = JSON.parse(autosaveStr);
-            if (save.date === gameState.todayDate && save.placedCards && save.placedCards.length > 0) {
-                loadedAutosave = save;
-            }
-        } catch(e){}
-    }
+    const loadedAutosave = (() => {
+        const save = readJson('timeline_autosave', null);
+        if (!save || typeof save !== 'object') return null;
+        if (save.date !== gameState.todayDate) return null;
+        if (!Array.isArray(save.placedCards) || save.placedCards.length === 0) return null;
+        if (!Array.isArray(save.remainingEvents)) return null;
+        return save;
+    })();
 
     if (loadedAutosave) {
         gameState.puzzle = puzzle;
         gameState.remainingEvents = loadedAutosave.remainingEvents;
         gameState.placedCards = loadedAutosave.placedCards;
-        gameState.score = loadedAutosave.score;
-        gameState.savedTimeMs = loadedAutosave.savedTimeMs || 0;
-        
+        gameState.score = Number.isFinite(loadedAutosave.score) ? loadedAutosave.score : 1;
+        gameState.savedTimeMs = Number.isFinite(loadedAutosave.savedTimeMs) ? loadedAutosave.savedTimeMs : 0;
+
         categoryNameEl.textContent = puzzle.category;
         gameState.startTime = null; // Paused
-        
+
         if (window.liveTimerInterval) clearInterval(window.liveTimerInterval);
         const liveEl = document.getElementById('live-timer');
         if (liveEl) liveEl.textContent = (gameState.savedTimeMs / 1000).toFixed(1) + 's';
-        
+
         renderTimeline();
         nextEvent();
         return;
@@ -526,26 +660,36 @@ function renderTimeline() {
     }
     
     gameState.placedCards.forEach((card, index) => {
-        const cardEl = document.createElement('div');
-        cardEl.className = 'timeline-card';
-        cardEl.innerHTML = `
-            <div class="card-inner">
-                <div class="card-front">${card.event}</div>
-                <div class="card-back ${card.wasWrong ? 'wrong-permanent' : ''}">
-                    <div class="year">${card.year}</div>
-                    <div class="event-text">${card.event}</div>
-                </div>
-            </div>
-        `;
+        const cardEl = buildTimelineCard(card.event, card.year, {
+            backClass: card.wasWrong ? 'wrong-permanent' : ''
+        });
         // Already flipped because it's placed
         cardEl.classList.add('flipped');
-        
+
         timelineCardsEl.appendChild(cardEl);
-        
+
         if (!gameState.isGameOver) {
             timelineCardsEl.appendChild(createDropTarget(index + 1));
         }
     });
+}
+
+// Builds a timeline card without interpolating text into innerHTML. Event text
+// can originate from a synced payload, so it is never treated as markup.
+function buildTimelineCard(eventText, year, { frontClass = '', backClass = '' } = {}) {
+    const cardEl = createEl('div', 'timeline-card');
+    const inner = createEl('div', 'card-inner');
+
+    const front = createEl('div', `card-front${frontClass ? ' ' + frontClass : ''}`, eventText);
+
+    const back = createEl('div', `card-back${backClass ? ' ' + backClass : ''}`);
+    back.appendChild(createEl('div', 'year', year));
+    back.appendChild(createEl('div', 'event-text', eventText));
+
+    inner.appendChild(front);
+    inner.appendChild(back);
+    cardEl.appendChild(inner);
+    return cardEl;
 }
 
 function createDropTarget(index) {
@@ -594,7 +738,13 @@ function updateDropTarget(clientY) {
 
 function nextEvent() {
     if (gameState.remainingEvents.length === 0) {
-        endGame();
+        // endGame is async and is not awaited here; without an explicit catch
+        // any throw inside it becomes an unhandled rejection that silently
+        // skips score submission and the results modal.
+        endGame().catch(err => {
+            console.error('endGame failed', err);
+            showToast('Something went wrong saving your result.');
+        });
         return;
     }
     
@@ -718,22 +868,26 @@ document.addEventListener('pointerup', e => {
     currentActiveElement.style.left = '0';
     currentActiveElement.style.width = '';
 
-    if (dropIndex !== -1) {
+    const target = dropIndex !== -1
+        ? document.querySelector(`.drop-target[data-index="${dropIndex}"]`)
+        : null;
+
+    if (target) {
         // Snap into drop target
-        const target = document.querySelector(`.drop-target[data-index="${dropIndex}"]`);
         target.classList.remove('active-hover');
         target.classList.add('has-card');
         target.appendChild(currentActiveElement);
-        
+
         playSound('drop');
-        
+
         target.appendChild(confirmContainer);
-        
+
         // Show confirm button
         confirmContainer.classList.remove('hidden');
         setTimeout(() => confirmContainer.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50);
     } else {
-        // Move back to top container
+        // No valid target (or it was re-rendered mid-drag) — return the card
+        dropIndex = -1;
         activeCardContainer.appendChild(currentActiveElement);
     }
     
@@ -763,29 +917,24 @@ confirmBtn.addEventListener('click', async () => {
         event.wasWrong = true;
     }
     
-    // Animate Card Flip and Move
-    const activeEl = activeCardContainer.querySelector('.active-card');
-    
     // Create actual timeline card structure for the animation
-    const cardEl = document.createElement('div');
-    cardEl.className = 'timeline-card';
-    cardEl.innerHTML = `
-        <div class="card-inner">
-            <div class="card-front ${correct ? 'correct' : 'incorrect'}">${event.event}</div>
-            <div class="card-back ${correct ? 'correct-year' : 'incorrect-year'}">
-                <div class="year">${event.year}</div>
-                <div class="event-text">${event.event}</div>
-            </div>
-        </div>
-    `;
-    
-    // Replace active target with the new card temporarily
+    const cardEl = buildTimelineCard(event.event, event.year, {
+        frontClass: correct ? 'correct' : 'incorrect',
+        backClass: correct ? 'correct-year' : 'incorrect-year'
+    });
+
+    // Replace active target with the new card temporarily.
+    // The confirm container currently lives inside this drop target, so move it
+    // back to the body first rather than letting innerHTML detach it.
     const target = document.querySelector(`.drop-target[data-index="${dropIndex}"]`);
-    if(target) {
+    if (target) {
+        if (confirmContainer.parentElement === target) {
+            document.body.appendChild(confirmContainer);
+        }
         target.innerHTML = '';
         target.appendChild(cardEl);
     }
-    
+
     // Flip to show year
     setTimeout(() => cardEl.classList.add('flipped'), 50);
     
@@ -821,43 +970,48 @@ async function endGame() {
     
     gameState.endTime = Date.now();
     if (window.liveTimerInterval) clearInterval(window.liveTimerInterval);
-    const timeMs = (gameState.endTime - gameState.startTime) + (gameState.savedTimeMs || 0);
-    
+
+    // startTime is null if the game somehow ended without the player ever
+    // dragging a card; treat the active session as zero-length rather than
+    // sending Date.now() to the server as an elapsed time.
+    const activeMs = gameState.startTime ? (gameState.endTime - gameState.startTime) : 0;
+    const timeMs = Math.max(0, activeMs + (gameState.savedTimeMs || 0));
+
     localStorage.removeItem('timeline_autosave');
-    
+
     // Save history locally
-    const history = JSON.parse(localStorage.getItem('timeline_history') || '{}');
-    const result = { 
-        score: gameState.score, 
-        timeMs, 
+    const history = getHistory();
+    const result = {
+        score: gameState.score,
+        timeMs,
         category: gameState.puzzle.category,
         placedCards: gameState.placedCards
     };
     history[gameState.todayDate] = result;
-    localStorage.setItem('timeline_history', JSON.stringify(history));
-    
-    // Confetti
-    if (gameState.score > 4) {
-        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+    try {
+        localStorage.setItem('timeline_history', JSON.stringify(history));
+    } catch (e) {
+        console.error('Could not persist history', e);
     }
-    
+
+    // Confetti is loaded from a CDN. If it is blocked or unavailable an
+    // uncaught ReferenceError here used to abort the rest of endGame, so the
+    // score was never submitted and no results modal ever appeared.
+    if (gameState.score > 4 && typeof confetti === 'function') {
+        try {
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        } catch (e) {
+            console.warn('Confetti failed', e);
+        }
+    }
+
     // Show a View Results button in the active card area
-    const category = gameState.puzzle.category;
-    const btnText = category.split(' ').length > 2 ? 'Review Results' : `View ${category} Results`;
-    activeCardContainer.classList.add('game-over');
-    activeCardContainer.innerHTML = `
-        <div style="display: flex; justify-content: center; width: 100%;">
-            <button id="reopen-results-btn-end" class="primary-btn outline">${btnText}</button>
-        </div>
-    `;
-    document.getElementById('reopen-results-btn-end')?.addEventListener('click', () => {
-        showLeaderboard(result);
-    });
-    
+    showResultsButton(gameState.puzzle.category, result);
+
     showNextPuzzleScreen();
-    
+
     await submitScore(result);
-    
+
     // Delay popup to allow fireworks to be seen
     if (gameState.score > 4) {
         setTimeout(() => {
@@ -869,14 +1023,23 @@ async function endGame() {
 }
 
 // 8. Leaderboard & Backend
+const MAX_OFFLINE_QUEUE = 120;
+
 function getOfflineQueue() {
-    return JSON.parse(localStorage.getItem('timeline_offline_results') || '[]');
+    const queue = readJson('timeline_offline_results', []);
+    return Array.isArray(queue) ? queue : [];
 }
 
 function saveToOfflineQueue(payload) {
     const queue = getOfflineQueue();
     queue.push(payload);
-    localStorage.setItem('timeline_offline_results', JSON.stringify(queue));
+    // Bound the queue so a long offline streak cannot fill localStorage.
+    const trimmed = queue.slice(-MAX_OFFLINE_QUEUE);
+    try {
+        localStorage.setItem('timeline_offline_results', JSON.stringify(trimmed));
+    } catch (e) {
+        console.error('Could not queue score offline', e);
+    }
 }
 
 async function syncOfflineQueue() {
@@ -897,6 +1060,10 @@ async function syncOfflineQueue() {
             });
             if (res.ok) {
                 syncedCount++;
+            } else if (res.status >= 400 && res.status < 500) {
+                // The server rejected the payload itself; retrying will never
+                // succeed, so drop it instead of retrying forever.
+                console.warn(`Dropping unsyncable queued score (HTTP ${res.status})`);
             } else {
                 failedQueue.push(payload);
             }
@@ -906,7 +1073,11 @@ async function syncOfflineQueue() {
         }
     }
     
-    localStorage.setItem('timeline_offline_results', JSON.stringify(failedQueue));
+    try {
+        localStorage.setItem('timeline_offline_results', JSON.stringify(failedQueue));
+    } catch (e) {
+        console.error('Could not update offline queue', e);
+    }
 
     if (syncedCount > 0) {
         showToast(`Synced ${syncedCount} score${syncedCount > 1 ? 's' : ''} to leaderboard!`);
@@ -944,7 +1115,11 @@ async function submitScore(result) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
-        if (!res.ok) {
+        if (res.status >= 400 && res.status < 500) {
+            // The server rejected the payload itself; queueing it would just
+            // retry the same rejection forever.
+            console.error(`Score rejected by server (HTTP ${res.status}); not queueing.`);
+        } else if (!res.ok) {
             saveToOfflineQueue(payload);
         }
     } catch(e) {
@@ -958,10 +1133,11 @@ async function fetchLeaderboard() {
         return { isOffline: true, top10: [], userRank: -1, userData: null };
     }
     try {
+        // Only the player id is sent. The server used to also match on display
+        // name, which meant two players sharing a name were treated as one.
         const urlParams = new URLSearchParams({
             date: gameState.todayDate,
             user_id: gameState.userId,
-            display_name: gameState.displayName || '',
             t: Date.now()
         });
         const res = await fetch(`/api/leaderboard?${urlParams.toString()}`);
@@ -974,93 +1150,123 @@ async function fetchLeaderboard() {
     return { isError: true, top10: [], userRank: -1, userData: null };
 }
 
+function renderLeaderboardMessage(listEl, message) {
+    listEl.innerHTML = '';
+    const p = createEl('p', null, message);
+    p.style.textAlign = 'center';
+    p.style.color = 'var(--text-secondary)';
+    p.style.padding = '0.75rem 0';
+    p.style.fontSize = '0.9rem';
+    listEl.appendChild(p);
+}
+
+// Builds one leaderboard row. Display names are attacker-controlled, so they
+// are only ever set via textContent — never interpolated into innerHTML.
+function buildLeaderboardRow(entry, rank, badge) {
+    const isMe = entry.isMe === true;
+
+    const item = createEl('div', 'leaderboard-item' + (isMe ? ' is-me' : ''));
+
+    const leftCol = createEl('div', 'left-col');
+    leftCol.appendChild(createEl('span', 'rank', rank));
+
+    const nameSpan = createEl('span', 'player-name');
+    const nameText = `${entry.display_name || 'Anonymous'}${isMe ? ' (You)' : ''}`;
+    if (isMe) {
+        nameSpan.appendChild(createEl('strong', null, nameText));
+    } else {
+        nameSpan.textContent = nameText;
+    }
+    leftCol.appendChild(nameSpan);
+
+    if (entry.isBot) {
+        const tag = createEl('span', 'player-tag', 'demo');
+        tag.style.fontSize = '0.65rem';
+        tag.style.textTransform = 'uppercase';
+        tag.style.letterSpacing = '0.08em';
+        tag.style.opacity = '0.6';
+        tag.style.marginLeft = '0.4rem';
+        tag.title = 'Sample entry, not a real player';
+        leftCol.appendChild(tag);
+    }
+
+    const rightCol = createEl('div', 'right-col');
+    rightCol.appendChild(createEl('span', 'score', `${entry.score}/7`));
+
+    const timeSpan = createEl('span', null, formatClock(entry.time_ms));
+    timeSpan.style.fontSize = '0.8rem';
+    timeSpan.style.color = 'var(--text-secondary)';
+    timeSpan.style.marginRight = '0.25rem';
+    rightCol.appendChild(timeSpan);
+
+    if (badge) {
+        const badgeSpan = createEl('span', null, badge);
+        badgeSpan.style.fontSize = '1.2em';
+        rightCol.appendChild(badgeSpan);
+    }
+
+    item.appendChild(leftCol);
+    item.appendChild(rightCol);
+    return item;
+}
+
 function renderLeaderboardItems(leaderboardData, listEl) {
     listEl.innerHTML = '';
-    
+
     if (!navigator.onLine || leaderboardData.isOffline) {
-        listEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 0.75rem 0; font-size: 0.9rem;">Leaderboard unavailable while offline.</p>';
+        renderLeaderboardMessage(listEl, 'Leaderboard unavailable while offline.');
         return;
     }
-    
+
     if (leaderboardData.isError) {
-        listEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 0.75rem 0; font-size: 0.9rem;">Unable to load leaderboard data.</p>';
+        renderLeaderboardMessage(listEl, 'Unable to load leaderboard data.');
         return;
     }
-    
-    if (!leaderboardData.top10 || leaderboardData.top10.length === 0) {
-        listEl.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 0.75rem 0; font-size: 0.9rem;">No scores yet today!</p>';
+
+    if (!Array.isArray(leaderboardData.top10) || leaderboardData.top10.length === 0) {
+        renderLeaderboardMessage(listEl, 'No scores yet today!');
     } else {
-        leaderboardData.top10.forEach((l, i) => {
-            const secs = Math.floor(l.time_ms / 1000);
-            const time = `${Math.floor(secs/60)}:${String(secs%60).padStart(2,'0')}`;
-            const item = document.createElement('div');
-            const isMe = l.user_id === gameState.userId || (gameState.displayName && l.display_name === gameState.displayName);
-            item.className = 'leaderboard-item' + (isMe ? ' is-me' : '');
-            const nameDisplay = isMe ? `<strong>${l.display_name || 'Anonymous'} (You)</strong>` : (l.display_name || 'Anonymous');
-            
-            const badge = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
-            item.innerHTML = `
-                <div class="left-col">
-                    <span class="rank">${i+1}</span>
-                    <span class="player-name">${nameDisplay}</span>
-                </div>
-                <div class="right-col">
-                    <span class="score">${l.score}/7</span>
-                    <span style="font-size: 0.8rem; color: var(--text-secondary); margin-right: 0.25rem;">${time}</span>
-                    ${badge ? `<span style="font-size: 1.2em;">${badge}</span>` : ''}
-                </div>
-            `;
-            listEl.appendChild(item);
+        const badges = ['🥇', '🥈', '🥉'];
+        leaderboardData.top10.forEach((entry, i) => {
+            listEl.appendChild(buildLeaderboardRow(entry, i + 1, badges[i] || ''));
         });
-        
+
         if (leaderboardData.userRank > 10 && leaderboardData.userData) {
-            const separator = document.createElement('div');
+            const separator = createEl('div', null, '...');
             separator.style.textAlign = 'center';
             separator.style.color = 'var(--text-secondary)';
             separator.style.margin = '0.5rem 0';
-            separator.textContent = '...';
             listEl.appendChild(separator);
-            
-            const l = leaderboardData.userData;
-            const secs = Math.floor(l.time_ms / 1000);
-            const time = `${Math.floor(secs/60)}:${String(secs%60).padStart(2,'0')}`;
-            const item = document.createElement('div');
-            item.className = 'leaderboard-item is-me';
-            item.innerHTML = `
-                <div class="left-col">
-                    <span class="rank">${leaderboardData.userRank}</span>
-                    <span class="player-name"><strong>${l.display_name || 'Anonymous'} (You)</strong></span>
-                </div>
-                <div class="right-col">
-                    <span class="score">${l.score}/7</span>
-                    <span style="font-size: 0.8rem; color: var(--text-secondary); margin-right: 0.25rem;">${time}</span>
-                </div>
-            `;
-            listEl.appendChild(item);
+
+            listEl.appendChild(
+                buildLeaderboardRow(
+                    { ...leaderboardData.userData, isMe: true },
+                    leaderboardData.userRank,
+                    ''
+                )
+            );
         }
     }
 }
 
 async function showLeaderboard(result) {
+    if (!result) return;
+
     overlay.classList.remove('hidden');
     endModal.classList.remove('hidden');
-    
-    // Add a 300ms delay to let the modal transition in first
-    animateLogoElement('end-logo', 0.3);
-    
+
     const endTitle = document.getElementById('end-title');
     if (result.score === 7) endTitle.textContent = 'Perfect!';
     else if (result.score === 6) endTitle.textContent = 'Excellent!';
     else if (result.score === 5) endTitle.textContent = 'Good!';
     else if (result.score >= 3) endTitle.textContent = 'Not Bad!';
     else endTitle.textContent = 'Keep Practicing!';
-    
+
     document.getElementById('score-display').textContent = `${result.score}/7`;
-    const secs = Math.floor(result.timeMs / 1000);
-    document.getElementById('time-display').textContent = `${Math.floor(secs/60)}:${String(secs%60).padStart(2,'0')}`;
-    
+    document.getElementById('time-display').textContent = formatClock(result.timeMs);
+
     // Personal Stats
-    const history = JSON.parse(localStorage.getItem('timeline_history') || '{}');
+    const history = getHistory();
     const playCount = Object.keys(history).length;
     const statsSection = document.getElementById('personal-stats-section');
     const statsList = document.getElementById('personal-stats-list');
@@ -1099,14 +1305,16 @@ async function showLeaderboard(result) {
                 statItem.style.padding = '0.25rem 0';
                 statItem.style.borderBottom = 'none';
                 
-                const leftCol = document.createElement('div');
-                leftCol.className = 'left-col';
-                leftCol.innerHTML = `<span class="rank">-</span> <span class="player-name">${counts[i]} game${counts[i] !== 1 ? 's' : ''}</span>`;
-                
-                const rightCol = document.createElement('div');
-                rightCol.className = 'right-col';
-                rightCol.innerHTML = `<span class="score">${i}/7</span>`;
-                
+                const leftCol = createEl('div', 'left-col');
+                leftCol.appendChild(createEl('span', 'rank', '-'));
+                leftCol.appendChild(document.createTextNode(' '));
+                leftCol.appendChild(
+                    createEl('span', 'player-name', `${counts[i]} game${counts[i] !== 1 ? 's' : ''}`)
+                );
+
+                const rightCol = createEl('div', 'right-col');
+                rightCol.appendChild(createEl('span', 'score', `${i}/7`));
+
                 statItem.appendChild(leftCol);
                 statItem.appendChild(rightCol);
                 statsList.appendChild(statItem);
@@ -1130,17 +1338,20 @@ async function showLeaderboard(result) {
         if (offlineNoticeBox) offlineNoticeBox.classList.add('hidden');
     }
     
-    const listEl = document.getElementById('leaderboard-list');
-    listEl.innerHTML = '<div class="loading-spinner">Loading...</div>';
-    
-    const leaderboardData = await fetchLeaderboard();
-    renderLeaderboardItems(leaderboardData, listEl);
-    
-    // If no display name, prompt them
+    // If no display name, prompt for one first. This is checked before the
+    // leaderboard fetch is awaited, otherwise the results modal flashes up for
+    // as long as the request takes before being replaced by the name prompt.
     if (!gameState.displayName) {
         endModal.classList.add('hidden');
         nameModal.classList.remove('hidden');
     }
+
+    const listEl = document.getElementById('leaderboard-list');
+    listEl.innerHTML = '';
+    listEl.appendChild(createEl('div', 'loading-spinner', 'Loading...'));
+
+    const leaderboardData = await fetchLeaderboard();
+    renderLeaderboardItems(leaderboardData, listEl);
 }
 
 
@@ -1151,26 +1362,32 @@ document.getElementById('name-input')?.addEventListener('input', (e) => {
 
 document.getElementById('save-name-btn')?.addEventListener('click', async () => {
     const name = document.getElementById('name-input').value.trim();
-    if (name) {
-        gameState.displayName = name;
-        localStorage.setItem('timeline_display_name', name);
-        
-        if (navigator.onLine) {
+    if (!name) return;
+
+    gameState.displayName = name;
+    localStorage.setItem('timeline_display_name', name);
+
+    const todaysResult = getHistory()[gameState.todayDate];
+
+    if (navigator.onLine) {
+        try {
             await fetch('/api/user', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ user_id: gameState.userId, display_name: name })
             });
-            // Update leaderboard if we just saved
-            await submitScore(JSON.parse(localStorage.getItem('timeline_history'))[gameState.todayDate]);
+            // Re-submit so the name is attached to today's score
+            if (todaysResult) await submitScore(todaysResult);
+        } catch (e) {
+            console.error('Could not save display name', e);
         }
-        
-        nameModal.classList.add('hidden');
-        endModal.classList.remove('hidden');
-        
-        // Refresh leaderboard
-        showLeaderboard(JSON.parse(localStorage.getItem('timeline_history'))[gameState.todayDate]);
     }
+
+    nameModal.classList.add('hidden');
+    endModal.classList.remove('hidden');
+
+    // Refresh leaderboard
+    if (todaysResult) showLeaderboard(todaysResult);
 });
 
 document.getElementById('skip-name-btn')?.addEventListener('click', () => {
@@ -1306,26 +1523,38 @@ document.getElementById('close-about-x')?.addEventListener('click', () => {
 
 document.getElementById('update-name-btn')?.addEventListener('click', async () => {
     const name = document.getElementById('settings-name-input').value.trim();
-    if (name && name !== gameState.displayName) {
-        gameState.displayName = name;
-        localStorage.setItem('timeline_display_name', name);
-        if (navigator.onLine) {
-            await fetch('/api/user', {
+    if (!name || name === gameState.displayName) return;
+
+    gameState.displayName = name;
+    localStorage.setItem('timeline_display_name', name);
+
+    let saved = true;
+    if (navigator.onLine) {
+        // navigator.onLine being true does not mean the request will succeed.
+        // An unhandled rejection here used to abort the rest of the handler,
+        // leaving the button stuck and no confirmation shown.
+        try {
+            const res = await fetch('/api/user', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ user_id: gameState.userId, display_name: name })
             });
+            saved = res.ok;
+        } catch (e) {
+            console.error('Could not update display name', e);
+            saved = false;
         }
-        showToast("Name updated!");
-        
-        // Reset buttons to original state
-        const updateBtn = document.getElementById('update-name-btn');
-        const closeBtn = document.getElementById('close-settings-btn');
-        updateBtn.disabled = true;
-        updateBtn.style.display = 'none';
-        updateBtn.className = 'modal-btn outline';
-        closeBtn.className = 'modal-btn primary';
     }
+
+    showToast(saved ? "Name updated!" : "Saved locally — will sync later.");
+
+    // Reset buttons to original state
+    const updateBtn = document.getElementById('update-name-btn');
+    const closeBtn = document.getElementById('close-settings-btn');
+    updateBtn.disabled = true;
+    updateBtn.style.display = 'none';
+    updateBtn.className = 'modal-btn outline';
+    closeBtn.className = 'modal-btn primary';
 });
 
 // UUID Sync Logic
@@ -1397,17 +1626,13 @@ confirmUuidYes.addEventListener('click', () => {
 });
 
 function getShareText() {
-    const history = JSON.parse(localStorage.getItem('timeline_history') || '{}');
-    const res = history[gameState.todayDate];
+    const res = getHistory()[gameState.todayDate];
     if (!res) return '';
-    
+
     const [year, month, day] = gameState.todayDate.split('-');
-    const dateStr = `${parseInt(month)}/${parseInt(day)}/${year.slice(-2)}`;
-    
-    const secs = Math.floor(res.timeMs / 1000);
-    const timeFormatted = `${Math.floor(secs/60)}:${String(secs%60).padStart(2,'0')}`;
-    
-    return `📅 Timeline, ${dateStr}\nhttps://timeline-74i.pages.dev\nCategory: ${res.category}\nScore: ${res.score}/7  (${timeFormatted})`;
+    const dateStr = `${parseInt(month, 10)}/${parseInt(day, 10)}/${year.slice(-2)}`;
+
+    return `📅 Timeline, ${dateStr}\n${window.location.origin}\nCategory: ${res.category}\nScore: ${res.score}/7  (${formatClock(res.timeMs)})`;
 }
 
 async function copyToClipboard(text) {
@@ -1438,7 +1663,7 @@ document.getElementById('share-btn')?.addEventListener('click', async () => {
             await navigator.share({
                 title: 'Timeline Result',
                 text: text,
-                url: 'https://timeline-74i.pages.dev'
+                url: window.location.origin
             });
         } catch (err) {
             if (err.name !== 'AbortError') {
@@ -1478,14 +1703,22 @@ document.getElementById('close-end-x')?.addEventListener('click', () => {
 // PWA Service Worker Registration
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').then(reg => {
-            console.log('SW registered', reg);
-        });
+        navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('SW registered', reg))
+            .catch(err => console.error('SW registration failed', err));
     });
 }
 
-// Start
-initGame();
+// Start. Any unexpected failure here used to leave the page stuck on "..."
+// with no indication of what went wrong.
+function startGame() {
+    initGame().catch(err => {
+        console.error('Failed to initialise game', err);
+        if (categoryNameEl) categoryNameEl.textContent = 'Error Loading Puzzle';
+    });
+}
+
+startGame();
 
 // Mobile keyboard handling for modals
 document.querySelectorAll('.modal input').forEach(input => {
@@ -1511,70 +1744,89 @@ setInterval(() => {
     if (currentLADate !== gameState.todayDate) {
         // Is timer running? (null means hasn't started, isGameOver means finished)
         const isTimerRunning = gameState.startTime !== null && !gameState.isGameOver;
-        
+
         // Are modals open?
-        const overlay = document.getElementById('modal-overlay');
-        const isModalOpen = overlay && !overlay.classList.contains('hidden');
-        
+        const modalOverlay = document.getElementById('modal-overlay');
+        const isModalOpen = modalOverlay && !modalOverlay.classList.contains('hidden');
+
         if (!isTimerRunning && !isModalOpen) {
             // It's a new day, force refresh game
-            initGame();
+            startGame();
         }
     }
 }, 5000);
 
 // Admin / Dashboard logic
+//
+// The admin session is an HttpOnly, HMAC-signed cookie set by /api/login. The
+// client cannot forge it and cannot read it, so `isAdmin` here is only a UI
+// hint — every privileged response is gated server-side. It replaces the old
+// `localStorage.dashboardLoggedIn` flag, which anyone could simply set.
 const dashboardBtn = document.getElementById('dashboard-btn');
 let adminClickCount = 0;
+let isAdmin = false;
 
-if (localStorage.getItem('dashboardLoggedIn') === 'true') {
-    if (dashboardBtn) {
-        dashboardBtn.style.display = '';
-        dashboardBtn.classList.remove('hidden');
-    }
-} else {
-    if (dashboardBtn) {
-        dashboardBtn.style.display = 'none';
-        dashboardBtn.classList.add('hidden');
-    }
+function setDashboardButtonVisible(visible) {
+    if (!dashboardBtn) return;
+    dashboardBtn.style.display = visible ? '' : 'none';
+    dashboardBtn.classList.toggle('hidden', !visible);
 }
+
+async function refreshAdminSession() {
+    // Clean up the legacy client-side flag if it is still lying around.
+    localStorage.removeItem('dashboardLoggedIn');
+    localStorage.removeItem('isAdmin');
+
+    if (!navigator.onLine) return false;
+    try {
+        const res = await fetch('/api/session');
+        if (res.ok) {
+            const data = await res.json();
+            isAdmin = data.admin === true;
+        }
+    } catch (e) {
+        isAdmin = false;
+    }
+    setDashboardButtonVisible(isAdmin);
+    return isAdmin;
+}
+
+setDashboardButtonVisible(false);
+refreshAdminSession();
 
 document.addEventListener('click', (e) => {
     const logo = document.getElementById('logo');
     if (logo && logo.firstElementChild && e.target === logo.firstElementChild) {
         adminClickCount++;
         if (adminClickCount >= 10) {
-            if (dashboardBtn) {
-                dashboardBtn.style.display = '';
-                dashboardBtn.classList.remove('hidden');
-            }
+            setDashboardButtonVisible(true);
         }
     }
 });
 
 window.addEventListener('blur', () => {
-    if (localStorage.getItem('dashboardLoggedIn') !== 'true') {
-        if (dashboardBtn) {
-            dashboardBtn.style.display = 'none';
-            dashboardBtn.classList.add('hidden');
-        }
+    if (!isAdmin) {
+        setDashboardButtonVisible(false);
         adminClickCount = 0;
     }
 });
 
 if (dashboardBtn) {
-    dashboardBtn.addEventListener('click', () => {
-        const overlay = document.getElementById('modal-overlay');
+    dashboardBtn.addEventListener('click', async () => {
+        const modalOverlay = document.getElementById('modal-overlay');
         const loginModal = document.getElementById('login-modal');
         const dashboardModal = document.getElementById('dashboard-modal');
-        if (overlay) {
-            overlay.classList.remove('hidden');
-            if (localStorage.getItem('dashboardLoggedIn') === 'true' && dashboardModal) {
+        if (!modalOverlay) return;
+
+        modalOverlay.classList.remove('hidden');
+
+        if (await refreshAdminSession()) {
+            if (dashboardModal) {
                 dashboardModal.classList.remove('hidden');
                 initDashboard();
-            } else if (loginModal) {
-                loginModal.classList.remove('hidden');
             }
+        } else if (loginModal) {
+            loginModal.classList.remove('hidden');
         }
     });
 }
@@ -1598,7 +1850,10 @@ if (loginSubmitBtn) {
             });
 
             if (res.ok) {
-                localStorage.setItem('dashboardLoggedIn', 'true');
+                // The session itself is the HttpOnly cookie the server just
+                // set; nothing about being logged in is stored client-side.
+                isAdmin = true;
+                setDashboardButtonVisible(true);
                 document.getElementById('login-modal').classList.add('hidden');
                 document.getElementById('dashboard-modal').classList.remove('hidden');
                 loginUsernameInput.value = '';
@@ -1606,10 +1861,15 @@ if (loginSubmitBtn) {
                 loginErrorMsg.style.display = 'none';
                 initDashboard();
             } else {
+                loginPasswordInput.value = '';
+                loginErrorMsg.textContent = res.status === 503
+                    ? 'Admin login is not configured on this deployment.'
+                    : 'Incorrect credentials.';
                 loginErrorMsg.style.display = 'block';
             }
         } catch (e) {
             console.error('Login error:', e);
+            loginErrorMsg.textContent = 'Could not reach the server.';
             loginErrorMsg.style.display = 'block';
         }
     });
@@ -1710,7 +1970,7 @@ async function fetchPuzzleForDashboard(dateStr) {
 
     if (!puzzle) {
         try {
-            const res = await fetch(`/api/puzzles?date=${dateStr}`);
+            const res = await fetch(`/api/puzzles?date=${encodeURIComponent(dateStr)}`);
             if (res.ok) {
                 const data = await res.json();
                 if (Array.isArray(data) && data.length > 0) {
@@ -1724,16 +1984,16 @@ async function fetchPuzzleForDashboard(dateStr) {
 
     if (puzzle) {
         puzzleCategory.textContent = puzzle.category;
-        
+
         const sortedEvents = [...puzzle.events].sort((a, b) => a.year - b.year);
         puzzleEvents.innerHTML = '';
         sortedEvents.forEach(ev => {
-            const el = document.createElement('div');
-            el.className = 'event-item';
-            el.innerHTML = `<span class="event-year">${ev.year}</span><span class="event-text">${ev.event}</span>`;
+            const el = createEl('div', 'event-item');
+            el.appendChild(createEl('span', 'event-year', ev.year));
+            el.appendChild(createEl('span', 'event-text', ev.event));
             puzzleEvents.appendChild(el);
         });
-        
+
         puzzleDisplay.classList.remove('hidden');
         fetchLeaderboardForDashboard(dateStr);
     } else {
@@ -1746,48 +2006,77 @@ async function fetchPuzzleForDashboard(dateStr) {
     }
 }
 
+function setDashboardMessage(container, message) {
+    container.innerHTML = '';
+    const p = createEl('p', null, message);
+    p.style.textAlign = 'center';
+    p.style.color = 'var(--text-secondary)';
+    container.appendChild(p);
+}
+
 async function fetchLeaderboardForDashboard(dateStr) {
     const leaderboardDisplay = document.getElementById('leaderboard-display');
     const leaderboardContent = document.getElementById('leaderboard-content');
-    
+
     if (!navigator.onLine) {
         leaderboardDisplay.classList.remove('hidden');
-        leaderboardContent.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Leaderboard data unavailable while offline.</p>';
+        setDashboardMessage(leaderboardContent, 'Leaderboard data unavailable while offline.');
         return;
     }
-    
+
     try {
-        const res = await fetch(`/api/leaderboard?date=${dateStr}`);
+        const res = await fetch(`/api/leaderboard?date=${encodeURIComponent(dateStr)}`);
+        leaderboardDisplay.classList.remove('hidden');
+
         if (!res.ok) {
-            leaderboardDisplay.classList.remove('hidden');
-            leaderboardContent.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Unable to load leaderboard data.</p>';
+            setDashboardMessage(leaderboardContent, 'Unable to load leaderboard data.');
             return;
         }
         const data = await res.json();
-        const top10 = data.all || data.top10;
-        
-        leaderboardDisplay.classList.remove('hidden');
-        if (!top10 || top10.length === 0) {
-            leaderboardContent.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No leaderboard data yet for this date.</p>';
+
+        // `all` is only returned to an authenticated admin; fall back to the
+        // public top 10 if the session has expired.
+        const rows = Array.isArray(data.all) ? data.all : data.top10;
+
+        if (!Array.isArray(rows) || rows.length === 0) {
+            setDashboardMessage(leaderboardContent, 'No leaderboard data yet for this date.');
             return;
         }
-        
-        let html = '<table><thead><tr><th>Rank</th><th>Player</th><th>Score</th><th>Time (s)</th></tr></thead><tbody>';
-        top10.forEach((entry, index) => {
-            const timeSeconds = (entry.time_ms / 1000).toFixed(1);
-            html += `<tr>
-                <td>${index + 1}</td>
-                <td>${entry.display_name || 'Missing Name'}</td>
-                <td>${entry.score}</td>
-                <td>${timeSeconds}</td>
-            </tr>`;
+
+        // Built with DOM nodes rather than an HTML string: display names are
+        // player-supplied and must never be parsed as markup.
+        const table = document.createElement('table');
+        const thead = document.createElement('thead');
+        const headRow = document.createElement('tr');
+        ['Rank', 'Player', 'Score', 'Time (s)'].forEach(label => {
+            headRow.appendChild(createEl('th', null, label));
         });
-        html += '</tbody></table>';
-        leaderboardContent.innerHTML = html;
+        thead.appendChild(headRow);
+        table.appendChild(thead);
+
+        const tbody = document.createElement('tbody');
+        rows.forEach((entry, index) => {
+            const tr = document.createElement('tr');
+            tr.appendChild(createEl('td', null, index + 1));
+            tr.appendChild(
+                createEl(
+                    'td',
+                    null,
+                    `${entry.display_name || 'Missing Name'}${entry.isBot ? ' (demo)' : ''}`
+                )
+            );
+            tr.appendChild(createEl('td', null, entry.score));
+            tr.appendChild(createEl('td', null, ((Number(entry.time_ms) || 0) / 1000).toFixed(1)));
+            tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+
+        leaderboardContent.innerHTML = '';
+        leaderboardContent.appendChild(table);
     } catch (e) {
         console.error("Leaderboard fetch error:", e);
         leaderboardDisplay.classList.remove('hidden');
-        leaderboardContent.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Unable to load leaderboard data.</p>';
+        setDashboardMessage(leaderboardContent, 'Unable to load leaderboard data.');
     }
 }
 
@@ -1802,15 +2091,15 @@ document.getElementById('close-dashboard-x')?.addEventListener('click', () => {
 });
 
 document.getElementById('logout-dashboard-btn')?.addEventListener('click', () => {
-    localStorage.removeItem('dashboardLoggedIn');
-    localStorage.removeItem('isAdmin');
+    // Clear the session server-side; the cookie is HttpOnly so the client
+    // cannot expire it on its own.
+    fetch('/api/logout', { method: 'POST' }).catch(e => console.error('Logout failed', e));
+
+    isAdmin = false;
     adminClickCount = 0;
     document.getElementById('modal-overlay').classList.add('hidden');
     document.getElementById('dashboard-modal').classList.add('hidden');
-    if (dashboardBtn) {
-        dashboardBtn.style.display = 'none';
-        dashboardBtn.classList.add('hidden');
-    }
+    setDashboardButtonVisible(false);
 });
 
 // PWA Install Logic

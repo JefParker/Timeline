@@ -1,0 +1,4 @@
+{
+  "//": "Marks lib/*.js as ES modules for Node (the repo root is commonjs so the legacy scripts keep working). Cloudflare bundles these itself and is unaffected.",
+  "type": "module"
+}

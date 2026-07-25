@@ -1,9 +1,16 @@
-export async function onRequestGet(context) {
-    const url = new URL(context.request.url);
-    const requestedDate = url.searchParams.get("date");
-    const CATEGORIES = ["Sports","Landmarks","History","Entertainment","Business","Technology","Cinema","Science","Pop History","Geography"];
+import { isValidDateStr, errorResponse } from '../../lib/validate.js';
 
-    // A hardcoded fallback dataset to ensure 60 days of high quality puzzles without relying on flaky APIs.
+// Hard ceiling on how far ahead a caller can force generation. Without this a
+// request for ?date=9999-12-31 would generate ~2.9 million days and — because
+// results are now memoised for the lifetime of the isolate — leave that memory
+// allocated for every subsequent request.
+const MAX_DAYS_AHEAD = 730;
+
+const CATEGORIES = ["Sports","Landmarks","History","Entertainment","Business","Technology","Cinema","Science","Pop History","Geography"];
+
+// A hardcoded dataset so 60 days of high quality puzzles are always available
+// without relying on flaky third-party APIs. Declared at module scope so it is
+// allocated once per isolate rather than rebuilt on every request.
 const FALLBACK_DATA = {
     "Sports": [
         {
@@ -502,7 +509,7 @@ const FALLBACK_DATA = {
         },
         {
             "event": "Winter Palace (first version) built",
-            "year": 1455
+            "year": 1711
         },
         {
             "event": "St. Peter's Basilica (Current) construction begins",
@@ -1551,7 +1558,7 @@ const FALLBACK_DATA = {
             "event": "Thomas Watson Sr. joins the Computing-Tabulating-Recording Company, later renamed IBM."
         },
         {
-            "year": 1919,
+            "year": 1923,
             "event": "The Walt Disney Company is founded as the Disney Brothers Cartoon Studio."
         },
         {
@@ -3799,89 +3806,108 @@ const FALLBACK_DATA = {
     ]
 };
 
-    // Seeded PRNG using mulberry32
-    function mulberry32(a) {
-        return function() {
-          var t = a += 0x6D2B79F5;
-          t = Math.imul(t ^ t >>> 15, t | 1);
-          t ^= t + Math.imul(t ^ t >>> 7, t | 61);
-          return ((t ^ t >>> 14) >>> 0) / 4294967296;
-        }
-    }
+// Seeded PRNG using mulberry32
+function mulberry32(a) {
+    return function() {
+        let t = a += 0x6D2B79F5;
+        t = Math.imul(t ^ t >>> 15, t | 1);
+        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+}
     
-    // Seed from string
-    function getSeedFromString(str) {
-        let hash = 0;
-        for (let i = 0; i < str.length; i++) {
-            hash = Math.imul(31, hash) + str.charCodeAt(i) | 0;
-        }
-        return hash;
+// Seed from string
+function getSeedFromString(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = Math.imul(31, hash) + str.charCodeAt(i) | 0;
     }
+    return hash;
+}
     
-    function shuffleSeeded(array, randomFn) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(randomFn() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+function shuffleSeeded(array, randomFn) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(randomFn() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
     }
+    return array;
+}
 
-    const allPuzzles = [];
-    
-    // Use LA Time for start date to match game logic
-    const laTime = new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
-    const startDate = new Date(laTime);
-    startDate.setHours(0,0,0,0);
-    
-    // Start from 2 days ago to give some padding for timezones
-    startDate.setDate(startDate.getDate() - 2);
-    
-    const epoch = new Date("2024-01-01T00:00:00Z");
-    
-    let targetEndDate = new Date(startDate);
-    targetEndDate.setDate(targetEndDate.getDate() + 60);
-    if (requestedDate) {
-        targetEndDate = new Date(requestedDate);
-        targetEndDate.setHours(0,0,0,0);
-        targetEndDate.setDate(targetEndDate.getDate() + 1);
-    }
-    
-    const daysToGenerate = Math.floor((targetEndDate - epoch) / (1000 * 60 * 60 * 24));
-    
-    // Create a PRNG for category selection
-    const catRandom = mulberry32(123456789);
-    const recentCategories = [];
-    const globalUsedEvents = new Set();
+const EPOCH_MS = Date.UTC(2024, 0, 1);
+const DAY_MS = 24 * 60 * 60 * 1000;
+const WINDOW_DAYS = 60;
+const MEMORY_BANK_DAYS = 60;
 
-    for (let i = 0; i < daysToGenerate; i++) {
-        const date = new Date(epoch);
-        date.setDate(date.getDate() + i);
-        const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-        
-        let availableCategories = CATEGORIES.filter(c => !recentCategories.includes(c));
+function dateStrForIndex(index) {
+    const d = new Date(EPOCH_MS + index * DAY_MS);
+    return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}-${String(d.getUTCDate()).padStart(2, '0')}`;
+}
+
+function dayIndexForDate(dateStr) {
+    const [year, month, day] = dateStr.split('-').map(Number);
+    return Math.round((Date.UTC(year, month - 1, day) - EPOCH_MS) / DAY_MS);
+}
+
+// en-CA renders as YYYY-MM-DD, which avoids parsing a localised date string
+// back through the Date constructor (implementation-defined behaviour).
+const LA_DATE_FORMATTER = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'America/Los_Angeles',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+});
+
+function getLADateStr(now = new Date()) {
+    return LA_DATE_FORMATTER.format(now);
+}
+
+// Generation is a pure forward scan from the epoch: day N depends only on the
+// days before it. The results are therefore memoised for the lifetime of the
+// isolate and extended incrementally, instead of replaying every day since
+// 2024-01-01 on every single request.
+const generation = {
+    puzzles: [],
+    catRandom: mulberry32(123456789),
+    recentCategories: [],
+    usedEvents: new Set()
+};
+
+// The furthest index any request is allowed to generate, recomputed per call so
+// it advances naturally with the calendar.
+function maxAllowedIndex() {
+    return dayIndexForDate(getLADateStr()) + MAX_DAYS_AHEAD;
+}
+
+function generateThroughIndex(lastIndex) {
+    const ceiling = Math.min(lastIndex, maxAllowedIndex());
+    for (let i = generation.puzzles.length; i <= ceiling; i++) {
+        const dateStr = dateStrForIndex(i);
+
+        let availableCategories = CATEGORIES.filter(c => !generation.recentCategories.includes(c));
         if (availableCategories.length === 0) availableCategories = [...CATEGORIES];
-        
-        const category = availableCategories[Math.floor(catRandom() * availableCategories.length)];
-        recentCategories.push(category);
-        if (recentCategories.length > 6) recentCategories.shift();
-        
-        const seed = getSeedFromString(dateStr);
-        const randomFn = mulberry32(seed);
 
-        const categoryList = FALLBACK_DATA[category];
-        const shuffledList = shuffleSeeded([...categoryList], randomFn);
+        const category = availableCategories[Math.floor(generation.catRandom() * availableCategories.length)];
+        generation.recentCategories.push(category);
+        if (generation.recentCategories.length > 6) generation.recentCategories.shift();
+
+        const randomFn = mulberry32(getSeedFromString(dateStr));
+        const shuffledList = shuffleSeeded([...FALLBACK_DATA[category]], randomFn);
+
+        // NOTE: `selected` holds references into FALLBACK_DATA. That is safe
+        // only because every path out of the memo goes through clonePuzzle().
+        // Never hand `generation.puzzles` entries to a caller directly.
         const selected = [];
         const usedYears = new Set();
-        
+
         for (const ev of shuffledList) {
-            if (!usedYears.has(ev.year) && !globalUsedEvents.has(ev.event)) {
+            if (!usedYears.has(ev.year) && !generation.usedEvents.has(ev.event)) {
                 usedYears.add(ev.year);
                 selected.push(ev);
-                globalUsedEvents.add(ev.event);
+                generation.usedEvents.add(ev.event);
                 if (selected.length === 7) break;
             }
         }
-        
+
         // Fallback in case a category doesn't have 7 unique years
         if (selected.length < 7) {
             for (const ev of shuffledList) {
@@ -3892,29 +3918,52 @@ const FALLBACK_DATA = {
             }
         }
 
-        allPuzzles.push({
-            date: dateStr,
-            category: category,
-            events: selected
-        });
-        
-        // Maintain 60-day memory bank
-        if (allPuzzles.length >= 60) {
-            const oldPuzzle = allPuzzles[allPuzzles.length - 60];
-            oldPuzzle.events.forEach(e => globalUsedEvents.delete(e.event));
-        }
-    }
+        generation.puzzles.push({ date: dateStr, category: category, events: selected });
 
-    let puzzles = [];
-    if (requestedDate) {
-        puzzles = allPuzzles.filter(p => p.date === requestedDate);
-    } else {
-        const startStr = `${startDate.getFullYear()}-${String(startDate.getMonth() + 1).padStart(2, '0')}-${String(startDate.getDate()).padStart(2, '0')}`;
-        const startIndex = allPuzzles.findIndex(p => p.date === startStr);
-        if (startIndex !== -1) {
-            puzzles = allPuzzles.slice(startIndex, startIndex + 60);
+        // Maintain 60-day memory bank
+        if (generation.puzzles.length >= MEMORY_BANK_DAYS) {
+            const oldPuzzle = generation.puzzles[generation.puzzles.length - MEMORY_BANK_DAYS];
+            oldPuzzle.events.forEach(e => generation.usedEvents.delete(e.event));
         }
     }
+}
+
+// Memoised entries are shared across requests, so callers always receive deep
+// copies. Handing out the originals would let the per-request shuffle below
+// mutate the cache and change what every later request sees.
+function clonePuzzle(puzzle) {
+    return {
+        date: puzzle.date,
+        category: puzzle.category,
+        events: puzzle.events.map(e => ({ event: e.event, year: e.year }))
+    };
+}
+
+// The daily window must always fit inside the generation ceiling, otherwise it
+// would silently return fewer than WINDOW_DAYS puzzles.
+if (MAX_DAYS_AHEAD < WINDOW_DAYS) {
+    throw new Error('MAX_DAYS_AHEAD must be at least WINDOW_DAYS');
+}
+
+function getPuzzleWindow() {
+    // Start two days back to give timezone padding.
+    const startIndex = dayIndexForDate(getLADateStr()) - 2;
+    if (startIndex < 0) return [];
+
+    generateThroughIndex(startIndex + WINDOW_DAYS - 1);
+    return generation.puzzles.slice(startIndex, startIndex + WINDOW_DAYS).map(clonePuzzle);
+}
+
+function getPuzzleForDate(dateStr) {
+    const index = dayIndexForDate(dateStr);
+    if (index < 0 || index > maxAllowedIndex()) return null;
+
+    generateThroughIndex(index);
+    const puzzle = generation.puzzles[index];
+    return puzzle ? clonePuzzle(puzzle) : null;
+}
+
+function applyOverrides(puzzles) {
 
     // Special Override for World Chocolate Day (2026-07-07)
     for (let i = 0; i < puzzles.length; i++) {
@@ -4060,9 +4109,9 @@ const FALLBACK_DATA = {
                     { event: "'52nd Street' by Billy Joel wins Album of the Year", year: 1980 },
                     { event: "'Nick of Time' by Bonnie Raitt wins Album of the Year", year: 1990 },
                     { event: "'Supernatural' by Santana wins Album of the Year", year: 2000 },
-                    { event: "'We Are' by Jon Batiste wins Album of the Year", year: 2021 },
-                    { event: "'Harry's House' by Harry Styles wins Album of the Year", year: 2022 },
-                    { event: "'Midnights' by Taylor Swift wins Album of the Year", year: 2023 }
+                    { event: "'We Are' by Jon Batiste wins Album of the Year", year: 2022 },
+                    { event: "'Harry's House' by Harry Styles wins Album of the Year", year: 2023 },
+                    { event: "'Midnights' by Taylor Swift wins Album of the Year", year: 2024 }
                 ]
             };
         }
@@ -5721,16 +5770,39 @@ const FALLBACK_DATA = {
         }
     }
     // Shuffle events for each puzzle to ensure they are mixed up when presented
-    for (let p of puzzles) {
-        const seed = getSeedFromString(p.date + "-shuffle");
-        const randomFn = mulberry32(seed);
+    for (const p of puzzles) {
+        const randomFn = mulberry32(getSeedFromString(p.date + "-shuffle"));
         p.events = shuffleSeeded(p.events, randomFn);
     }
 
-    return new Response(JSON.stringify(puzzles), {
+    return puzzles;
+}
+
+export async function onRequestGet(context) {
+    const url = new URL(context.request.url);
+    const requestedDate = url.searchParams.get("date");
+
+    let puzzles;
+
+    if (requestedDate !== null) {
+        if (!isValidDateStr(requestedDate)) {
+            return errorResponse('Invalid date parameter', 400);
+        }
+        const puzzle = getPuzzleForDate(requestedDate);
+        puzzles = puzzle ? [puzzle] : [];
+    } else {
+        puzzles = getPuzzleWindow();
+    }
+
+    const body = JSON.stringify(applyOverrides(puzzles));
+
+    return new Response(body, {
         headers: {
             'Content-Type': 'application/json',
-            'Cache-Control': 'no-cache, no-store, must-revalidate'
+            // Output for a given date never changes, but the rolling 60-day
+            // window advances daily, so allow a short shared cache lifetime.
+            'Cache-Control': 'public, max-age=300, s-maxage=300'
         }
     });
 }
+

@@ -1,21 +1,43 @@
+import {
+    isValidUuid,
+    sanitizeDisplayName,
+    readJsonBody,
+    jsonResponse,
+    errorResponse
+} from '../../lib/validate.js';
+
+const MAX_HISTORY_ROWS = 400;
+
 export async function onRequestPut(context) {
     const { request, env } = context;
+
+    const data = await readJsonBody(request);
+    if (!data) {
+        return errorResponse('Bad request', 400);
+    }
+
+    const userId = data.user_id;
+    if (!isValidUuid(userId)) {
+        return errorResponse('Invalid user_id', 400);
+    }
+
+    const displayName = sanitizeDisplayName(data.display_name);
+    if (!displayName) {
+        return errorResponse('Invalid display_name', 400);
+    }
+
     try {
-        const data = await request.json();
-        const { user_id, display_name } = data;
-
-        if (!user_id || !display_name) {
-            return new Response('Missing required fields', { status: 400 });
-        }
-
         await env.DB.prepare(
-            `INSERT INTO users (id, display_name) VALUES (?, ?) 
+            `INSERT INTO users (id, display_name) VALUES (?, ?)
              ON CONFLICT(id) DO UPDATE SET display_name = excluded.display_name`
-        ).bind(user_id, display_name).run();
+        )
+            .bind(userId, displayName)
+            .run();
 
-        return new Response('OK', { status: 200 });
+        return jsonResponse({ success: true, display_name: displayName });
     } catch (e) {
-        return new Response(e.message, { status: 500 });
+        console.error('User write failed:', e);
+        return errorResponse('Unable to save profile', 500);
     }
 }
 
@@ -23,20 +45,32 @@ export async function onRequestGet(context) {
     const { request, env } = context;
     const url = new URL(request.url);
     const userId = url.searchParams.get('user_id');
-    
-    if (!userId) return new Response('Missing user_id', { status: 400 });
-    
+
+    if (!isValidUuid(userId)) {
+        return errorResponse('Invalid user_id', 400);
+    }
+
     try {
-        const user = await env.DB.prepare('SELECT display_name FROM users WHERE id = ?').bind(userId).first();
-        const history = await env.DB.prepare('SELECT puzzle_date, category, score, time_ms, placed_cards FROM leaderboard WHERE user_id = ?').bind(userId).all();
-        
-        return new Response(JSON.stringify({
+        const user = await env.DB.prepare('SELECT display_name FROM users WHERE id = ?')
+            .bind(userId)
+            .first();
+
+        const history = await env.DB.prepare(
+            `SELECT puzzle_date, category, score, time_ms, placed_cards
+             FROM leaderboard
+             WHERE user_id = ?
+             ORDER BY puzzle_date DESC
+             LIMIT ?`
+        )
+            .bind(userId, MAX_HISTORY_ROWS)
+            .all();
+
+        return jsonResponse({
             display_name: user ? user.display_name : null,
-            history: history.results
-        }), {
-            headers: { 'Content-Type': 'application/json' }
+            history: history.results || []
         });
-    } catch(e) {
-        return new Response(e.message, { status: 500 });
+    } catch (e) {
+        console.error('User read failed:', e);
+        return errorResponse('Unable to load profile', 500);
     }
 }

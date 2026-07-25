@@ -1,3 +1,9 @@
+// OBSOLETE — DO NOT RUN. This rewrites functions/api/puzzles.js, public/sw.js
+// and public/puzzles.json from an old template and would destroy the current
+// module structure. Use `npm run build:puzzles` instead. Move to scripts/archive/.
+console.error('update_puzzles.js is obsolete and would overwrite functions/api/puzzles.js and public/sw.js. Refusing to run.');
+process.exit(1);
+
 const fs = require('fs');
 
 const tvPuzzles = [

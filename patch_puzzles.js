@@ -1,3 +1,23 @@
+// ---------------------------------------------------------------------------
+// OBSOLETE — DO NOT RUN.
+//
+// This was a one-off codemod against an older shape of functions/api/puzzles.js.
+// That file has since been restructured (module-scope data, a memoised
+// generator, and applyOverrides()), so none of the string targets below match
+// any more. The script would replace nothing and then overwrite the file with
+// its own unchanged buffer — at best a no-op, at worst a silent clobber of
+// concurrent edits.
+//
+// Kept only for reference; it should be moved into scripts/archive/.
+// ---------------------------------------------------------------------------
+console.error(
+    'patch_puzzles.js is obsolete and refuses to run.\n' +
+    'It targets a version of functions/api/puzzles.js that no longer exists.\n' +
+    'Delete this file or move it to scripts/archive/.'
+);
+process.exit(1);
+
+// eslint-disable-next-line no-unreachable
 const fs = require('fs');
 let code = fs.readFileSync('functions/api/puzzles.js', 'utf8');
 
