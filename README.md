@@ -19,11 +19,20 @@ migrations/        Optional one-off SQL migrations
 Set these in the Cloudflare dashboard under **Settings → Environment variables**,
 or in a local `.dev.vars` file (already gitignored).
 
-| Variable | Purpose |
-| --- | --- |
-| `ADMIN_USERNAME` | Admin dashboard username |
-| `ADMIN_PASSWORD` | Admin dashboard password |
-| `ADMIN_SECRET` | Random string used to HMAC-sign the admin session cookie |
+| Variable | Purpose | Typed by a human? |
+| --- | --- | --- |
+| `ADMIN_USERNAME` | Admin dashboard username | Yes — at the login form |
+| `ADMIN_PASSWORD` | Admin dashboard password | Yes — at the login form |
+| `ADMIN_SECRET` | HMAC key that signs the admin session cookie | **Never** |
+
+**`ADMIN_SECRET` is not a password.** It is a machine-only key used by
+`lib/auth.js` to sign and verify the `tl_admin` cookie; nobody ever enters it
+anywhere. Make it long and random, and don't try to type it into the login form
+— that field wants `ADMIN_PASSWORD`. Confusing the two is the easiest mistake to
+make here, and it presents as "Invalid credentials" with no hint as to why.
+
+Rotating one has no effect on the others. Rotating `ADMIN_SECRET` signs out
+every existing admin session but leaves the username and password unchanged.
 
 Generate a secret with:
 
@@ -42,6 +51,41 @@ ADMIN_USERNAME=admin
 ADMIN_PASSWORD=choose-something-long
 ADMIN_SECRET=paste-the-generated-value-here
 ```
+
+## Rotating credentials
+
+```bash
+bash scripts/rotate-admin-secret.sh ADMIN_SECRET --generate   # generated, never displayed
+bash scripts/rotate-admin-secret.sh ADMIN_PASSWORD            # prompts twice, hidden
+```
+
+Each run updates Cloudflare and rewrites the matching line in `.dev.vars`, so
+local and deployed values cannot drift apart. `scripts/setup-secrets.sh`
+provisions all three from scratch; use it for a new project, not for rotation.
+
+**Pages binds environment variables at deployment time.** Updating a secret does
+not affect the running deployment — the old value keeps working until a new
+deployment exists. (Workers are the opposite: there a secret applies on the next
+request.) So rotation is a two-step operation:
+
+```bash
+npx wrangler pages deploy public --project-name timeline
+```
+
+Neither script deploys for you, because deploying ships whatever else is sitting
+in the working tree. Check `git status` first.
+
+Afterwards, verify against the real endpoint rather than trusting that the
+command reported success — a session cookie issued before the rotation should
+now be rejected:
+
+```bash
+curl -s https://timeline-74i.pages.dev/api/session -H "Cookie: tl_admin=<old-token>"
+```
+
+`{"admin":false}` means the new `ADMIN_SECRET` is live. On `/api/login`, 200 is
+success, 401 means wrong username/password, and 503 means one of the three
+variables is missing or empty on the deployment (`functions/api/login.js`).
 
 ## Development
 
