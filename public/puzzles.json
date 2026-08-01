@@ -1,273 +1,35 @@
 [
   {
-    "date": "2026-07-23",
-    "category": "Comic Book Debuts",
-    "events": [
-      {
-        "event": "Superman – Debuts in Action Comics #1",
-        "year": 1938
-      },
-      {
-        "event": "Teenage Mutant Ninja Turtles – Debuts in a self-published comic",
-        "year": 1984
-      },
-      {
-        "event": "Wonder Woman – Debuts in All Star Comics #8",
-        "year": 1941
-      },
-      {
-        "event": "Spider-Man – Debuts in Amazing Fantasy #15",
-        "year": 1962
-      },
-      {
-        "event": "Wolverine – Debuts in a cameo in The Incredible Hulk #180",
-        "year": 1974
-      },
-      {
-        "event": "Deadpool – Debuts in The New Mutants #98",
-        "year": 1991
-      },
-      {
-        "event": "Batman – Debuts in Detective Comics #27",
-        "year": 1939
-      }
-    ]
-  },
-  {
-    "date": "2026-07-24",
-    "category": "Epic Survival & Media Sensations",
-    "events": [
-      {
-        "event": "Baby Jessica McClure is safely pulled from an abandoned well in Texas after a 58-hour ordeal.",
-        "year": 1987
-      },
-      {
-        "event": "Four indigenous children are rescued after surviving 40 days in the Amazon rainforest following a plane crash.",
-        "year": 2023
-      },
-      {
-        "event": "Sir Ernest Shackleton's stranded crew is finally rescued from Elephant Island.",
-        "year": 1916
-      },
-      {
-        "event": "Captain Richard Phillips is rescued from Somali pirates by US Navy SEAL snipers.",
-        "year": 2009
-      },
-      {
-        "event": "The 16 survivors of a plane crash in the freezing Andes mountains are rescued after 72 days.",
-        "year": 1972
-      },
-      {
-        "event": "The crew of Apollo 13 is safely brought back to Earth after a critical explosion in space.",
-        "year": 1970
-      },
-      {
-        "event": "All nine miners trapped in the flooded Quecreek Mine in Pennsylvania are successfully rescued.",
-        "year": 2002
-      }
-    ]
-  },
-  {
-    "date": "2026-07-25",
-    "category": "History",
-    "events": [
-      {
-        "event": "Hitler appointed Chancellor of Germany",
-        "year": 1933
-      },
-      {
-        "event": "Watergate break-in",
-        "year": 1972
-      },
-      {
-        "event": "Completion of the Transcontinental Railroad",
-        "year": 1869
-      },
-      {
-        "event": "Iranian Revolution",
-        "year": 1979
-      },
-      {
-        "event": "Civil Rights Act signed",
-        "year": 1964
-      },
-      {
-        "event": "Gandhi's Salt March",
-        "year": 1930
-      },
-      {
-        "event": "Global financial crisis",
-        "year": 2008
-      }
-    ]
-  },
-  {
-    "date": "2026-07-26",
-    "category": "Wild & Bizarre Celebrity Run-Ins",
-    "events": [
-      {
-        "event": "Jim Morrison is arrested for indecent exposure and profanity during a Doors concert in Miami.",
-        "year": 1969
-      },
-      {
-        "event": "O.J. Simpson is arrested following the infamous, televised low-speed white Ford Bronco chase.",
-        "year": 1994
-      },
-      {
-        "event": "Matthew McConaughey is arrested in Texas for marijuana possession and resisting arrest while allegedly playing bongo drums naked.",
-        "year": 1999
-      },
-      {
-        "event": "Paul McCartney is arrested in Tokyo after customs officials find half a pound of marijuana in his luggage.",
-        "year": 1980
-      },
-      {
-        "event": "Bruno Mars is arrested in Las Vegas after a bathroom attendant catches him with cocaine.",
-        "year": 2010
-      },
-      {
-        "event": "Paul Reubens (Pee-wee Herman) is arrested for indecent exposure in a Florida adult movie theater.",
-        "year": 1991
-      },
-      {
-        "event": "Nick Nolte is arrested for a DUI, resulting in arguably the most chaotic and iconic celebrity mugshot of all time.",
-        "year": 2002
-      }
-    ]
-  },
-  {
-    "date": "2026-07-27",
-    "category": "The Procedural (Case-of-the-Week)",
-    "events": [
-      {
-        "event": "CSI: Crime Scene Investigation premieres, heavily influencing the depiction of forensic science in pop culture.",
-        "year": 2000
-      },
-      {
-        "event": "Murder, She Wrote premieres, starring Angela Lansbury as the mystery-solving author Jessica Fletcher.",
-        "year": 1984
-      },
-      {
-        "event": "NCIS debuts, eventually growing into one of the most-watched procedural franchises in the world.",
-        "year": 2003
-      },
-      {
-        "event": "Columbo debuts as a regular series, popularizing the 'howcatchem' inverted detective format.",
-        "year": 1971
-      },
-      {
-        "event": "Sherlock premieres on the BBC, transplanting Conan Doyle's detective into the smartphone era.",
-        "year": 2010
-      },
-      {
-        "event": "Law & Order debuts, defining the modern two-part police and legal procedural format.",
-        "year": 1990
-      },
-      {
-        "event": "Hawaii Five-O premieres, bringing high-stakes police procedural action to the tropical islands.",
-        "year": 1968
-      }
-    ]
-  },
-  {
-    "date": "2026-07-28",
-    "category": "Sports",
-    "events": [
-      {
-        "event": "Roger Bannister breaks the four-minute mile",
-        "year": 1954
-      },
-      {
-        "event": "First FIFA World Cup is held in Uruguay",
-        "year": 1930
-      },
-      {
-        "event": "Jackie Robinson breaks the baseball color line",
-        "year": 1947
-      },
-      {
-        "event": "First Wimbledon tennis championship is held",
-        "year": 1877
-      },
-      {
-        "event": "Usain Bolt sets 100m and 200m world records at the Beijing Olympics",
-        "year": 2008
-      },
-      {
-        "event": "The 'Miracle on Ice' at the Lake Placid Winter Olympics",
-        "year": 1980
-      },
-      {
-        "event": "Tiger Woods wins his first Masters at age 21",
-        "year": 1997
-      }
-    ]
-  },
-  {
-    "date": "2026-07-29",
-    "category": "Entertainment",
-    "events": [
-      {
-        "event": "The Globe Theatre opens in London.",
-        "year": 1599
-      },
-      {
-        "event": "Sony PlayStation launches in Japan.",
-        "year": 1994
-      },
-      {
-        "event": "'The Matrix' is released in theaters.",
-        "year": 1999
-      },
-      {
-        "event": "'The Exorcist' is released.",
-        "year": 1973
-      },
-      {
-        "event": "'Snow White and the Seven Dwarfs' premieres.",
-        "year": 1937
-      },
-      {
-        "event": "Walt Disney Company is founded.",
-        "year": 1923
-      },
-      {
-        "event": "'Iron Man' kicks off the Marvel Cinematic Universe.",
-        "year": 2008
-      }
-    ]
-  },
-  {
     "date": "2026-07-30",
     "category": "Technology",
     "events": [
       {
-        "event": "Hans Lippershey invents the telescope.",
-        "year": 1608
-      },
-      {
         "event": "The Soviet Union launches Sputnik 1, the first artificial Earth satellite.",
         "year": 1957
-      },
-      {
-        "event": "The Altair 8800, sparking the microcomputer revolution, is released.",
-        "year": 1975
       },
       {
         "event": "Edmund Cartwright invents the power loom.",
         "year": 1785
       },
       {
-        "event": "John Bardeen, Walter Brattain, and William Shockley invent the transistor.",
-        "year": 1947
+        "event": "Benjamin Franklin invents the lightning rod.",
+        "year": 1752
+      },
+      {
+        "event": "Philo Farnsworth transmits the first all-electronic television image.",
+        "year": 1927
       },
       {
         "event": "Daniel Gabriel Fahrenheit invents the mercury thermometer.",
         "year": 1714
       },
       {
-        "event": "Philo Farnsworth transmits the first all-electronic television image.",
-        "year": 1927
+        "event": "The Altair 8800, sparking the microcomputer revolution, is released.",
+        "year": 1975
+      },
+      {
+        "event": "John Bardeen, Walter Brattain, and William Shockley invent the transistor.",
+        "year": 1947
       }
     ]
   },
@@ -326,16 +88,16 @@
         "year": 1989
       },
       {
-        "event": "Instagram is launched",
-        "year": 2010
+        "event": "Apple's iPhone puts the full web in your pocket",
+        "year": 2007
       },
       {
-        "event": "Google is founded",
-        "year": 1998
+        "event": "Hotmail brings free email to the web",
+        "year": 1996
       },
       {
-        "event": "Facebook is launched",
-        "year": 2004
+        "event": "Napster ignites peer-to-peer file sharing",
+        "year": 1999
       }
     ]
   },
@@ -344,32 +106,32 @@
     "category": "Business",
     "events": [
       {
-        "event": "The Bretton Woods system establishes international financial rules and creates the IMF and World Bank.",
-        "year": 1944
+        "event": "Frank McNamara and Ralph Schneider introduce the Diners Club card, the world's first multipurpose charge card.",
+        "year": 1950
       },
       {
-        "event": "Elon Musk acquires Twitter for $44 billion and takes the company private.",
-        "year": 2022
+        "event": "Lehman Brothers files for bankruptcy, marking the climax of the global financial crisis.",
+        "year": 2008
+      },
+      {
+        "event": "Major tech companies heavily invest and launch numerous Generative AI tools and services in a global AI boom.",
+        "year": 2024
       },
       {
         "event": "Jeff Bezos founds Amazon in Bellevue, Washington, initially as an online bookstore.",
         "year": 1994
       },
       {
+        "event": "Procter & Gamble is founded by William Procter and James Gamble in Cincinnati, Ohio.",
+        "year": 1837
+      },
+      {
         "event": "The Buttonwood Agreement is signed, laying the foundation for the New York Stock Exchange.",
         "year": 1792
       },
       {
-        "event": "Twitter is created by Jack Dorsey, Noah Glass, Biz Stone, and Evan Williams.",
-        "year": 2006
-      },
-      {
-        "event": "Ray Kroc opens his first franchised McDonald's restaurant in Des Plaines, Illinois.",
-        "year": 1955
-      },
-      {
-        "event": "Procter & Gamble is founded by William Procter and James Gamble in Cincinnati, Ohio.",
-        "year": 1837
+        "event": "Tim Berners-Lee invents the World Wide Web, paving the way for e-commerce.",
+        "year": 1989
       }
     ]
   },
@@ -378,32 +140,32 @@
     "category": "Firsts in Space",
     "events": [
       {
-        "event": "Curiosity rover lands on Mars – First of the modern, large-scale Mars rovers",
-        "year": 2012
+        "event": "SpaceX lands an orbital rocket booster upright for the first time",
+        "year": 2015
       },
       {
-        "event": "Apollo 11 Moon landing – First humans to walk on the moon",
-        "year": 1969
+        "event": "Salyut 1 becomes the first space station",
+        "year": 1971
       },
       {
-        "event": "Yuri Gagarin orbits Earth – First human in space",
-        "year": 1961
+        "event": "Valentina Tereshkova becomes the first woman in space",
+        "year": 1963
       },
       {
         "event": "James Webb Space Telescope launched – The most powerful space telescope ever built",
         "year": 2021
       },
       {
-        "event": "Sputnik 1 launched – First artificial satellite",
-        "year": 1957
+        "event": "A V-2 rocket becomes the first man-made object to reach space",
+        "year": 1944
       },
       {
-        "event": "Hubble Space Telescope launched – First major optical telescope in space",
-        "year": 1990
+        "event": "Space Shuttle Columbia flies the first reusable orbital mission",
+        "year": 1981
       },
       {
-        "event": "International Space Station (ISS) – First module launched",
-        "year": 1998
+        "event": "Dennis Tito becomes the first space tourist",
+        "year": 2001
       }
     ]
   },
@@ -412,20 +174,8 @@
     "category": "Landmarks",
     "events": [
       {
-        "event": "Grand Central Terminal opens",
-        "year": 1913
-      },
-      {
-        "event": "Big Ben bell cast",
-        "year": 1858
-      },
-      {
-        "event": "Brooklyn Bridge opens",
-        "year": 1883
-      },
-      {
-        "event": "Buckingham Palace (Buckingham House) built",
-        "year": 1703
+        "event": "Westminster Abbey consecrated",
+        "year": 1065
       },
       {
         "event": "Hagia Sophia construction begins",
@@ -438,6 +188,18 @@
       {
         "event": "One World Trade Center opens",
         "year": 2014
+      },
+      {
+        "event": "Tokyo Tower completed",
+        "year": 1958
+      },
+      {
+        "event": "Hadrian's Wall construction begins",
+        "year": 122
+      },
+      {
+        "event": "Big Ben bell cast",
+        "year": 1858
       }
     ]
   },
@@ -446,24 +208,12 @@
     "category": "History",
     "events": [
       {
-        "event": "Defeat of the Spanish Armada",
-        "year": 1588
-      },
-      {
-        "event": "Scopes Monkey Trial",
-        "year": 1925
+        "event": "Fall of the Berlin Wall",
+        "year": 1989
       },
       {
         "event": "First Olympic Games",
         "year": -776
-      },
-      {
-        "event": "Declaration of Independence",
-        "year": 1776
-      },
-      {
-        "event": "Fall of the Berlin Wall",
-        "year": 1989
       },
       {
         "event": "Attack on Pearl Harbor",
@@ -472,6 +222,18 @@
       {
         "event": "Great Fire of London",
         "year": 1666
+      },
+      {
+        "event": "Munich Beer Hall Putsch",
+        "year": 1923
+      },
+      {
+        "event": "Declaration of Independence",
+        "year": 1776
+      },
+      {
+        "event": "Defeat of the Spanish Armada",
+        "year": 1588
       }
     ]
   },
@@ -480,32 +242,32 @@
     "category": "Entertainment",
     "events": [
       {
-        "event": "'Titanic' is released.",
-        "year": 1997
+        "event": "Elvis Presley releases his debut album.",
+        "year": 1956
       },
       {
-        "event": "'The Great Train Robbery' is released.",
-        "year": 1903
+        "event": "Mickey Mouse debuts in 'Steamboat Willie'.",
+        "year": 1928
       },
       {
         "event": "'Singin' in the Rain' is released.",
         "year": 1952
       },
       {
-        "event": "Elvis Presley releases his debut album.",
-        "year": 1956
+        "event": "Dungeons & Dragons is published.",
+        "year": 1974
       },
       {
-        "event": "'Jaws' becomes the first modern summer blockbuster.",
-        "year": 1975
+        "event": "'The Great Train Robbery' is released.",
+        "year": 1903
       },
       {
         "event": "First Hollywood film studio opens.",
         "year": 1911
       },
       {
-        "event": "Mickey Mouse debuts in 'Steamboat Willie'.",
-        "year": 1928
+        "event": "'Titanic' is released.",
+        "year": 1997
       }
     ]
   },
@@ -522,24 +284,24 @@
         "year": 1922
       },
       {
-        "event": "Charlie Chaplin's Little Tramp character makes his debut in 'Kid Auto Races at Venice'.",
-        "year": 1914
+        "event": "United Artists is founded by Charlie Chaplin, Mary Pickford, Douglas Fairbanks, and D. W. Griffith.",
+        "year": 1919
       },
       {
-        "event": "'Jurassic Park' astounds audiences with photorealistic CGI dinosaurs.",
-        "year": 1993
+        "event": "'Jaws' becomes the first modern summer blockbuster.",
+        "year": 1975
       },
       {
         "event": "The COVID-19 pandemic causes unprecedented global cinema closures and film delays.",
         "year": 2020
       },
       {
-        "event": "The first Cinerama film, 'This Is Cinerama', premieres, starting a widescreen craze.",
-        "year": 1952
+        "event": "'Jurassic Park' astounds audiences with photorealistic CGI dinosaurs.",
+        "year": 1993
       },
       {
-        "event": "United Artists is founded by Charlie Chaplin, Mary Pickford, Douglas Fairbanks, and D. W. Griffith.",
-        "year": 1919
+        "event": "The first Cinerama film, 'This Is Cinerama', premieres, starting a widescreen craze.",
+        "year": 1952
       }
     ]
   },
@@ -582,32 +344,32 @@
     "category": "Geography",
     "events": [
       {
-        "event": "Discovery of Moluccas by Portuguese",
-        "year": 1512
+        "event": "Livingstone begins Zambezi expedition",
+        "year": 1852
       },
       {
-        "event": "Columbus discovers Honduras",
-        "year": 1502
-      },
-      {
-        "event": "Lake Victoria discovered by Speke",
-        "year": 1858
-      },
-      {
-        "event": "Willoughby expedition attempts Northeast Passage",
-        "year": 1553
+        "event": "Jamestown founded",
+        "year": 1607
       },
       {
         "event": "Scott reaches South Pole",
         "year": 1912
       },
       {
+        "event": "Palmer sights Antarctica Peninsula",
+        "year": 1820
+      },
+      {
         "event": "Cape Town founded",
         "year": 1652
       },
       {
-        "event": "Bass Strait discovered",
-        "year": 1798
+        "event": "Waldseemüller map names America",
+        "year": 1507
+      },
+      {
+        "event": "Willoughby expedition attempts Northeast Passage",
+        "year": 1553
       }
     ]
   },
@@ -616,32 +378,32 @@
     "category": "Sports",
     "events": [
       {
-        "event": "First codified rules of boxing (Broughton's rules) are introduced",
-        "year": 1743
-      },
-      {
-        "event": "Sheffield F.C., the world's oldest independent football club, is founded",
-        "year": 1857
-      },
-      {
-        "event": "The Rumble in the Jungle boxing match",
-        "year": 1974
-      },
-      {
-        "event": "International Olympic Committee is founded",
-        "year": 1894
-      },
-      {
         "event": "First Indianapolis 500 automobile race",
         "year": 1911
+      },
+      {
+        "event": "Boston Red Sox win the World Series, breaking the Curse of the Bambino",
+        "year": 2004
       },
       {
         "event": "The Scottish Football Association is founded",
         "year": 1873
       },
       {
+        "event": "Sheffield F.C., the world's oldest independent football club, is founded",
+        "year": 1857
+      },
+      {
         "event": "FIFA (Fédération Internationale de Football Association) is founded",
         "year": 1904
+      },
+      {
+        "event": "Cambridge rules for association football are drawn up",
+        "year": 1848
+      },
+      {
+        "event": "MLS (Major League Soccer) plays its inaugural season",
+        "year": 1996
       }
     ]
   },
@@ -692,24 +454,24 @@
         "year": 1903
       },
       {
-        "event": "Samsung is founded by Lee Byung-chul in Daegu, Japanese Korea, as a trading company.",
-        "year": 1938
+        "event": "The East German Mark is abolished and replaced by the Deutsche Mark as German reunification nears.",
+        "year": 1990
       },
       {
         "event": "Enron files for bankruptcy in one of the largest corporate accounting scandals in history.",
         "year": 2001
       },
       {
-        "event": "Blockbuster Video opens its first store in Dallas, Texas.",
-        "year": 1985
-      },
-      {
-        "event": "The East German Mark is abolished and replaced by the Deutsche Mark as German reunification nears.",
-        "year": 1990
+        "event": "Samsung is founded by Lee Byung-chul in Daegu, Japanese Korea, as a trading company.",
+        "year": 1938
       },
       {
         "event": "Western Union is founded as The New York and Mississippi Valley Printing Telegraph Company.",
         "year": 1851
+      },
+      {
+        "event": "Elon Musk acquires Twitter for $44 billion and takes the company private.",
+        "year": 2022
       }
     ]
   },
@@ -722,28 +484,28 @@
         "year": 1964
       },
       {
-        "event": "The Twilight Zone premieres on television.",
-        "year": 1959
+        "event": "First public film screening by the Lumière brothers.",
+        "year": 1895
       },
       {
-        "event": "Walt Disney World opens in Florida.",
-        "year": 1971
+        "event": "Michael Jackson's 'Thriller' is released.",
+        "year": 1982
       },
       {
         "event": "Super Mario Bros. is released for the NES.",
         "year": 1985
       },
       {
-        "event": "Godzilla makes his first appearance in film.",
-        "year": 1954
+        "event": "The Twilight Zone premieres on television.",
+        "year": 1959
       },
       {
         "event": "'Grand Theft Auto V' is released, breaking sales records.",
         "year": 2013
       },
       {
-        "event": "First Technicolor feature film, 'Becky Sharp', is released.",
-        "year": 1935
+        "event": "Godzilla makes his first appearance in film.",
+        "year": 1954
       }
     ]
   },
@@ -752,24 +514,20 @@
     "category": "Cinema",
     "events": [
       {
+        "event": "'Toy Story' is released as the world's first fully computer-animated feature film.",
+        "year": 1995
+      },
+      {
         "event": "Alfred Hitchcock's 'Vertigo' is released to mixed reviews before later being recognized as a masterpiece.",
         "year": 1958
-      },
-      {
-        "event": "Thomas Edison's Kinetoscope is given its first public exhibition.",
-        "year": 1894
-      },
-      {
-        "event": "'A Hard Day's Night' starring The Beatles redefines the musical film genre.",
-        "year": 1964
       },
       {
         "event": "James Dean stars in 'Rebel Without a Cause' shortly before his tragic death.",
         "year": 1955
       },
       {
-        "event": "'Toy Story' is released as the world's first fully computer-animated feature film.",
-        "year": 1995
+        "event": "Sergei Eisenstein's 'Battleship Potemkin' introduces revolutionary Soviet montage techniques.",
+        "year": 1925
       },
       {
         "event": "'The Matrix' introduces the 'bullet time' visual effect to popular cinema.",
@@ -778,6 +536,10 @@
       {
         "event": "'Casablanca', starring Humphrey Bogart and Ingrid Bergman, premieres in New York City.",
         "year": 1942
+      },
+      {
+        "event": "'A Hard Day's Night' starring The Beatles redefines the musical film genre.",
+        "year": 1964
       }
     ]
   },
@@ -785,14 +547,6 @@
     "date": "2026-08-15",
     "category": "Landmarks",
     "events": [
-      {
-        "event": "Leaning Tower of Pisa completed",
-        "year": 1373
-      },
-      {
-        "event": "St. Peter's Basilica (Old) consecrated",
-        "year": 320
-      },
       {
         "event": "White House construction begins",
         "year": 1792
@@ -806,8 +560,16 @@
         "year": -447
       },
       {
-        "event": "St. Paul's Cathedral rebuilding begins",
-        "year": 1675
+        "event": "Leaning Tower of Pisa completed",
+        "year": 1373
+      },
+      {
+        "event": "Louvre Pyramid completed",
+        "year": 1989
+      },
+      {
+        "event": "Mount Rushmore carving begins",
+        "year": 1927
       },
       {
         "event": "Taj Mahal construction begins",
@@ -820,6 +582,14 @@
     "category": "Pop History",
     "events": [
       {
+        "event": "Elton John, born Reginald Kenneth Dwight",
+        "year": 1947
+      },
+      {
+        "event": "The Teddy Bear – Created and named after President 'Teddy' Roosevelt",
+        "year": 1902
+      },
+      {
         "event": "Bob Dylan, born Robert Zimmerman",
         "year": 1941
       },
@@ -828,24 +598,16 @@
         "year": 2012
       },
       {
-        "event": "Superman – Debuts in Action Comics #1",
-        "year": 1938
+        "event": "Game Boy – Nintendo introduces its incredibly popular handheld console",
+        "year": 1989
       },
       {
         "event": "Finding Nemo – Pixar takes audiences on an epic underwater journey",
         "year": 2003
       },
       {
-        "event": "Game Boy – Nintendo introduces its incredibly popular handheld console",
-        "year": 1989
-      },
-      {
-        "event": "Twitter – Jack Dorsey sends the first tweet: 'just setting up my twttr'",
-        "year": 2006
-      },
-      {
-        "event": "Elton John, born Reginald Kenneth Dwight",
-        "year": 1947
+        "event": "Ford Model T – Henry Ford introduces the first affordable, mass-produced automobile",
+        "year": 1908
       }
     ]
   },
@@ -956,28 +718,28 @@
     "category": "Business",
     "events": [
       {
-        "event": "Hugh Hefner publishes the first issue of Playboy magazine.",
-        "year": 1953
-      },
-      {
         "event": "Instagram is launched by Kevin Systrom and Mike Krieger.",
         "year": 2010
-      },
-      {
-        "event": "Thomas Watson Sr. joins the Computing-Tabulating-Recording Company, later renamed IBM.",
-        "year": 1914
       },
       {
         "event": "Saudi Aramco becomes the world's most valuable public company after its IPO.",
         "year": 2019
       },
       {
+        "event": "Hugh Hefner publishes the first issue of Playboy magazine.",
+        "year": 1953
+      },
+      {
+        "event": "Oracle Corporation is founded by Larry Ellison, Bob Miner, and Ed Oates.",
+        "year": 1977
+      },
+      {
         "event": "Intel Corporation is founded by Gordon Moore and Robert Noyce.",
         "year": 1968
       },
       {
-        "event": "The Wall Street Crash triggers the Great Depression.",
-        "year": 1929
+        "event": "Blockbuster Video opens its first store in Dallas, Texas.",
+        "year": 1985
       },
       {
         "event": "The Dot-com bubble bursts, causing many internet-based companies to fail.",
@@ -1002,8 +764,8 @@
         "year": 1937
       },
       {
-        "event": "The first movie studio in Hollywood, Nestor Studio, is established.",
-        "year": 1911
+        "event": "'The Lord of the Rings: The Fellowship of the Ring' begins the critically acclaimed fantasy trilogy.",
+        "year": 2001
       },
       {
         "event": "'The Godfather' is released, setting new standards for the gangster genre.",
@@ -1024,32 +786,32 @@
     "category": "Landmarks",
     "events": [
       {
-        "event": "Erie Canal opened",
-        "year": 1825
-      },
-      {
         "event": "Stonehenge construction begins",
         "year": -2500
-      },
-      {
-        "event": "Rialto Bridge completed",
-        "year": 1591
-      },
-      {
-        "event": "Great Fire of London destroys St Paul's",
-        "year": 1666
-      },
-      {
-        "event": "Taipei 101 completed",
-        "year": 2004
       },
       {
         "event": "Washington Monument completed",
         "year": 1884
       },
       {
-        "event": "Winter Palace (first version) built",
-        "year": 1711
+        "event": "Rialto Bridge completed",
+        "year": 1591
+      },
+      {
+        "event": "Erie Canal opened",
+        "year": 1825
+      },
+      {
+        "event": "Taipei 101 completed",
+        "year": 2004
+      },
+      {
+        "event": "Notre-Dame de Paris construction begins",
+        "year": 1163
+      },
+      {
+        "event": "Empire State Building completed",
+        "year": 1931
       }
     ]
   },
@@ -1058,20 +820,20 @@
     "category": "Entertainment",
     "events": [
       {
-        "event": "The Tony Awards are held for the first time.",
-        "year": 1947
+        "event": "Disneyland opens in Anaheim, California.",
+        "year": 1955
       },
       {
-        "event": "Apple's '1984' Macintosh commercial airs during Super Bowl XVIII.",
-        "year": 1984
+        "event": "The Tony Awards are held for the first time.",
+        "year": 1947
       },
       {
         "event": "The Muppet Show premieres.",
         "year": 1976
       },
       {
-        "event": "'Nosferatu' is released.",
-        "year": 1922
+        "event": "Apple's '1984' Macintosh commercial airs during Super Bowl XVIII.",
+        "year": 1984
       },
       {
         "event": "'American Idol' debuts on Fox.",
@@ -1092,32 +854,32 @@
     "category": "Science",
     "events": [
       {
-        "event": "Alfred Wegener proposes continental drift",
-        "year": 1912
+        "event": "Amedeo Avogadro proposes Avogadro's law",
+        "year": 1811
+      },
+      {
+        "event": "Enrico Fermi oversees the first controlled nuclear chain reaction",
+        "year": 1942
+      },
+      {
+        "event": "Stephen Hawking predicts Hawking radiation",
+        "year": 1974
+      },
+      {
+        "event": "Michael Faraday discovers electromagnetic induction",
+        "year": 1831
+      },
+      {
+        "event": "Charles Darwin publishes On the Origin of Species",
+        "year": 1859
       },
       {
         "event": "Rosalind Franklin captures Photograph 51 of DNA",
         "year": 1951
       },
       {
-        "event": "Edward Jenner develops the smallpox vaccine",
-        "year": 1796
-      },
-      {
-        "event": "Werner Heisenberg formulates the uncertainty principle",
-        "year": 1927
-      },
-      {
         "event": "Johannes Kepler publishes Astronomia nova",
         "year": 1609
-      },
-      {
-        "event": "Robert Koch discovers the bacterium that causes tuberculosis",
-        "year": 1882
-      },
-      {
-        "event": "George Gamow, Ralph Alpher, and Robert Herman propose the Big Bang theory",
-        "year": 1948
       }
     ]
   },
@@ -1160,32 +922,32 @@
     "category": "History",
     "events": [
       {
-        "event": "Battle of Hastings",
-        "year": 1066
+        "event": "Wright brothers' first flight",
+        "year": 1903
       },
       {
         "event": "Montgomery Bus Boycott",
         "year": 1955
       },
       {
-        "event": "Glorious Revolution in England",
-        "year": 1688
-      },
-      {
-        "event": "Dissolution of the Soviet Union",
-        "year": 1991
-      },
-      {
-        "event": "Spanish Civil War begins",
-        "year": 1936
-      },
-      {
         "event": "Vasco da Gama reaches India",
         "year": 1498
       },
       {
-        "event": "Wright brothers' first flight",
-        "year": 1903
+        "event": "Glorious Revolution in England",
+        "year": 1688
+      },
+      {
+        "event": "Fall of France",
+        "year": 1940
+      },
+      {
+        "event": "Scopes Monkey Trial",
+        "year": 1925
+      },
+      {
+        "event": "Coronation of Charlemagne",
+        "year": 800
       }
     ]
   },
@@ -1202,8 +964,8 @@
         "year": 1928
       },
       {
-        "event": "The first smartphone, the IBM Simon, is released.",
-        "year": 1994
+        "event": "Dolly the sheep becomes the first mammal cloned from an adult somatic cell.",
+        "year": 1996
       },
       {
         "event": "Douglas Engelbart demonstrates the computer mouse and graphical user interface.",
@@ -1228,22 +990,6 @@
     "category": "Cinema",
     "events": [
       {
-        "event": "'The Great Train Robbery', an early milestone in narrative filmmaking, is released.",
-        "year": 1903
-      },
-      {
-        "event": "'The Dark Knight' and 'Iron Man' are released, cementing the dominance of the superhero genre.",
-        "year": 2008
-      },
-      {
-        "event": "Émile Cohl creates 'Fantasmagorie', one of the first fully animated films.",
-        "year": 1908
-      },
-      {
-        "event": "'The Terminator' launches the career of director James Cameron.",
-        "year": 1984
-      },
-      {
         "event": "'The Sound of Music' is released, becoming one of the highest-grossing films of all time.",
         "year": 1965
       },
@@ -1252,8 +998,24 @@
         "year": 2000
       },
       {
+        "event": "Émile Cohl creates 'Fantasmagorie', one of the first fully animated films.",
+        "year": 1908
+      },
+      {
+        "event": "'The Great Train Robbery', an early milestone in narrative filmmaking, is released.",
+        "year": 1903
+      },
+      {
+        "event": "'The Dark Knight' and 'Iron Man' are released, cementing the dominance of the superhero genre.",
+        "year": 2008
+      },
+      {
         "event": "'Enter the Dragon' brings Bruce Lee global superstardom shortly after his death.",
         "year": 1973
+      },
+      {
+        "event": "The first movie studio in Hollywood, Nestor Studio, is established.",
+        "year": 1911
       }
     ]
   },
@@ -1262,8 +1024,24 @@
     "category": "Landmarks",
     "events": [
       {
+        "event": "Panama Canal opens",
+        "year": 1914
+      },
+      {
+        "event": "Winter Palace (first version) built",
+        "year": 1711
+      },
+      {
         "event": "Space Needle opens",
         "year": 1962
+      },
+      {
+        "event": "Great Fire of London destroys St Paul's",
+        "year": 1666
+      },
+      {
+        "event": "Burj Khalifa completed",
+        "year": 2010
       },
       {
         "event": "Leaning Tower of Pisa construction begins",
@@ -1272,22 +1050,6 @@
       {
         "event": "Eiffel Tower opens",
         "year": 1889
-      },
-      {
-        "event": "Dome of the Rock completed",
-        "year": 691
-      },
-      {
-        "event": "Panama Canal opens",
-        "year": 1914
-      },
-      {
-        "event": "White House first occupied",
-        "year": 1800
-      },
-      {
-        "event": "Lincoln Memorial dedicated",
-        "year": 1922
       }
     ]
   },
@@ -1300,8 +1062,8 @@
         "year": 2004
       },
       {
-        "event": "The first Super Bowl is played.",
-        "year": 1967
+        "event": "The first Grammy Awards are held.",
+        "year": 1958
       },
       {
         "event": "Georges Méliès releases 'A Trip to the Moon'.",
@@ -1312,16 +1074,16 @@
         "year": 1962
       },
       {
-        "event": "The first Grammy Awards are held.",
-        "year": 1958
-      },
-      {
         "event": "'The Jazz Singer', the first feature-length motion picture with synchronized dialogue, is released.",
         "year": 1927
       },
       {
-        "event": "'The Legend of Zelda: Ocarina of Time' is released.",
-        "year": 1998
+        "event": "Woodstock Music & Art Fair is held.",
+        "year": 1969
+      },
+      {
+        "event": "Universal Pictures releases 'Dracula' starring Bela Lugosi.",
+        "year": 1931
       }
     ]
   },
@@ -1330,24 +1092,16 @@
     "category": "Business",
     "events": [
       {
-        "event": "The Stockton and Darlington Railway opens, the world's first public railway to use steam locomotives, boosting trade.",
-        "year": 1825
+        "event": "The Pure Food and Drug Act is passed in the US, regulating business practices in the food and pharmaceutical industries.",
+        "year": 1906
       },
       {
-        "event": "General Electric is formed through the merger of Edison General Electric and Thomson-Houston Electric Company.",
-        "year": 1892
-      },
-      {
-        "event": "Apple introduces the Macintosh computer with a famous Super Bowl commercial.",
-        "year": 1984
+        "event": "The Bretton Woods system establishes international financial rules and creates the IMF and World Bank.",
+        "year": 1944
       },
       {
         "event": "Pierre Omidyar launches AuctionWeb, which later becomes eBay.",
         "year": 1995
-      },
-      {
-        "event": "Occupy Wall Street protests begin in New York City, drawing attention to economic inequality.",
-        "year": 2011
       },
       {
         "event": "Microsoft acquires LinkedIn for $26.2 billion.",
@@ -1356,6 +1110,14 @@
       {
         "event": "The Supreme Court orders the dissolution of Standard Oil under the Sherman Antitrust Act.",
         "year": 1911
+      },
+      {
+        "event": "General Electric is formed through the merger of Edison General Electric and Thomson-Houston Electric Company.",
+        "year": 1892
+      },
+      {
+        "event": "Apple introduces the Macintosh computer with a famous Super Bowl commercial.",
+        "year": 1984
       }
     ]
   },
@@ -1384,7 +1146,7 @@
         "year": 1993
       },
       {
-        "event": "Game of Thrones premieres on HBO, bringing unprecedented scale and budget to high fantasy television.",
+        "event": "Black Mirror premieres, turning dark technological anxieties into an anthology phenomenon.",
         "year": 2011
       },
       {
@@ -1398,32 +1160,32 @@
     "category": "History",
     "events": [
       {
-        "event": "Six-Day War",
-        "year": 1967
-      },
-      {
-        "event": "Mayflower arrives at Plymouth",
-        "year": 1620
-      },
-      {
         "event": "Nuremberg Trials begin",
         "year": 1946
-      },
-      {
-        "event": "Fall of Baghdad to Mongols",
-        "year": 1258
-      },
-      {
-        "event": "First solo transatlantic flight by Charles Lindbergh",
-        "year": 1927
       },
       {
         "event": "League of Nations established",
         "year": 1920
       },
       {
+        "event": "Assassination of Julius Caesar",
+        "year": -44
+      },
+      {
         "event": "Revolutions of 1848",
         "year": 1848
+      },
+      {
+        "event": "First solo transatlantic flight by Charles Lindbergh",
+        "year": 1927
+      },
+      {
+        "event": "Six-Day War",
+        "year": 1967
+      },
+      {
+        "event": "Mayflower arrives at Plymouth",
+        "year": 1620
       }
     ]
   },
@@ -1500,24 +1262,8 @@
     "category": "Cinema",
     "events": [
       {
-        "event": "The US Supreme Court's 'Paramount Decision' forces studios to sell off their theater chains.",
-        "year": 1948
-      },
-      {
-        "event": "'Parasite' premieres at Cannes, later becoming the first non-English language film to win Best Picture.",
-        "year": 2019
-      },
-      {
-        "event": "'Easy Rider' heralds the arrival of the New Hollywood era of independent-minded filmmaking.",
-        "year": 1969
-      },
-      {
-        "event": "'Inception' brings complex, original science fiction to blockbuster audiences.",
-        "year": 2010
-      },
-      {
-        "event": "'Becky Sharp' becomes the first feature film shot entirely in three-strip Technicolor.",
-        "year": 1935
+        "event": "The world's first feature-length film, 'The Story of the Kelly Gang', is released in Australia.",
+        "year": 1906
       },
       {
         "event": "'Pulp Fiction' wins the Palme d'Or and cements Quentin Tarantino's status as an auteur.",
@@ -1526,6 +1272,22 @@
       {
         "event": "'Top Gun: Maverick' becomes a massive hit, credited with revitalizing the theatrical experience.",
         "year": 2022
+      },
+      {
+        "event": "Thomas Edison's Kinetoscope is given its first public exhibition.",
+        "year": 1894
+      },
+      {
+        "event": "'Easy Rider' heralds the arrival of the New Hollywood era of independent-minded filmmaking.",
+        "year": 1969
+      },
+      {
+        "event": "'Black Panther' becomes a massive cultural milestone and the first superhero film nominated for Best Picture.",
+        "year": 2018
+      },
+      {
+        "event": "'Blade Runner' defines the cyberpunk aesthetic on film.",
+        "year": 1982
       }
     ]
   },
@@ -1538,28 +1300,28 @@
         "year": 1948
       },
       {
-        "event": "McDonald's – Founded by Richard and Maurice McDonald in San Bernardino",
-        "year": 1940
+        "event": "Sony Walkman – The TPS-L2 revolutionizes portable music",
+        "year": 1979
       },
       {
         "event": "Apple iPod – '1,000 songs in your pocket' changes the music industry",
         "year": 2001
       },
       {
-        "event": "First Webcam – Created at Cambridge University just to monitor a coffee pot",
-        "year": 1991
-      },
-      {
-        "event": "Sony Walkman – The TPS-L2 revolutionizes portable music",
-        "year": 1979
-      },
-      {
         "event": "A Charlie Brown Christmas – The Peanuts gang makes their animated TV debut",
         "year": 1965
       },
       {
+        "event": "Miley Cyrus, born Destiny Hope Cyrus",
+        "year": 1992
+      },
+      {
         "event": "Uno – Merle Robbins invents the shedding-type card game",
         "year": 1971
+      },
+      {
+        "event": "Sputnik 1 becomes the first artificial satellite",
+        "year": 1957
       }
     ]
   },
@@ -1576,20 +1338,20 @@
         "year": 1867
       },
       {
-        "event": "Tiger Woods wins his first Masters at age 21",
-        "year": 1997
+        "event": "William Webb Ellis purportedly invents rugby",
+        "year": 1823
       },
       {
-        "event": "The National League of Professional Baseball Clubs is formed",
-        "year": 1876
+        "event": "Cotswold Olimpick Games begin in England",
+        "year": 1604
       },
       {
         "event": "Figure skating becomes the first winter sport contested at the Olympics",
         "year": 1908
       },
       {
-        "event": "Cotswold Olimpick Games begin in England",
-        "year": 1604
+        "event": "First Super Bowl is played",
+        "year": 1967
       },
       {
         "event": "Michael Phelps becomes the most decorated Olympian of all time",
@@ -1610,24 +1372,24 @@
         "year": 1962
       },
       {
-        "event": "Mark Zuckerberg and his college roommates launch Facebook.",
-        "year": 2004
-      },
-      {
-        "event": "J.P. Morgan creates United States Steel Corporation, the world's first billion-dollar company.",
-        "year": 1901
+        "event": "Sony is founded as Tokyo Tsushin Kogyo in a department store building in Tokyo.",
+        "year": 1946
       },
       {
         "event": "Apple becomes the first publicly traded US company to reach a $1 trillion market capitalization.",
         "year": 2018
       },
       {
-        "event": "Lehman Brothers files for bankruptcy, marking the climax of the global financial crisis.",
-        "year": 2008
-      },
-      {
         "event": "Unilever is formed by the merger of Margarine Unie and Lever Brothers.",
         "year": 1930
+      },
+      {
+        "event": "J.P. Morgan creates United States Steel Corporation, the world's first billion-dollar company.",
+        "year": 1901
+      },
+      {
+        "event": "The Paris Agreement on climate change is adopted, pushing global businesses toward sustainability.",
+        "year": 2015
       }
     ]
   },
@@ -1640,28 +1402,28 @@
         "year": 1948
       },
       {
-        "event": "The Nintendo Entertainment System (Famicom) launches in Japan.",
-        "year": 1983
+        "event": "'Space Invaders' arcade game is released.",
+        "year": 1978
       },
       {
         "event": "'Avatar' is released and becomes the highest-grossing film of all time.",
         "year": 2009
       },
       {
-        "event": "'Space Invaders' arcade game is released.",
-        "year": 1978
+        "event": "'Casablanca' premieres.",
+        "year": 1942
       },
       {
         "event": "'Pokemon Red and Green' are released in Japan.",
         "year": 1996
       },
       {
-        "event": "'The Simpsons' debut as shorts on The Tracey Ullman Show.",
-        "year": 1987
+        "event": "First Technicolor feature film, 'Becky Sharp', is released.",
+        "year": 1935
       },
       {
-        "event": "'Casablanca' premieres.",
-        "year": 1942
+        "event": "The first Super Bowl is played.",
+        "year": 1967
       }
     ]
   },
@@ -1670,32 +1432,32 @@
     "category": "History",
     "events": [
       {
-        "event": "State of Israel established",
-        "year": 1948
-      },
-      {
-        "event": "September 11 attacks",
-        "year": 2001
-      },
-      {
-        "event": "Atomic bombings of Hiroshima and Nagasaki",
-        "year": 1945
-      },
-      {
         "event": "Assassination of Archduke Franz Ferdinand",
         "year": 1914
       },
       {
-        "event": "Discovery of DNA structure",
-        "year": 1953
+        "event": "Fall of Baghdad to Mongols",
+        "year": 1258
+      },
+      {
+        "event": "State of Israel established",
+        "year": 1948
       },
       {
         "event": "First Crusade captures Jerusalem",
         "year": 1099
       },
       {
-        "event": "Signing of the Magna Carta",
-        "year": 1215
+        "event": "Fall of the Western Roman Empire",
+        "year": 476
+      },
+      {
+        "event": "French Revolution begins",
+        "year": 1789
+      },
+      {
+        "event": "Atomic bombings of Hiroshima and Nagasaki",
+        "year": 1945
       }
     ]
   },
@@ -1704,32 +1466,32 @@
     "category": "Geography",
     "events": [
       {
-        "event": "Wilkes maps Antarctic coast",
-        "year": 1840
-      },
-      {
-        "event": "Discovery of Australia by Willem Janszoon",
-        "year": 1606
-      },
-      {
-        "event": "Lake Albert discovered",
-        "year": 1864
+        "event": "Discovery of Moluccas by Portuguese",
+        "year": 1512
       },
       {
         "event": "Abel Tasman discovers New Zealand",
         "year": 1642
       },
       {
-        "event": "Cook crosses Antarctic Circle",
-        "year": 1773
+        "event": "Cook explores New Zealand coastline",
+        "year": 1769
       },
       {
         "event": "Magellan departs on global circumnavigation",
         "year": 1519
       },
       {
-        "event": "Bering sights Alaska",
-        "year": 1741
+        "event": "Discovery of Brazil by Cabral",
+        "year": 1500
+      },
+      {
+        "event": "Cook crosses Antarctic Circle",
+        "year": 1773
+      },
+      {
+        "event": "Sturt explores Murray River",
+        "year": 1830
       }
     ]
   },
@@ -1738,8 +1500,8 @@
     "category": "Landmarks",
     "events": [
       {
-        "event": "Westminster Abbey consecrated",
-        "year": 1065
+        "event": "Great Mosque of Córdoba begun",
+        "year": 785
       },
       {
         "event": "Pantheon rebuilt by Hadrian",
@@ -1772,28 +1534,28 @@
     "category": "Pop History",
     "events": [
       {
-        "event": "First Network Email – Ray Tomlinson sends the first message using the '@' symbol",
-        "year": 1971
-      },
-      {
-        "event": "SixDegrees.com – Widely considered the very first social media site",
-        "year": 1997
-      },
-      {
-        "event": "Wonder Woman – Debuts in All Star Comics #8",
-        "year": 1941
-      },
-      {
-        "event": "Ford Model T – Henry Ford introduces the first affordable, mass-produced automobile",
-        "year": 1908
-      },
-      {
         "event": "The Computer Mouse – Douglas Engelbart publicly demonstrates the device for the first time",
         "year": 1968
       },
       {
-        "event": "The Phantom of the Opera – Andrew Lloyd Webber's masterpiece opens in the West End",
-        "year": 1986
+        "event": "Toyota Prius – The world's first mass-produced hybrid passenger car goes on sale",
+        "year": 1997
+      },
+      {
+        "event": "YouTube – The first video, 'Me at the zoo,' is uploaded",
+        "year": 2005
+      },
+      {
+        "event": "Lewis Carroll, born Charles Lutwidge Dodgson",
+        "year": 1832
+      },
+      {
+        "event": "Subway – Opened originally as 'Pete's Super Submarines'",
+        "year": 1965
+      },
+      {
+        "event": "First Network Email – Ray Tomlinson sends the first message using the '@' symbol",
+        "year": 1971
       },
       {
         "event": "Mark Twain, born Samuel Langhorne Clemens",
@@ -1840,28 +1602,28 @@
     "category": "Business",
     "events": [
       {
-        "event": "The Pure Food and Drug Act is passed in the US, regulating business practices in the food and pharmaceutical industries.",
-        "year": 1906
+        "event": "Ray Kroc opens his first franchised McDonald's restaurant in Des Plaines, Illinois.",
+        "year": 1955
+      },
+      {
+        "event": "The Stockton and Darlington Railway opens, the world's first public railway to use steam locomotives, boosting trade.",
+        "year": 1825
       },
       {
         "event": "The Walt Disney Company is founded as the Disney Brothers Cartoon Studio.",
         "year": 1923
       },
       {
-        "event": "The United States initiates the deregulation of the trucking and airline industries.",
-        "year": 1980
-      },
-      {
         "event": "Bill Gates and Paul Allen found Microsoft in Albuquerque, New Mexico.",
         "year": 1975
       },
       {
-        "event": "The Gramm-Leach-Bliley Act repeals parts of the Glass-Steagall Act in the US.",
-        "year": 1999
+        "event": "Thomas Watson Sr. joins the Computing-Tabulating-Recording Company, later renamed IBM.",
+        "year": 1914
       },
       {
-        "event": "Frank McNamara and Ralph Schneider introduce the Diners Club card, the world's first multipurpose charge card.",
-        "year": 1950
+        "event": "The United States initiates the deregulation of the trucking and airline industries.",
+        "year": 1980
       },
       {
         "event": "Facebook holds its initial public offering, one of the largest in technology history.",
@@ -1875,15 +1637,15 @@
     "events": [
       {
         "event": "TikTok – Launched internationally by ByteDance",
-        "year": 2016
+        "year": 2017
+      },
+      {
+        "event": "Vine – The six-second looping video app launches under Twitter",
+        "year": 2013
       },
       {
         "event": "Instagram – The photo-sharing app launches exclusively on iOS",
         "year": 2010
-      },
-      {
-        "event": "Twitter – Jack Dorsey sends the first tweet: 'just setting up my twttr'",
-        "year": 2006
       },
       {
         "event": "Facebook – Mark Zuckerberg launches 'TheFacebook' at Harvard",
@@ -1894,12 +1656,12 @@
         "year": 1997
       },
       {
-        "event": "Friendster – Launched as one of the first major global social networks",
-        "year": 2002
+        "event": "The WELL – The pioneering online community goes live in the Bay Area",
+        "year": 1985
       },
       {
-        "event": "YouTube – The first video, 'Me at the zoo,' is uploaded",
-        "year": 2005
+        "event": "Twitter – Jack Dorsey sends the first tweet: 'just setting up my twttr'",
+        "year": 2006
       }
     ]
   },
@@ -1908,28 +1670,28 @@
     "category": "History",
     "events": [
       {
+        "event": "Haitian Independence",
+        "year": 1804
+      },
+      {
+        "event": "Martin Luther posts his 95 Theses",
+        "year": 1517
+      },
+      {
         "event": "Wall Street Crash",
         "year": 1929
       },
       {
-        "event": "Transfer of sovereignty over Hong Kong",
-        "year": 1997
-      },
-      {
-        "event": "Construction of the Berlin Wall",
-        "year": 1961
-      },
-      {
-        "event": "Haitian Independence",
-        "year": 1804
+        "event": "Discovery of DNA structure",
+        "year": 1953
       },
       {
         "event": "Korean War begins",
         "year": 1950
       },
       {
-        "event": "Martin Luther posts his 95 Theses",
-        "year": 1517
+        "event": "Construction of the Berlin Wall",
+        "year": 1961
       },
       {
         "event": "Irish Free State established",
@@ -2010,8 +1772,8 @@
     "category": "Sports",
     "events": [
       {
-        "event": "Jackie Robinson breaks the baseball color line",
-        "year": 1947
+        "event": "Buster Douglas knocks out Mike Tyson",
+        "year": 1990
       },
       {
         "event": "Women compete in the Olympics for the first time",
@@ -2026,8 +1788,8 @@
         "year": 1970
       },
       {
-        "event": "Buster Douglas knocks out Mike Tyson",
-        "year": 1990
+        "event": "The first 24 Hours of Le Mans endurance race",
+        "year": 1923
       },
       {
         "event": "William G. Morgan invents volleyball",
@@ -2048,28 +1810,28 @@
         "year": 1999
       },
       {
-        "event": "Great Mosque of Córdoba begun",
-        "year": 785
-      },
-      {
-        "event": "Suez Canal opens",
-        "year": 1869
-      },
-      {
-        "event": "Panama Canal expansion opens",
-        "year": 2016
-      },
-      {
-        "event": "St. Paul's Cathedral completed",
-        "year": 1708
+        "event": "Machu Picchu built (estimated)",
+        "year": 1438
       },
       {
         "event": "Arc de Triomphe completed",
         "year": 1836
       },
       {
-        "event": "St. Peter's Basilica (Current) construction begins",
-        "year": 1506
+        "event": "Suez Canal opens",
+        "year": 1869
+      },
+      {
+        "event": "St. Paul's Cathedral completed",
+        "year": 1708
+      },
+      {
+        "event": "White House first occupied",
+        "year": 1800
+      },
+      {
+        "event": "Panama Canal expansion opens",
+        "year": 2016
       }
     ]
   },
@@ -2078,32 +1840,32 @@
     "category": "Business",
     "events": [
       {
-        "event": "Nintendo is founded in Kyoto, Japan, to produce hanafuda playing cards.",
-        "year": 1889
+        "event": "The 1973 oil crisis leads to soaring fuel prices and major economic shifts worldwide.",
+        "year": 1973
+      },
+      {
+        "event": "The Glass-Steagall Act is passed in the US, separating commercial and investment banking.",
+        "year": 1933
       },
       {
         "event": "Bank of America launches the BankAmericard, the first successful modern credit card, later known as Visa.",
         "year": 1958
       },
       {
+        "event": "The Gramm-Leach-Bliley Act repeals parts of the Glass-Steagall Act in the US.",
+        "year": 1999
+      },
+      {
+        "event": "Twitter is created by Jack Dorsey, Noah Glass, Biz Stone, and Evan Williams.",
+        "year": 2006
+      },
+      {
         "event": "The first ATM in the United States is installed by Chemical Bank in New York.",
         "year": 1969
       },
       {
-        "event": "The 1973 oil crisis leads to soaring fuel prices and major economic shifts worldwide.",
-        "year": 1973
-      },
-      {
-        "event": "Phil Knight and Bill Bowerman found Blue Ribbon Sports, which later becomes Nike.",
-        "year": 1964
-      },
-      {
-        "event": "John D. Rockefeller incorporates Standard Oil, which comes to dominate the oil industry.",
-        "year": 1870
-      },
-      {
-        "event": "The Glass-Steagall Act is passed in the US, separating commercial and investment banking.",
-        "year": 1933
+        "event": "Nintendo is founded in Kyoto, Japan, to produce hanafuda playing cards.",
+        "year": 1889
       }
     ]
   },
@@ -2112,32 +1874,32 @@
     "category": "Pop History",
     "events": [
       {
-        "event": "The Little Mermaid – The film that kicked off the Disney Renaissance",
-        "year": 1989
+        "event": "The Digital Camera – Steven Sasson at Kodak creates the first digital camera",
+        "year": 1975
       },
       {
-        "event": "Bruno Mars, born Peter Gene Hernandez",
-        "year": 1985
+        "event": "The Barcode – Norman Joseph Woodland and Bernard Silver receive the patent",
+        "year": 1952
       },
       {
         "event": "Starbucks – The first store opens at Seattle's Pike Place Market",
         "year": 1971
       },
       {
-        "event": "The Digital Camera – Steven Sasson at Kodak creates the first digital camera",
-        "year": 1975
-      },
-      {
         "event": "The Nightmare Before Christmas – Jack Skellington discovers Christmas Town",
         "year": 1993
       },
       {
-        "event": "Epcot – Disney's vision of a permanent World's Fair opens",
-        "year": 1982
+        "event": "Bruno Mars, born Peter Gene Hernandez",
+        "year": 1985
       },
       {
         "event": "Twister – Milton Bradley releases the first game using human bodies as playing pieces",
         "year": 1966
+      },
+      {
+        "event": "World Wide Web Invented – Tim Berners-Lee writes the initial proposal at CERN",
+        "year": 1989
       }
     ]
   },
@@ -2154,24 +1916,24 @@
         "year": 1682
       },
       {
-        "event": "Amerigo Vespucci explores South American coast",
-        "year": 1501
-      },
-      {
-        "event": "Pizarro begins expedition to Peru",
-        "year": 1527
+        "event": "Victoria Falls discovered",
+        "year": 1855
       },
       {
         "event": "Coronado expedition begins in American Southwest",
         "year": 1540
       },
       {
-        "event": "Victoria Falls discovered",
-        "year": 1855
+        "event": "Hudson explores Hudson River",
+        "year": 1609
       },
       {
-        "event": "Cook explores New Zealand coastline",
-        "year": 1769
+        "event": "Pizarro begins expedition to Peru",
+        "year": 1527
+      },
+      {
+        "event": "Wilkes maps Antarctic coast",
+        "year": 1840
       }
     ]
   },
@@ -2184,28 +1946,28 @@
         "year": 1920
       },
       {
-        "event": "'The Lord of the Rings: The Fellowship of the Ring' begins the critically acclaimed fantasy trilogy.",
-        "year": 2001
+        "event": "The 'Barbenheimer' phenomenon takes over global pop culture, with 'Barbie' and 'Oppenheimer' opening on the same day.",
+        "year": 2023
       },
       {
         "event": "The Lumière brothers hold their first public screening of short films in Paris.",
         "year": 1895
       },
       {
-        "event": "'Star Wars' is released, becoming a cultural phenomenon and changing the film industry.",
-        "year": 1977
+        "event": "'The Avengers' proves the viability of interconnected cinematic universes.",
+        "year": 2012
       },
       {
         "event": "'Titanic' becomes the highest-grossing film of all time and wins 11 Academy Awards.",
         "year": 1997
       },
       {
-        "event": "'Terminator 2: Judgment Day' features groundbreaking computer-generated imagery.",
-        "year": 1991
+        "event": "The French New Wave explodes internationally with the release of 'The 400 Blows'.",
+        "year": 1959
       },
       {
-        "event": "The 'Barbenheimer' phenomenon takes over global pop culture, with 'Barbie' and 'Oppenheimer' opening on the same day.",
-        "year": 2023
+        "event": "'Terminator 2: Judgment Day' features groundbreaking computer-generated imagery.",
+        "year": 1991
       }
     ]
   },
@@ -2214,16 +1976,16 @@
     "category": "Entertainment",
     "events": [
       {
-        "event": "'Star Trek' premieres on NBC.",
-        "year": 1966
+        "event": "'The Legend of Zelda: Ocarina of Time' is released.",
+        "year": 1998
       },
       {
         "event": "'Star Wars' is released in theaters.",
         "year": 1977
       },
       {
-        "event": "Woodstock Music & Art Fair is held.",
-        "year": 1969
+        "event": "'Star Trek' premieres on NBC.",
+        "year": 1966
       },
       {
         "event": "The Motion Picture Production Code (Hays Code) is introduced.",
@@ -2248,32 +2010,32 @@
     "category": "Sports",
     "events": [
       {
-        "event": "Usain Bolt sets 100m and 200m world records at the Beijing Olympics",
-        "year": 2008
+        "event": "First codified rules of boxing (Broughton's rules) are introduced",
+        "year": 1743
       },
       {
         "event": "The National Baseball Hall of Fame opens",
         "year": 1939
       },
       {
-        "event": "First water skiing performed by Ralph Samuelson",
-        "year": 1922
+        "event": "First official cricket match at Hambledon",
+        "year": 1766
       },
       {
-        "event": "The Basketball Association of America (later NBA) is founded",
-        "year": 1946
+        "event": "First professional American football game is played",
+        "year": 1892
+      },
+      {
+        "event": "Usain Bolt sets 100m and 200m world records at the Beijing Olympics",
+        "year": 2008
       },
       {
         "event": "First Ryder Cup golf tournament is held",
         "year": 1927
       },
       {
-        "event": "Golf is banned by King James II of Scotland",
-        "year": 1457
-      },
-      {
-        "event": "First professional American football game is played",
-        "year": 1892
+        "event": "First water skiing performed by Ralph Samuelson",
+        "year": 1922
       }
     ]
   },
@@ -2282,28 +2044,28 @@
     "category": "Science",
     "events": [
       {
-        "event": "Julius Robert von Mayer proposes the law of conservation of energy",
-        "year": 1842
+        "event": "Arno Penzias and Robert Wilson discover the cosmic microwave background radiation",
+        "year": 1965
+      },
+      {
+        "event": "Pierre Janssen and Norman Lockyer discover helium",
+        "year": 1868
       },
       {
         "event": "The Scanning Tunneling Microscope is invented",
         "year": 1981
       },
       {
-        "event": "Arno Penzias and Robert Wilson discover the cosmic microwave background radiation",
-        "year": 1965
-      },
-      {
-        "event": "Robert Hooke publishes Micrographia",
-        "year": 1665
-      },
-      {
         "event": "Dolly the sheep becomes the first cloned mammal",
         "year": 1996
       },
       {
-        "event": "Henri Becquerel discovers radioactivity",
-        "year": 1896
+        "event": "Robert Boyle formulates Boyle's law",
+        "year": 1662
+      },
+      {
+        "event": "George Gamow, Ralph Alpher, and Robert Herman propose the Big Bang theory",
+        "year": 1948
       },
       {
         "event": "Clyde Tombaugh discovers Pluto",
@@ -2418,32 +2180,32 @@
     "category": "Landmarks",
     "events": [
       {
-        "event": "Eiffel Tower construction begins",
-        "year": 1887
-      },
-      {
-        "event": "Hadrian's Wall construction begins",
-        "year": 122
-      },
-      {
-        "event": "CN Tower opens",
-        "year": 1976
-      },
-      {
-        "event": "Forbidden City construction begins",
-        "year": 1406
+        "event": "Palace of Versailles becomes royal residence",
+        "year": 1682
       },
       {
         "event": "Louvre Museum opens",
         "year": 1793
       },
       {
-        "event": "Sagrada Família construction begins",
-        "year": 1882
+        "event": "Eiffel Tower construction begins",
+        "year": 1887
       },
       {
-        "event": "Burj Khalifa completed",
-        "year": 2010
+        "event": "St. Peter's Basilica (Current) construction begins",
+        "year": 1506
+      },
+      {
+        "event": "Forbidden City construction begins",
+        "year": 1406
+      },
+      {
+        "event": "Brooklyn Bridge opens",
+        "year": 1883
+      },
+      {
+        "event": "CN Tower opens",
+        "year": 1976
       }
     ]
   },
@@ -2456,12 +2218,12 @@
         "year": 2011
       },
       {
-        "event": "Orson Welles broadcasts 'The War of the Worlds'.",
-        "year": 1938
+        "event": "'Nosferatu' is released.",
+        "year": 1922
       },
       {
-        "event": "First public film screening by the Lumière brothers.",
-        "year": 1895
+        "event": "'The Birth of a Nation' is released.",
+        "year": 1915
       },
       {
         "event": "'Hamilton' premieres on Broadway.",
@@ -2476,8 +2238,8 @@
         "year": 1960
       },
       {
-        "event": "'The Birth of a Nation' is released.",
-        "year": 1915
+        "event": "Orson Welles broadcasts 'The War of the Worlds'.",
+        "year": 1938
       }
     ]
   },
@@ -2490,8 +2252,8 @@
         "year": 1453
       },
       {
-        "event": "Iranian Revolution",
-        "year": 1979
+        "event": "Signing of the Magna Carta",
+        "year": 1215
       },
       {
         "event": "Battle of Midway",
@@ -2690,32 +2452,32 @@
     "category": "Business",
     "events": [
       {
-        "event": "Steve Jobs, Steve Wozniak, and Ronald Wayne establish Apple Computer, Inc.",
-        "year": 1976
-      },
-      {
-        "event": "The Federal Reserve System is established in the United States.",
-        "year": 1913
-      },
-      {
-        "event": "Kaiser Permanente, one of the largest modern healthcare organizations, is opened to the public.",
-        "year": 1945
+        "event": "Lehman Brothers files for bankruptcy, marking the climax of the global financial crisis.",
+        "year": 2008
       },
       {
         "event": "The AT&T settlement forces the breakup of the Bell System monopoly.",
         "year": 1982
       },
       {
-        "event": "The Coca-Cola Company is established after John Stith Pemberton invents the beverage.",
-        "year": 1886
-      },
-      {
         "event": "The Muscovy Company, the first major English joint-stock trading company, is chartered.",
         "year": 1555
       },
       {
-        "event": "Jeff Bezos purchases The Washington Post newspaper for $250 million.",
-        "year": 2013
+        "event": "The Coca-Cola Company is established after John Stith Pemberton invents the beverage.",
+        "year": 1886
+      },
+      {
+        "event": "Kaiser Permanente, one of the largest modern healthcare organizations, is opened to the public.",
+        "year": 1945
+      },
+      {
+        "event": "Steve Jobs, Steve Wozniak, and Ronald Wayne establish Apple Computer, Inc.",
+        "year": 1976
+      },
+      {
+        "event": "The Federal Reserve System is established in the United States.",
+        "year": 1913
       }
     ]
   },
@@ -2732,8 +2494,8 @@
         "year": 1963
       },
       {
-        "event": "First Hollywood film studio opens.",
-        "year": 1911
+        "event": "'The Wizard of Oz' is released.",
+        "year": 1939
       },
       {
         "event": "Amazon acquires Twitch.",
@@ -2744,8 +2506,8 @@
         "year": 1956
       },
       {
-        "event": "Universal Pictures releases 'Dracula' starring Bela Lugosi.",
-        "year": 1931
+        "event": "First Hollywood film studio opens.",
+        "year": 1911
       },
       {
         "event": "Instagram is launched.",
@@ -2830,16 +2592,16 @@
         "year": 1190
       },
       {
+        "event": "Lincoln Memorial dedicated",
+        "year": 1922
+      },
+      {
         "event": "Great Pyramid of Giza completed",
         "year": -2560
       },
       {
-        "event": "Colosseum construction begins",
-        "year": 70
-      },
-      {
-        "event": "Empire State Building completed",
-        "year": 1931
+        "event": "Charlemagne's Palatine Chapel consecrated",
+        "year": 814
       },
       {
         "event": "Cologne Cathedral construction begins",
@@ -2850,8 +2612,8 @@
         "year": 1296
       },
       {
-        "event": "White House construction begins",
-        "year": 1792
+        "event": "Colosseum construction begins",
+        "year": 70
       }
     ]
   },
@@ -2860,28 +2622,28 @@
     "category": "Technology",
     "events": [
       {
-        "event": "Samuel Morse patents the telegraph.",
-        "year": 1837
-      },
-      {
-        "event": "Samuel Morse sends the first public telegraph message.",
-        "year": 1844
-      },
-      {
         "event": "Hans Lippershey invents the telescope.",
         "year": 1608
+      },
+      {
+        "event": "The Soviet Union launches Sputnik 1, the first artificial Earth satellite.",
+        "year": 1957
       },
       {
         "event": "Intel introduces the 4004, the first commercial microprocessor.",
         "year": 1971
       },
       {
+        "event": "Samuel Morse sends the first public telegraph message.",
+        "year": 1844
+      },
+      {
         "event": "Theodore Maiman builds the first working laser.",
         "year": 1960
       },
       {
-        "event": "IBM introduces the IBM Personal Computer (PC).",
-        "year": 1981
+        "event": "Samuel Morse patents the telegraph.",
+        "year": 1837
       },
       {
         "event": "Charles Babbage designs the Analytical Engine.",
@@ -2928,24 +2690,24 @@
     "category": "Pop History",
     "events": [
       {
-        "event": "Furby – The robotic electronic pet becomes a massive holiday craze",
-        "year": 1998
+        "event": "Pringles – Procter & Gamble introduces 'Pringle's Newfangled Potato Chips'",
+        "year": 1968
       },
       {
         "event": "Elf – Buddy the Elf travels from the North Pole to New York City",
         "year": 2003
       },
       {
-        "event": "Lunchables – Oscar Mayer launches the pre-packaged, build-your-own lunch",
-        "year": 1988
-      },
-      {
         "event": "Clue – Waddington's releases 'Cluedo' in the UK",
         "year": 1949
       },
       {
-        "event": "Pringles – Procter & Gamble introduces 'Pringle\\'s Newfangled Potato Chips'",
-        "year": 1968
+        "event": "Wonder Woman – Debuts in All Star Comics #8",
+        "year": 1941
+      },
+      {
+        "event": "Lunchables – Oscar Mayer launches the pre-packaged, build-your-own lunch",
+        "year": 1988
       },
       {
         "event": "Spider-Man – Debuts in Amazing Fantasy #15",
@@ -3042,8 +2804,8 @@
         "year": 1986
       },
       {
-        "event": "The first 24 Hours of Le Mans endurance race",
-        "year": 1923
+        "event": "Brandi Chastain secures the US Women's World Cup victory",
+        "year": 1999
       },
       {
         "event": "The FA Cup tournament is inaugurated",
@@ -3170,8 +2932,8 @@
         "year": 1989
       },
       {
-        "event": "French Revolution begins",
-        "year": 1789
+        "event": "Publication of On the Origin of Species",
+        "year": 1859
       },
       {
         "event": "Brexit referendum",
@@ -3182,8 +2944,8 @@
         "year": 1917
       },
       {
-        "event": "Publication of On the Origin of Species",
-        "year": 1859
+        "event": "Fall of Saigon",
+        "year": 1975
       },
       {
         "event": "D-Day landings",
@@ -3200,22 +2962,6 @@
     "category": "Landmarks",
     "events": [
       {
-        "event": "Golden Gate Bridge opens",
-        "year": 1937
-      },
-      {
-        "event": "Brooklyn Bridge opens",
-        "year": 1883
-      },
-      {
-        "event": "Charlemagne's Palatine Chapel consecrated",
-        "year": 814
-      },
-      {
-        "event": "Taj Mahal completed",
-        "year": 1653
-      },
-      {
         "event": "St. Paul's Cathedral rebuilding begins",
         "year": 1675
       },
@@ -3224,8 +2970,24 @@
         "year": 1806
       },
       {
+        "event": "Taj Mahal construction begins",
+        "year": 1631
+      },
+      {
         "event": "Pentagon completed",
         "year": 1943
+      },
+      {
+        "event": "Guggenheim Museum New York opens",
+        "year": 1959
+      },
+      {
+        "event": "Taj Mahal completed",
+        "year": 1653
+      },
+      {
+        "event": "Golden Gate Bridge opens",
+        "year": 1937
       }
     ]
   },
@@ -3280,8 +3042,8 @@
         "year": -776
       },
       {
-        "event": "Boston Red Sox win the World Series, breaking the Curse of the Bambino",
-        "year": 2004
+        "event": "Tiger Woods wins his first Masters at age 21",
+        "year": 1997
       },
       {
         "event": "Knickerbocker rules for baseball are written",
@@ -3310,20 +3072,20 @@
         "year": 1965
       },
       {
-        "event": "Rubik's Cube – Invented by Hungarian architecture professor Ernő Rubik",
-        "year": 1974
+        "event": "George Orwell, born Eric Arthur Blair",
+        "year": 1903
       },
       {
-        "event": "Six Flags Over Texas – The first-ever Six Flags park opens in Arlington",
-        "year": 1961
+        "event": "Rubik's Cube – Invented by Hungarian architecture professor Ernő Rubik",
+        "year": 1974
       },
       {
         "event": "Deadpool – Debuts in The New Mutants #98",
         "year": 1991
       },
       {
-        "event": "Salyut 1 becomes the first space station",
-        "year": 1971
+        "event": "John le Carré, born David John Moore Cornwell",
+        "year": 1931
       },
       {
         "event": "Miracle on 34th Street – The original film starring Maureen O'Hara and Edmund Gwenn",
@@ -3344,20 +3106,20 @@
         "year": 1923
       },
       {
-        "event": "'The Jazz Singer', the first feature-length motion picture with synchronized dialogue, is released.",
-        "year": 1927
+        "event": "'The Exorcist' is released.",
+        "year": 1973
       },
       {
-        "event": "'World of Warcraft' is released.",
-        "year": 2004
+        "event": "Mickey Mouse debuts in 'Steamboat Willie'.",
+        "year": 1928
       },
       {
         "event": "Netflix introduces streaming video.",
         "year": 2007
       },
       {
-        "event": "'The Exorcist' is released.",
-        "year": 1973
+        "event": "The Nintendo Entertainment System (Famicom) launches in Japan.",
+        "year": 1983
       },
       {
         "event": "The PlayStation 2 is released.",
@@ -3374,24 +3136,24 @@
         "year": 1878
       },
       {
+        "event": "Cabrillo explores California coast",
+        "year": 1542
+      },
+      {
         "event": "Waldseemüller map names America",
         "year": 1507
       },
       {
-        "event": "Hudson Bay discovered",
-        "year": 1610
-      },
-      {
-        "event": "Burke and Wills expedition in Australia",
-        "year": 1860
-      },
-      {
-        "event": "Sturt explores Murray River",
-        "year": 1830
+        "event": "De Soto expedition begins in North America",
+        "year": 1539
       },
       {
         "event": "Dampier explores Australian coast",
         "year": 1699
+      },
+      {
+        "event": "Cook reaches Botany Bay, Australia",
+        "year": 1770
       },
       {
         "event": "Bering Strait discovered",
@@ -3404,12 +3166,12 @@
     "category": "History",
     "events": [
       {
-        "event": "Invention of the telegraph",
-        "year": 1837
-      },
-      {
         "event": "Great Fire of London",
         "year": 1666
+      },
+      {
+        "event": "Hitler appointed Chancellor of Germany",
+        "year": 1933
       },
       {
         "event": "Columbus reaches the Americas",
@@ -3424,12 +3186,12 @@
         "year": 1928
       },
       {
-        "event": "Hitler appointed Chancellor of Germany",
-        "year": 1933
+        "event": "Invention of the telephone",
+        "year": 1876
       },
       {
-        "event": "Global financial crisis",
-        "year": 2008
+        "event": "Invention of the telegraph",
+        "year": 1837
       }
     ]
   },
@@ -3506,32 +3268,32 @@
     "category": "Business",
     "events": [
       {
-        "event": "Oracle Corporation is founded by Larry Ellison, Bob Miner, and Ed Oates.",
-        "year": 1977
-      },
-      {
-        "event": "Global stock markets crash and then rapidly recover amidst the onset of the COVID-19 pandemic.",
-        "year": 2020
-      },
-      {
         "event": "The Dot-com bubble bursts, causing many internet-based companies to fail.",
         "year": 2000
       },
       {
-        "event": "Jeff Bezos founds Amazon in Bellevue, Washington, initially as an online bookstore.",
-        "year": 1994
+        "event": "Oracle Corporation is founded by Larry Ellison, Bob Miner, and Ed Oates.",
+        "year": 1977
       },
       {
         "event": "General Electric is formed through the merger of Edison General Electric and Thomson-Houston Electric Company.",
         "year": 1892
       },
       {
+        "event": "Global stock markets crash and then rapidly recover amidst the onset of the COVID-19 pandemic.",
+        "year": 2020
+      },
+      {
+        "event": "John D. Rockefeller incorporates Standard Oil, which comes to dominate the oil industry.",
+        "year": 1870
+      },
+      {
         "event": "Samsung is founded by Lee Byung-chul in Daegu, Japanese Korea, as a trading company.",
         "year": 1938
       },
       {
-        "event": "The Paris Agreement on climate change is adopted, pushing global businesses toward sustainability.",
-        "year": 2015
+        "event": "Jeff Bezos founds Amazon in Bellevue, Washington, initially as an online bookstore.",
+        "year": 1994
       }
     ]
   },
@@ -3540,8 +3302,8 @@
     "category": "Landmarks",
     "events": [
       {
-        "event": "White House first occupied",
-        "year": 1800
+        "event": "Petronas Towers completed",
+        "year": 1998
       },
       {
         "event": "Eiffel Tower opens",
@@ -3552,16 +3314,16 @@
         "year": 1711
       },
       {
-        "event": "Petronas Towers completed",
-        "year": 1998
+        "event": "British Museum established",
+        "year": 1753
       },
       {
         "event": "Louvre Pyramid completed",
         "year": 1989
       },
       {
-        "event": "British Museum established",
-        "year": 1753
+        "event": "Big Ben clock tower completed",
+        "year": 1859
       },
       {
         "event": "One World Trade Center opens",
@@ -3574,8 +3336,8 @@
     "category": "Entertainment",
     "events": [
       {
-        "event": "Dungeons & Dragons is published.",
-        "year": 1974
+        "event": "'World of Warcraft' is released.",
+        "year": 2004
       },
       {
         "event": "'Pokemon Go' is released and becomes a global phenomenon.",
@@ -3586,12 +3348,12 @@
         "year": 1990
       },
       {
-        "event": "The first Super Bowl is played.",
-        "year": 1967
-      },
-      {
         "event": "'Singin' in the Rain' is released.",
         "year": 1952
+      },
+      {
+        "event": "Dungeons & Dragons is published.",
+        "year": 1974
       },
       {
         "event": "'The Phantom of the Opera' opens in London's West End.",
@@ -3612,28 +3374,28 @@
         "year": 2022
       },
       {
-        "event": "Toyota Prius – The world's first mass-produced hybrid passenger car goes on sale",
-        "year": 1997
+        "event": "Mazda MX-5 Miata – The lightweight roadster revival debuts in Chicago",
+        "year": 1989
       },
       {
         "event": "Tesla Model S – Tesla releases its revolutionary luxury all-electric sedan",
         "year": 2012
       },
       {
-        "event": "Ford Model T – Henry Ford introduces the first affordable, mass-produced automobile",
-        "year": 1908
+        "event": "Jeep Willys MB – The rugged wartime 4x4 that spawned the civilian Jeep enters production",
+        "year": 1941
       },
       {
-        "event": "Volkswagen Beetle – Production begins on the iconic 'Bug'",
-        "year": 1938
+        "event": "Mini – Alec Issigonis's tiny front-wheel-drive icon is launched in Britain",
+        "year": 1959
       },
       {
-        "event": "Chevrolet Corvette – The quintessential American sports car is introduced",
-        "year": 1953
+        "event": "Porsche 911 – The enduring rear-engined sports car is unveiled in Frankfurt",
+        "year": 1963
       },
       {
-        "event": "Ford Mustang – The original 'pony car' makes a wildly successful debut",
-        "year": 1964
+        "event": "Lamborghini Countach – The scissor-doored supercar wedge enters production",
+        "year": 1974
       }
     ]
   },
@@ -3662,8 +3424,8 @@
         "year": 1991
       },
       {
-        "event": "National Hockey League (NHL) is formed",
-        "year": 1917
+        "event": "Leicester City remarkably wins the English Premier League",
+        "year": 2016
       },
       {
         "event": "The Ashes cricket series between England and Australia originates",
@@ -3710,32 +3472,32 @@
     "category": "Cinema",
     "events": [
       {
-        "event": "The first Academy Awards ceremony is held at the Hollywood Roosevelt Hotel.",
-        "year": 1929
-      },
-      {
         "event": "Roundhay Garden Scene, the world's earliest surviving motion-picture film, is recorded.",
         "year": 1888
       },
       {
-        "event": "'Back to the Future' becomes the highest-grossing film of the year.",
-        "year": 1985
-      },
-      {
-        "event": "'Saving Private Ryan' revolutionizes the portrayal of combat in war films.",
-        "year": 1998
-      },
-      {
-        "event": "'Inception' brings complex, original science fiction to blockbuster audiences.",
-        "year": 2010
+        "event": "'Alien' is released, blending science fiction and horror to immense success.",
+        "year": 1979
       },
       {
         "event": "United Artists is founded by Charlie Chaplin, Mary Pickford, Douglas Fairbanks, and D. W. Griffith.",
         "year": 1919
       },
       {
-        "event": "The Academy Award for Best Animated Feature is first presented, won by 'Shrek'.",
-        "year": 2002
+        "event": "'Inception' brings complex, original science fiction to blockbuster audiences.",
+        "year": 2010
+      },
+      {
+        "event": "'Black Panther' becomes a massive cultural milestone and the first superhero film nominated for Best Picture.",
+        "year": 2018
+      },
+      {
+        "event": "'Saving Private Ryan' revolutionizes the portrayal of combat in war films.",
+        "year": 1998
+      },
+      {
+        "event": "'No Country for Old Men' wins Best Picture at the Oscars, marking a high point for the Coen Brothers.",
+        "year": 2007
       }
     ]
   },
@@ -3752,8 +3514,8 @@
         "year": 1905
       },
       {
-        "event": "Signing of the Magna Carta",
-        "year": 1215
+        "event": "Declaration of Independence",
+        "year": 1776
       },
       {
         "event": "Fall of the Western Roman Empire",
@@ -3778,12 +3540,12 @@
     "category": "Landmarks",
     "events": [
       {
-        "event": "Channel Tunnel opens",
-        "year": 1994
+        "event": "St. Basil's Cathedral construction begins",
+        "year": 1555
       },
       {
-        "event": "Taj Mahal construction begins",
-        "year": 1631
+        "event": "Notre-Dame de Paris construction begins",
+        "year": 1163
       },
       {
         "event": "Grand Central Terminal opens",
@@ -3794,16 +3556,16 @@
         "year": 1368
       },
       {
-        "event": "Big Ben clock tower completed",
-        "year": 1859
+        "event": "Ziggurat of Ur built",
+        "year": -2000
       },
       {
         "event": "Mount Rushmore carving begins",
         "year": 1927
       },
       {
-        "event": "Ziggurat of Ur built",
-        "year": -2000
+        "event": "Leaning Tower of Pisa construction begins",
+        "year": 1173
       }
     ]
   },
@@ -3812,32 +3574,32 @@
     "category": "Geography",
     "events": [
       {
-        "event": "Cook's first voyage begins",
-        "year": 1768
+        "event": "Bass Strait discovered",
+        "year": 1798
       },
       {
-        "event": "Scott reaches South Pole",
-        "year": 1912
-      },
-      {
-        "event": "Francis Drake begins circumnavigation",
-        "year": 1577
+        "event": "Burke and Wills expedition in Australia",
+        "year": 1860
       },
       {
         "event": "Bering sights Alaska",
         "year": 1741
       },
       {
+        "event": "Cook's first voyage begins",
+        "year": 1768
+      },
+      {
+        "event": "Francis Drake begins circumnavigation",
+        "year": 1577
+      },
+      {
+        "event": "Endurance sinks in Antarctica",
+        "year": 1915
+      },
+      {
         "event": "Abel Tasman discovers New Zealand",
         "year": 1642
-      },
-      {
-        "event": "Amundsen completes Northwest Passage",
-        "year": 1906
-      },
-      {
-        "event": "Weddell Sea discovered",
-        "year": 1821
       }
     ]
   },
@@ -3900,8 +3662,8 @@
         "year": 1776
       },
       {
-        "event": "Thomas Watson Sr. joins the Computing-Tabulating-Recording Company, later renamed IBM.",
-        "year": 1914
+        "event": "Phil Knight and Bill Bowerman found Blue Ribbon Sports, which later becomes Nike.",
+        "year": 1964
       },
       {
         "event": "The NASDAQ, the world's first electronic stock market, begins trading.",
@@ -3926,20 +3688,20 @@
         "year": 1963
       },
       {
-        "event": "Teenage Mutant Ninja Turtles – Debuts in a self-published comic",
-        "year": 1984
-      },
-      {
         "event": "Mr. Potato Head – The first toy advertised on television",
         "year": 1952
       },
       {
-        "event": "Disneyland – Walt Disney opens his original park in Anaheim, California",
-        "year": 1955
+        "event": "Wendy's – Dave Thomas opens the first restaurant in Ohio",
+        "year": 1969
       },
       {
-        "event": "The Very Hungry Caterpillar – Eric Carle introduces the hungry, hole-punching bug",
-        "year": 1969
+        "event": "Teenage Mutant Ninja Turtles – Debuts in a self-published comic",
+        "year": 1984
+      },
+      {
+        "event": "Amazon Echo – The first smart speaker featuring the Alexa voice assistant",
+        "year": 2014
       }
     ]
   },
@@ -3948,16 +3710,16 @@
     "category": "Technology",
     "events": [
       {
-        "event": "The first commercial compact disc (CD) is produced.",
-        "year": 1982
+        "event": "IBM introduces the IBM Personal Computer (PC).",
+        "year": 1981
       },
       {
-        "event": "Johannes Gutenberg invents the printing press.",
-        "year": 1440
+        "event": "Eli Whitney invents the cotton gin.",
+        "year": 1793
       },
       {
-        "event": "The Bessemer process for steel production is patented.",
-        "year": 1855
+        "event": "John Bardeen, Walter Brattain, and William Shockley invent the transistor.",
+        "year": 1947
       },
       {
         "event": "The Mosaic web browser is released, popularizing the World Wide Web.",
@@ -3968,12 +3730,12 @@
         "year": 1839
       },
       {
-        "event": "Thomas Savery patents the first crude steam engine.",
-        "year": 1698
+        "event": "The Bessemer process for steel production is patented.",
+        "year": 1855
       },
       {
-        "event": "Eli Whitney invents the cotton gin.",
-        "year": 1793
+        "event": "Thomas Savery patents the first crude steam engine.",
+        "year": 1698
       }
     ]
   },
@@ -4016,32 +3778,32 @@
     "category": "Sports",
     "events": [
       {
-        "event": "First baseball players to wear numbers on their backs regularly",
-        "year": 1932
+        "event": "Calcio Fiorentino, an early form of football, is codified in Florence",
+        "year": 1530
+      },
+      {
+        "event": "Sheffield F.C., the world's oldest independent football club, is founded",
+        "year": 1857
+      },
+      {
+        "event": "England wins the FIFA World Cup",
+        "year": 1966
       },
       {
         "event": "Figure skating becomes the first winter sport contested at the Olympics",
         "year": 1908
       },
       {
-        "event": "Calcio Fiorentino, an early form of football, is codified in Florence",
-        "year": 1530
-      },
-      {
-        "event": "Tiger Woods wins his first Masters at age 21",
-        "year": 1997
-      },
-      {
-        "event": "First Home Nations rugby championship",
-        "year": 1883
+        "event": "First baseball players to wear numbers on their backs regularly",
+        "year": 1932
       },
       {
         "event": "First Indianapolis 500 automobile race",
         "year": 1911
       },
       {
-        "event": "Sheffield F.C., the world's oldest independent football club, is founded",
-        "year": 1857
+        "event": "First Home Nations rugby championship",
+        "year": 1883
       }
     ]
   },
@@ -4118,8 +3880,8 @@
     "category": "Landmarks",
     "events": [
       {
-        "event": "Expo 2020 Dubai pavilions open (delayed)",
-        "year": 2021
+        "event": "Hagia Sophia completed",
+        "year": 537
       },
       {
         "event": "Sydney Opera House opens",
@@ -4130,16 +3892,16 @@
         "year": 1591
       },
       {
+        "event": "Expo 2020 Dubai pavilions open (delayed)",
+        "year": 2021
+      },
+      {
+        "event": "White House first occupied",
+        "year": 1800
+      },
+      {
         "event": "St. Peter's Basilica (Old) consecrated",
         "year": 320
-      },
-      {
-        "event": "Hagia Sophia completed",
-        "year": 537
-      },
-      {
-        "event": "Terracotta Army buried",
-        "year": -220
       },
       {
         "event": "Notre-Dame de Paris completed",
@@ -4202,8 +3964,8 @@
         "year": 1608
       },
       {
-        "event": "Pizarro begins expedition to Peru",
-        "year": 1527
+        "event": "Nicolet reaches Lake Michigan",
+        "year": 1634
       },
       {
         "event": "Fall of Tenochtitlan",
@@ -4254,24 +4016,24 @@
     "category": "Technology",
     "events": [
       {
+        "event": "Frank Whittle patents the jet engine.",
+        "year": 1930
+      },
+      {
         "event": "Lee de Forest invents the triode vacuum tube.",
         "year": 1906
       },
       {
-        "event": "Robert Watson-Watt patents radar.",
-        "year": 1935
-      },
-      {
-        "event": "Igor Sikorsky develops the first successful helicopter.",
-        "year": 1939
+        "event": "Alfred Nobel invents dynamite.",
+        "year": 1866
       },
       {
         "event": "Edmund Cartwright invents the power loom.",
         "year": 1785
       },
       {
-        "event": "Frank Whittle patents the jet engine.",
-        "year": 1930
+        "event": "Igor Sikorsky develops the first successful helicopter.",
+        "year": 1939
       },
       {
         "event": "Linus Torvalds releases the first version of the Linux kernel.",
@@ -4334,8 +4096,8 @@
         "year": 1922
       },
       {
-        "event": "YouTube is launched, eventually transforming how video content is distributed and consumed.",
-        "year": 2005
+        "event": "'Godzilla' is released in Japan, creating the kaiju genre.",
+        "year": 1954
       },
       {
         "event": "'Top Gun: Maverick' becomes a massive hit, credited with revitalizing the theatrical experience.",
@@ -4346,8 +4108,8 @@
         "year": 1976
       },
       {
-        "event": "The critically acclaimed 'Moonlight' premieres, later winning Best Picture.",
-        "year": 2016
+        "event": "'King Kong' premieres, showcasing pioneering stop-motion animation by Willis O'Brien.",
+        "year": 1933
       }
     ]
   },
@@ -4360,6 +4122,18 @@
         "year": 1947
       },
       {
+        "event": "Catan – Klaus Teuber releases 'The Settlers of Catan' in Germany",
+        "year": 1995
+      },
+      {
+        "event": "Burger King – Founded in Miami, originally as Insta-Burger King",
+        "year": 1954
+      },
+      {
+        "event": "Furby – The robotic electronic pet becomes a massive holiday craze",
+        "year": 1998
+      },
+      {
         "event": "Dr. Seuss, born Theodor Seuss Geisel",
         "year": 1904
       },
@@ -4368,20 +4142,8 @@
         "year": 1971
       },
       {
-        "event": "Catan – Klaus Teuber releases 'The Settlers of Catan' in Germany",
-        "year": 1995
-      },
-      {
-        "event": "Super Mario Bros. – Mario and Luigi save the Mushroom Kingdom on the NES",
-        "year": 1985
-      },
-      {
-        "event": "Charlotte's Web – E. B. White publishes the classic farmyard tale",
-        "year": 1952
-      },
-      {
-        "event": "The Computer Mouse – Douglas Engelbart publicly demonstrates the device for the first time",
-        "year": 1968
+        "event": "Lady Gaga, born Stefani Joanne Angelina Germanotta",
+        "year": 1986
       }
     ]
   },
@@ -4390,24 +4152,24 @@
     "category": "Landmarks",
     "events": [
       {
-        "event": "Leaning Tower of Pisa completed",
-        "year": 1373
-      },
-      {
-        "event": "Taipei 101 completed",
-        "year": 2004
+        "event": "Parthenon construction begins",
+        "year": -447
       },
       {
         "event": "St. Paul's Cathedral completed",
         "year": 1708
       },
       {
-        "event": "Parthenon construction begins",
-        "year": -447
+        "event": "Leaning Tower of Pisa completed",
+        "year": 1373
       },
       {
         "event": "Washington Monument completed",
         "year": 1884
+      },
+      {
+        "event": "White House construction begins",
+        "year": 1792
       },
       {
         "event": "London Eye erected",
@@ -4492,24 +4254,24 @@
     "category": "The Political / Legal / Espionage Thriller",
     "events": [
       {
-        "event": "The West Wing premieres, offering an idealized, fast-talking look at the inner workings of the White House.",
-        "year": 1999
+        "event": "Mission: Impossible premieres, defining the elaborate espionage caper for television.",
+        "year": 1966
       },
       {
-        "event": "24 debuts, revolutionizing the espionage thriller with its real-time ticking clock format.",
-        "year": 2001
+        "event": "Tinker Tailor Soldier Spy airs on the BBC, bringing le Carré's mole hunt to the screen.",
+        "year": 1979
       },
       {
         "event": "Billions premieres, exploring the high-stakes financial warfare between a hedge fund king and a US Attorney.",
         "year": 2016
       },
       {
-        "event": "Damages premieres, presenting a dark, ruthless take on high-stakes corporate litigation.",
-        "year": 2007
+        "event": "The West Wing premieres, offering an idealized, fast-talking look at the inner workings of the White House.",
+        "year": 1999
       },
       {
-        "event": "The Good Wife debuts, wrapping complex legal and political maneuvering inside a network procedural format.",
-        "year": 2009
+        "event": "24 debuts, revolutionizing the espionage thriller with its real-time ticking clock format.",
+        "year": 2001
       },
       {
         "event": "House of Cards debuts, following a deeply corrupt politician's ruthless climb to the presidency.",
@@ -4530,8 +4292,8 @@
         "year": 2002
       },
       {
-        "event": "Buster Douglas knocks out Mike Tyson",
-        "year": 1990
+        "event": "Ancient Olympic Games are abolished by Emperor Theodosius I",
+        "year": 393
       },
       {
         "event": "The Queensberry Rules for boxing are published",
@@ -4550,8 +4312,8 @@
         "year": 2008
       },
       {
-        "event": "First UEFA European Cup is held",
-        "year": 1956
+        "event": "The first 24 Hours of Le Mans endurance race",
+        "year": 1923
       }
     ]
   },
@@ -4560,7 +4322,7 @@
     "category": "Holiday Classics",
     "events": [
       {
-        "event": "A Christmas Story – 'You\\'ll shoot your eye out!'",
+        "event": "A Christmas Story – 'You'll shoot your eye out!'",
         "year": 1983
       },
       {
@@ -4632,28 +4394,28 @@
         "year": 1952
       },
       {
-        "event": "Thomas Edison invents a practical incandescent light bulb",
-        "year": 1879
-      },
-      {
-        "event": "Galileo Galilei publishes Sidereus Nuncius",
-        "year": 1610
+        "event": "Johannes Diderik van der Waals derives the van der Waals equation",
+        "year": 1873
       },
       {
         "event": "Apollo 11 lands the first humans on the Moon",
         "year": 1969
       },
       {
+        "event": "Alfred Wegener proposes continental drift",
+        "year": 1912
+      },
+      {
         "event": "Nicolas Léonard Sadi Carnot describes the Carnot cycle",
         "year": 1824
       },
       {
-        "event": "Johannes Diderik van der Waals derives the van der Waals equation",
-        "year": 1873
+        "event": "Galileo Galilei publishes Sidereus Nuncius",
+        "year": 1610
       },
       {
-        "event": "Henri Becquerel discovers radioactivity",
-        "year": 1896
+        "event": "Marie and Pierre Curie discover polonium and radium",
+        "year": 1898
       }
     ]
   },
@@ -4678,8 +4440,8 @@
         "year": 1920
       },
       {
-        "event": "Alfred Hitchcock's 'Psycho' is released.",
-        "year": 1960
+        "event": "Universal Pictures releases 'Dracula' starring Bela Lugosi.",
+        "year": 1931
       },
       {
         "event": "First public film screening by the Lumière brothers.",
@@ -4700,28 +4462,28 @@
         "year": 1969
       },
       {
-        "event": "George Orwell, born Eric Arthur Blair",
-        "year": 1903
+        "event": "Stan Lee, born Stanley Martin Lieber",
+        "year": 1922
+      },
+      {
+        "event": "Super Mario Bros. – Mario and Luigi save the Mushroom Kingdom on the NES",
+        "year": 1985
       },
       {
         "event": "TikTok – Launched internationally by ByteDance",
-        "year": 2016
+        "year": 2017
       },
       {
-        "event": "Universal Studios Florida – Universal opens a theme park to rival Disney in Orlando",
-        "year": 1990
+        "event": "Superman – Debuts in Action Comics #1",
+        "year": 1938
       },
       {
         "event": "Wolverine – Debuts in a cameo in The Incredible Hulk #180",
         "year": 1974
       },
       {
-        "event": "Stan Lee, born Stanley Martin Lieber",
-        "year": 1922
-      },
-      {
-        "event": "Superman – Debuts in Action Comics #1",
-        "year": 1938
+        "event": "Instagram – The photo-sharing app launches exclusively on iOS",
+        "year": 2010
       }
     ]
   },
@@ -4768,24 +4530,24 @@
         "year": 1901
       },
       {
-        "event": "Thomas Edison patents a commercially practical incandescent light bulb.",
-        "year": 1879
-      },
-      {
-        "event": "Cornelis Drebbel invents the first navigable submarine.",
-        "year": 1620
-      },
-      {
-        "event": "The Montgolfier brothers launch the first hot air balloon.",
-        "year": 1783
+        "event": "Yuri Gagarin becomes the first human in space.",
+        "year": 1961
       },
       {
         "event": "John Ambrose Fleming invents the vacuum tube diode.",
         "year": 1904
       },
       {
-        "event": "Alessandro Volta invents the voltaic pile (battery).",
-        "year": 1800
+        "event": "Thomas Edison patents a commercially practical incandescent light bulb.",
+        "year": 1879
+      },
+      {
+        "event": "The Montgolfier brothers launch the first hot air balloon.",
+        "year": 1783
+      },
+      {
+        "event": "Cornelis Drebbel invents the first navigable submarine.",
+        "year": 1620
       },
       {
         "event": "Jonas Salk's polio vaccine is declared safe and effective.",
@@ -4798,32 +4560,32 @@
     "category": "Geography",
     "events": [
       {
-        "event": "Hudson explores Hudson River",
-        "year": 1609
-      },
-      {
-        "event": "Cook's second voyage begins",
-        "year": 1772
-      },
-      {
         "event": "Coronado expedition begins in American Southwest",
         "year": 1540
+      },
+      {
+        "event": "Hudson Bay discovered",
+        "year": 1610
       },
       {
         "event": "Tasman maps Australian coast",
         "year": 1644
       },
       {
-        "event": "Marquette and Jolliet explore Mississippi River",
-        "year": 1673
-      },
-      {
-        "event": "Lewis and Clark reach the Pacific Ocean",
-        "year": 1805
-      },
-      {
         "event": "Cartier explores Gulf of St. Lawrence",
         "year": 1534
+      },
+      {
+        "event": "Cook's second voyage begins",
+        "year": 1772
+      },
+      {
+        "event": "Amundsen completes Northwest Passage",
+        "year": 1906
+      },
+      {
+        "event": "Livingstone begins Zambezi expedition",
+        "year": 1852
       }
     ]
   },
@@ -4934,32 +4696,32 @@
     "category": "Pop History",
     "events": [
       {
-        "event": "The Microwave Oven – Percy Spencer accidentally discovers microwave cooking using radar tech",
-        "year": 1945
+        "event": "Lewis Carroll, born Charles Lutwidge Dodgson",
+        "year": 1832
       },
       {
         "event": "McDonald's – Founded by Richard and Maurice McDonald in San Bernardino",
         "year": 1940
       },
       {
-        "event": "World Wide Web Invented – Tim Berners-Lee writes the initial proposal at CERN",
-        "year": 1989
-      },
-      {
         "event": "Taco Bell – Glen Bell opens the first location in California",
         "year": 1962
       },
       {
-        "event": "Cinderella – Disney bounces back after WWII with a massive fairy tale hit",
-        "year": 1950
-      },
-      {
-        "event": "The Wizarding World of Harry Potter – The immersive Hogsmeade land opens at Universal",
-        "year": 2010
-      },
-      {
         "event": "Facebook – Mark Zuckerberg launches 'TheFacebook' at Harvard",
         "year": 2004
+      },
+      {
+        "event": "World Wide Web Invented – Tim Berners-Lee writes the initial proposal at CERN",
+        "year": 1989
+      },
+      {
+        "event": "Twister – Milton Bradley releases the first game using human bodies as playing pieces",
+        "year": 1966
+      },
+      {
+        "event": "Cheetos – Invented by Fritos creator Charles Elmer Doolin",
+        "year": 1948
       }
     ]
   },
@@ -5002,8 +4764,20 @@
     "category": "Cinema",
     "events": [
       {
-        "event": "'A Hard Day's Night' starring The Beatles redefines the musical film genre.",
-        "year": 1964
+        "event": "Charlie Chaplin's first true sound film, 'The Great Dictator', satirizes Adolf Hitler.",
+        "year": 1940
+      },
+      {
+        "event": "'The Lord of the Rings: The Fellowship of the Ring' begins the critically acclaimed fantasy trilogy.",
+        "year": 2001
+      },
+      {
+        "event": "'Becky Sharp' becomes the first feature film shot entirely in three-strip Technicolor.",
+        "year": 1935
+      },
+      {
+        "event": "The Golden Globe Awards are held for the first time.",
+        "year": 1944
       },
       {
         "event": "The Lumière brothers hold their first public screening of short films in Paris.",
@@ -5014,20 +4788,8 @@
         "year": 1953
       },
       {
-        "event": "'The Cabinet of Dr. Caligari', a quintessential work of German Expressionist cinema, is released.",
-        "year": 1920
-      },
-      {
-        "event": "The Golden Globe Awards are held for the first time.",
-        "year": 1944
-      },
-      {
         "event": "D. W. Griffith's highly controversial epic 'The Birth of a Nation' is released.",
         "year": 1915
-      },
-      {
-        "event": "'Jurassic Park' astounds audiences with photorealistic CGI dinosaurs.",
-        "year": 1993
       }
     ]
   },
@@ -5036,32 +4798,32 @@
     "category": "Geography",
     "events": [
       {
-        "event": "Tasman discovers Fiji",
-        "year": 1643
+        "event": "Discovery of Moluccas by Portuguese",
+        "year": 1512
       },
       {
         "event": "Frobisher discovers Frobisher Bay",
         "year": 1576
       },
       {
-        "event": "Discovery of Moluccas by Portuguese",
-        "year": 1512
+        "event": "Mayflower lands at Plymouth Rock",
+        "year": 1620
       },
       {
-        "event": "Cook discovers Hawaii",
-        "year": 1778
-      },
-      {
-        "event": "Discovery of Brazil by Cabral",
-        "year": 1500
+        "event": "Marquette and Jolliet explore Mississippi River",
+        "year": 1673
       },
       {
         "event": "Columbus returns from fourth voyage",
         "year": 1504
       },
       {
-        "event": "Mayflower lands at Plymouth Rock",
-        "year": 1620
+        "event": "Tasman discovers Fiji",
+        "year": 1643
+      },
+      {
+        "event": "Cook discovers Hawaii",
+        "year": 1778
       }
     ]
   },
@@ -5078,8 +4840,8 @@
         "year": 1927
       },
       {
-        "event": "Spanish Civil War begins",
-        "year": 1936
+        "event": "Global financial crisis",
+        "year": 2008
       },
       {
         "event": "Completion of the Transcontinental Railroad",
@@ -5104,8 +4866,12 @@
     "category": "Science",
     "events": [
       {
-        "event": "Gregor Mendel begins his experiments on plant hybridization",
-        "year": 1856
+        "event": "James Clerk Maxwell publishes A Dynamical Theory of the Electromagnetic Field",
+        "year": 1864
+      },
+      {
+        "event": "The transistor is invented at Bell Labs",
+        "year": 1947
       },
       {
         "event": "Jocelyn Bell Burnell discovers the first pulsar",
@@ -5116,20 +4882,16 @@
         "year": 1981
       },
       {
-        "event": "James Clerk Maxwell publishes A Dynamical Theory of the Electromagnetic Field",
-        "year": 1864
+        "event": "Henri Becquerel discovers radioactivity",
+        "year": 1896
+      },
+      {
+        "event": "Georg Ohm formulates Ohm's law",
+        "year": 1827
       },
       {
         "event": "Otto Hahn and Fritz Strassmann discover nuclear fission",
         "year": 1938
-      },
-      {
-        "event": "William Gilbert publishes De Magnete",
-        "year": 1600
-      },
-      {
-        "event": "The transistor is invented at Bell Labs",
-        "year": 1947
       }
     ]
   },
@@ -5176,28 +4938,28 @@
         "year": 1999
       },
       {
+        "event": "Michael Phelps becomes the most decorated Olympian of all time",
+        "year": 2012
+      },
+      {
         "event": "The US 'Dream Team' competes at the Barcelona Olympics",
         "year": 1992
       },
       {
-        "event": "South Africa wins the Rugby World Cup, uniting the nation",
-        "year": 1995
-      },
-      {
-        "event": "Ancient Olympic Games are abolished by Emperor Theodosius I",
-        "year": 393
+        "event": "The American Professional Football Association (later NFL) is founded",
+        "year": 1920
       },
       {
         "event": "Women compete in the Olympics for the first time",
         "year": 1900
       },
       {
-        "event": "First Masters Golf Tournament is played at Augusta National",
-        "year": 1934
+        "event": "South Africa wins the Rugby World Cup, uniting the nation",
+        "year": 1995
       },
       {
-        "event": "The American Professional Football Association (later NFL) is founded",
-        "year": 1920
+        "event": "First Masters Golf Tournament is played at Augusta National",
+        "year": 1934
       }
     ]
   },
@@ -5206,12 +4968,16 @@
     "category": "Landmarks",
     "events": [
       {
-        "event": "Statue of Liberty dedicated",
-        "year": 1886
-      },
-      {
         "event": "Big Ben bell cast",
         "year": 1858
+      },
+      {
+        "event": "Gateway Arch completed",
+        "year": 1965
+      },
+      {
+        "event": "Colosseum construction begins",
+        "year": 70
       },
       {
         "event": "St. Basil's Cathedral completed",
@@ -5226,12 +4992,8 @@
         "year": 1436
       },
       {
-        "event": "Space Needle opens",
-        "year": 1962
-      },
-      {
-        "event": "Colosseum construction begins",
-        "year": 70
+        "event": "Statue of Liberty dedicated",
+        "year": 1886
       }
     ]
   },
@@ -5244,16 +5006,16 @@
         "year": 1946
       },
       {
-        "event": "'Blade Runner' defines the cyberpunk aesthetic on film.",
-        "year": 1982
+        "event": "'Star Wars' is released, becoming a cultural phenomenon and changing the film industry.",
+        "year": 1977
       },
       {
-        "event": "'Pulp Fiction' wins the Palme d'Or and cements Quentin Tarantino's status as an auteur.",
-        "year": 1994
+        "event": "'Titanic' becomes the highest-grossing film of all time and wins 11 Academy Awards.",
+        "year": 1997
       },
       {
-        "event": "'Akira' is released, bringing Japanese anime to mainstream international audiences.",
-        "year": 1988
+        "event": "'The Great Train Robbery', an early milestone in narrative filmmaking, is released.",
+        "year": 1903
       },
       {
         "event": "'The Jazz Singer' becomes the first feature-length motion picture with synchronized dialogue.",
@@ -5264,8 +5026,8 @@
         "year": 1894
       },
       {
-        "event": "Charlie Chaplin's first true sound film, 'The Great Dictator', satirizes Adolf Hitler.",
-        "year": 1940
+        "event": "'Blade Runner' defines the cyberpunk aesthetic on film.",
+        "year": 1982
       }
     ]
   },
@@ -5274,32 +5036,32 @@
     "category": "Geography",
     "events": [
       {
-        "event": "Ross locates North Magnetic Pole",
-        "year": 1831
-      },
-      {
-        "event": "Discovery of New Caledonia",
-        "year": 1774
-      },
-      {
-        "event": "Antarctica sighted by Bellingshausen",
-        "year": 1819
-      },
-      {
-        "event": "Columbia River discovered by Gray",
-        "year": 1792
+        "event": "Cartier names Montreal",
+        "year": 1535
       },
       {
         "event": "St. Augustine founded in Florida",
         "year": 1565
       },
       {
-        "event": "Cartier names Montreal",
-        "year": 1535
+        "event": "Scott reaches South Pole",
+        "year": 1912
       },
       {
         "event": "Baffin Bay discovered",
         "year": 1616
+      },
+      {
+        "event": "Ross locates North Magnetic Pole",
+        "year": 1831
+      },
+      {
+        "event": "Antarctica sighted by Bellingshausen",
+        "year": 1819
+      },
+      {
+        "event": "Discovery of New Caledonia",
+        "year": 1774
       }
     ]
   },
@@ -5342,32 +5104,32 @@
     "category": "Pop History",
     "events": [
       {
-        "event": "Batman – Debuts in Detective Comics #27",
-        "year": 1939
-      },
-      {
         "event": "Madonna, born Madonna Louise Ciccone",
         "year": 1958
+      },
+      {
+        "event": "Subway – Opened originally as 'Pete's Super Submarines'",
+        "year": 1965
+      },
+      {
+        "event": "Batman – Debuts in Detective Comics #27",
+        "year": 1939
       },
       {
         "event": "Miley Cyrus, born Destiny Hope Cyrus",
         "year": 1992
       },
       {
-        "event": "Bruno Mars, born Peter Gene Hernandez",
-        "year": 1985
+        "event": "Charlotte's Web – E. B. White publishes the classic farmyard tale",
+        "year": 1952
       },
       {
         "event": "The Teddy Bear – Created and named after President 'Teddy' Roosevelt",
         "year": 1902
       },
       {
-        "event": "John le Carré, born David John Moore Cornwell",
-        "year": 1931
-      },
-      {
-        "event": "Miracle on 34th Street – The original film starring Maureen O'Hara and Edmund Gwenn",
-        "year": 1947
+        "event": "Bruno Mars, born Peter Gene Hernandez",
+        "year": 1985
       }
     ]
   },
@@ -5384,12 +5146,12 @@
         "year": 1940
       },
       {
-        "event": "Wall Street Crash",
-        "year": 1929
+        "event": "Fall of Baghdad to Mongols",
+        "year": 1258
       },
       {
-        "event": "Invention of the telephone",
-        "year": 1876
+        "event": "Black Death begins in Europe",
+        "year": 1347
       },
       {
         "event": "Unification of Germany",
@@ -5400,8 +5162,8 @@
         "year": 2001
       },
       {
-        "event": "Black Death begins in Europe",
-        "year": 1347
+        "event": "Wall Street Crash",
+        "year": 1929
       }
     ]
   },
@@ -5410,28 +5172,28 @@
     "category": "Science",
     "events": [
       {
-        "event": "Rosalind Franklin captures Photograph 51 of DNA",
-        "year": 1951
-      },
-      {
-        "event": "Ole Rømer makes the first quantitative measurement of the speed of light",
-        "year": 1676
-      },
-      {
-        "event": "Robert Koch discovers the bacterium that causes tuberculosis",
-        "year": 1882
-      },
-      {
         "event": "Johann Gottfried Galle discovers Neptune",
         "year": 1846
+      },
+      {
+        "event": "Robert Boyle formulates Boyle's law",
+        "year": 1662
+      },
+      {
+        "event": "Carl Linnaeus publishes Systema Naturae",
+        "year": 1735
+      },
+      {
+        "event": "Thomas Edison invents a practical incandescent light bulb",
+        "year": 1879
       },
       {
         "event": "Theodore Maiman builds the first working laser",
         "year": 1960
       },
       {
-        "event": "William Harvey publishes Exercitatio Anatomica de Motu Cordis et Sanguinis in Animalibus",
-        "year": 1628
+        "event": "Rosalind Franklin captures Photograph 51 of DNA",
+        "year": 1951
       },
       {
         "event": "Copernicus publishes De revolutionibus orbium coelestium",
@@ -5444,16 +5206,16 @@
     "category": "Technology",
     "events": [
       {
-        "event": "UNIVAC I, the first commercial computer, is delivered to the US Census Bureau.",
-        "year": 1951
+        "event": "James Watt patents his improved steam engine.",
+        "year": 1769
+      },
+      {
+        "event": "The first commercial compact disc (CD) is produced.",
+        "year": 1982
       },
       {
         "event": "ENIAC, the first general-purpose electronic digital computer, is dedicated.",
         "year": 1946
-      },
-      {
-        "event": "Otto von Guericke invents the air pump.",
-        "year": 1650
       },
       {
         "event": "The Soviet Union launches Sputnik 1, the first artificial Earth satellite.",
@@ -5468,8 +5230,8 @@
         "year": 1896
       },
       {
-        "event": "James Watt patents his improved steam engine.",
-        "year": 1769
+        "event": "Otto von Guericke invents the air pump.",
+        "year": 1650
       }
     ]
   },
@@ -5478,8 +5240,8 @@
     "category": "Sports",
     "events": [
       {
-        "event": "The Basketball Association of America (later NBA) is founded",
-        "year": 1946
+        "event": "National Hockey League (NHL) is formed",
+        "year": 1917
       },
       {
         "event": "First Formula One World Championship race",
@@ -5490,20 +5252,20 @@
         "year": 1998
       },
       {
-        "event": "Michael Phelps becomes the most decorated Olympian of all time",
-        "year": 2012
+        "event": "Brazil wins their third World Cup with Pelé",
+        "year": 1970
       },
       {
         "event": "First recorded Olympic Games in Ancient Greece",
         "year": -776
       },
       {
-        "event": "FIFA (Fédération Internationale de Football Association) is founded",
-        "year": 1904
+        "event": "The Basketball Association of America (later NBA) is founded",
+        "year": 1946
       },
       {
-        "event": "Brazil wins their third World Cup with Pelé",
-        "year": 1970
+        "event": "FIFA (Fédération Internationale de Football Association) is founded",
+        "year": 1904
       }
     ]
   },
@@ -5512,8 +5274,8 @@
     "category": "Business",
     "events": [
       {
-        "event": "Bank of America launches the BankAmericard, the first successful modern credit card, later known as Visa.",
-        "year": 1958
+        "event": "Thomas Watson Sr. joins the Computing-Tabulating-Recording Company, later renamed IBM.",
+        "year": 1914
       },
       {
         "event": "Lehman Brothers files for bankruptcy, marking the climax of the global financial crisis.",
@@ -5532,8 +5294,8 @@
         "year": 1937
       },
       {
-        "event": "Phil Knight and Bill Bowerman found Blue Ribbon Sports, which later becomes Nike.",
-        "year": 1964
+        "event": "Bank of America launches the BankAmericard, the first successful modern credit card, later known as Visa.",
+        "year": 1958
       },
       {
         "event": "The first ATM in the United States is installed by Chemical Bank in New York.",
@@ -5546,32 +5308,32 @@
     "category": "Landmarks",
     "events": [
       {
-        "event": "Machu Picchu built (estimated)",
-        "year": 1438
-      },
-      {
-        "event": "Pentagon completed",
-        "year": 1943
-      },
-      {
-        "event": "Suez Canal opens",
-        "year": 1869
-      },
-      {
-        "event": "Leaning Tower of Pisa construction begins",
-        "year": 1173
-      },
-      {
-        "event": "Arc de Triomphe completed",
-        "year": 1836
+        "event": "St. Peter's Basilica (Current) construction begins",
+        "year": 1506
       },
       {
         "event": "Lincoln Memorial dedicated",
         "year": 1922
       },
       {
-        "event": "Colosseum completed",
-        "year": 80
+        "event": "Taj Mahal construction begins",
+        "year": 1631
+      },
+      {
+        "event": "Suez Canal opens",
+        "year": 1869
+      },
+      {
+        "event": "Arc de Triomphe completed",
+        "year": 1836
+      },
+      {
+        "event": "Machu Picchu built (estimated)",
+        "year": 1438
+      },
+      {
+        "event": "Erie Canal opened",
+        "year": 1825
       }
     ]
   },
@@ -5580,24 +5342,24 @@
     "category": "Entertainment",
     "events": [
       {
-        "event": "'Doctor Who' debuts on BBC television.",
-        "year": 1963
+        "event": "First Technicolor feature film, 'Becky Sharp', is released.",
+        "year": 1935
       },
       {
         "event": "'The Jazz Singer', the first feature-length motion picture with synchronized dialogue, is released.",
         "year": 1927
       },
       {
-        "event": "Orson Welles broadcasts 'The War of the Worlds'.",
-        "year": 1938
+        "event": "The first Super Bowl is played.",
+        "year": 1967
       },
       {
         "event": "'The Exorcist' is released.",
         "year": 1973
       },
       {
-        "event": "First Technicolor feature film, 'Becky Sharp', is released.",
-        "year": 1935
+        "event": "Orson Welles broadcasts 'The War of the Worlds'.",
+        "year": 1938
       },
       {
         "event": "The Globe Theatre opens in London.",
@@ -5618,28 +5380,28 @@
         "year": 2000
       },
       {
-        "event": "'Godzilla' is released in Japan, creating the kaiju genre.",
-        "year": 1954
+        "event": "'Akira' is released, bringing Japanese anime to mainstream international audiences.",
+        "year": 1988
       },
       {
-        "event": "Ingmar Bergman releases 'The Seventh Seal', a masterpiece of Swedish cinema.",
-        "year": 1957
-      },
-      {
-        "event": "'King Kong' premieres, showcasing pioneering stop-motion animation by Willis O'Brien.",
-        "year": 1933
-      },
-      {
-        "event": "Alfred Hitchcock's 'Psycho' shocks audiences and changes the horror genre forever.",
-        "year": 1960
+        "event": "The critically acclaimed 'Moonlight' premieres, later winning Best Picture.",
+        "year": 2016
       },
       {
         "event": "'Rashomon' by Akira Kurosawa introduces Japanese cinema to a global audience.",
         "year": 1950
       },
       {
-        "event": "Stanley Kubrick's '2001: A Space Odyssey' redefines science fiction cinema.",
-        "year": 1968
+        "event": "Ingmar Bergman releases 'The Seventh Seal', a masterpiece of Swedish cinema.",
+        "year": 1957
+      },
+      {
+        "event": "'Jurassic Park' astounds audiences with photorealistic CGI dinosaurs.",
+        "year": 1993
+      },
+      {
+        "event": "Alfred Hitchcock's 'Psycho' shocks audiences and changes the horror genre forever.",
+        "year": 1960
       }
     ]
   },
@@ -5652,28 +5414,28 @@
         "year": 1943
       },
       {
+        "event": "Ford Model T – Henry Ford introduces the first affordable, mass-produced automobile",
+        "year": 1908
+      },
+      {
+        "event": "Clue – Waddington's releases 'Cluedo' in the UK",
+        "year": 1949
+      },
+      {
         "event": "The Tale of Peter Rabbit – Beatrix Potter publishes her famous tale",
         "year": 1902
       },
       {
-        "event": "West Side Story – Stephen Sondheim and Leonard Bernstein's tragic romance debuts",
-        "year": 1957
-      },
-      {
-        "event": "The Credit Card – Diners Club introduces the first modern multipurpose charge card",
-        "year": 1950
-      },
-      {
-        "event": "Ford F-150 Lightning – Ford launches the all-electric version of its best-selling truck",
-        "year": 2022
+        "event": "Lunchables – Oscar Mayer launches the pre-packaged, build-your-own lunch",
+        "year": 1988
       },
       {
         "event": "Ritz Crackers – Introduced as a buttery, circular cracker during the Great Depression",
         "year": 1934
       },
       {
-        "event": "Finding Nemo – Pixar takes audiences on an epic underwater journey",
-        "year": 2003
+        "event": "West Side Story – Stephen Sondheim and Leonard Bernstein's tragic romance debuts",
+        "year": 1957
       }
     ]
   },
@@ -5682,12 +5444,8 @@
     "category": "Technology",
     "events": [
       {
-        "event": "Alfred Nobel invents dynamite.",
-        "year": 1866
-      },
-      {
-        "event": "The first commercial radio broadcast is made by KDKA in Pittsburgh.",
-        "year": 1920
+        "event": "Daniel Gabriel Fahrenheit invents the mercury thermometer.",
+        "year": 1714
       },
       {
         "event": "Jack Kilby and Robert Noyce independently invent the integrated circuit.",
@@ -5698,16 +5456,20 @@
         "year": 1643
       },
       {
-        "event": "Daniel Gabriel Fahrenheit invents the mercury thermometer.",
-        "year": 1714
+        "event": "James Hargreaves invents the spinning jenny.",
+        "year": 1764
+      },
+      {
+        "event": "UNIVAC I, the first commercial computer, is delivered to the US Census Bureau.",
+        "year": 1951
+      },
+      {
+        "event": "Johannes Gutenberg invents the printing press.",
+        "year": 1440
       },
       {
         "event": "Elias Howe patents the sewing machine.",
         "year": 1846
-      },
-      {
-        "event": "James Hargreaves invents the spinning jenny.",
-        "year": 1764
       }
     ]
   },
@@ -5720,16 +5482,20 @@
         "year": 1903
       },
       {
+        "event": "Tiger Woods wins his first Masters at age 21",
+        "year": 1997
+      },
+      {
         "event": "The America's Cup sailing race begins",
         "year": 1851
       },
       {
-        "event": "James Naismith invents basketball",
-        "year": 1891
-      },
-      {
         "event": "William Webb Ellis purportedly invents rugby",
         "year": 1823
+      },
+      {
+        "event": "James Naismith invents basketball",
+        "year": 1891
       },
       {
         "event": "First codified rules of boxing (Broughton's rules) are introduced",
@@ -5738,10 +5504,6 @@
       {
         "event": "Leicester City remarkably wins the English Premier League",
         "year": 2016
-      },
-      {
-        "event": "National Hockey League (NHL) is formed",
-        "year": 1917
       }
     ]
   },
@@ -5750,32 +5512,32 @@
     "category": "History",
     "events": [
       {
-        "event": "Publication of On the Origin of Species",
-        "year": 1859
-      },
-      {
         "event": "Revolutions of 1848",
         "year": 1848
-      },
-      {
-        "event": "Independence of India and Pakistan",
-        "year": 1947
       },
       {
         "event": "Founding of Jamestown",
         "year": 1607
       },
       {
-        "event": "Discovery of DNA structure",
-        "year": 1953
+        "event": "Publication of On the Origin of Species",
+        "year": 1859
       },
       {
         "event": "Battle of Waterloo",
         "year": 1815
       },
       {
-        "event": "Declaration of Independence",
-        "year": 1776
+        "event": "Independence of India and Pakistan",
+        "year": 1947
+      },
+      {
+        "event": "First Crusade captures Jerusalem",
+        "year": 1099
+      },
+      {
+        "event": "Discovery of DNA structure",
+        "year": 1953
       }
     ]
   },
@@ -5818,32 +5580,32 @@
     "category": "Landmarks",
     "events": [
       {
-        "event": "Panama Canal expansion opens",
-        "year": 2016
-      },
-      {
-        "event": "St. Paul's Cathedral rebuilding begins",
-        "year": 1675
+        "event": "Taipei 101 completed",
+        "year": 2004
       },
       {
         "event": "Gateway Arch construction begins",
         "year": 1956
       },
       {
+        "event": "Colosseum completed",
+        "year": 80
+      },
+      {
+        "event": "St. Paul's Cathedral rebuilding begins",
+        "year": 1675
+      },
+      {
         "event": "Sydney Harbour Bridge opens",
         "year": 1932
       },
       {
-        "event": "Grand Central Terminal opens",
-        "year": 1913
+        "event": "Panama Canal expansion opens",
+        "year": 2016
       },
       {
-        "event": "CN Tower opens",
-        "year": 1976
-      },
-      {
-        "event": "St. Basil's Cathedral construction begins",
-        "year": 1555
+        "event": "Panama Canal opens",
+        "year": 1914
       }
     ]
   },
@@ -5852,8 +5614,8 @@
     "category": "Cinema",
     "events": [
       {
-        "event": "'The Avengers' proves the viability of interconnected cinematic universes.",
-        "year": 2012
+        "event": "The Hollywood Sign (originally 'Hollywoodland') is erected in Los Angeles.",
+        "year": 1923
       },
       {
         "event": "The first Cinerama film, 'This Is Cinerama', premieres, starting a widescreen craze.",
@@ -5864,20 +5626,20 @@
         "year": 1999
       },
       {
-        "event": "Sergei Eisenstein's 'Battleship Potemkin' introduces revolutionary Soviet montage techniques.",
-        "year": 1925
+        "event": "'No Country for Old Men' wins Best Picture at the Oscars, marking a high point for the Coen Brothers.",
+        "year": 2007
       },
       {
         "event": "'The Sound of Music' is released, becoming one of the highest-grossing films of all time.",
         "year": 1965
       },
       {
-        "event": "'Parasite' premieres at Cannes, later becoming the first non-English language film to win Best Picture.",
-        "year": 2019
+        "event": "The French New Wave explodes internationally with the release of 'The 400 Blows'.",
+        "year": 1959
       },
       {
-        "event": "'No Country for Old Men' wins Best Picture at the Oscars, marking a high point for the Coen Brothers.",
-        "year": 2007
+        "event": "'The Cabinet of Dr. Caligari', a quintessential work of German Expressionist cinema, is released.",
+        "year": 1920
       }
     ]
   },
@@ -5954,20 +5716,12 @@
     "category": "Sports",
     "events": [
       {
-        "event": "The first Giro d'Italia cycling race",
-        "year": 1909
-      },
-      {
-        "event": "The first Boston Marathon is run",
-        "year": 1897
-      },
-      {
         "event": "Boston Red Sox win the World Series, breaking the Curse of the Bambino",
         "year": 2004
       },
       {
-        "event": "Tommie Smith and John Carlos perform the Black Power salute at the Olympics",
-        "year": 1968
+        "event": "Buster Douglas knocks out Mike Tyson",
+        "year": 1990
       },
       {
         "event": "The 'Miracle on Ice' at the Lake Placid Winter Olympics",
@@ -5976,6 +5730,14 @@
       {
         "event": "Cincinnati Red Stockings become the first fully professional baseball team",
         "year": 1869
+      },
+      {
+        "event": "The first Boston Marathon is run",
+        "year": 1897
+      },
+      {
+        "event": "The first Giro d'Italia cycling race",
+        "year": 1909
       },
       {
         "event": "The first official Paralympic Games are held in Rome",
@@ -5992,12 +5754,12 @@
         "year": 1970
       },
       {
-        "event": "The Digital Camera – Steven Sasson at Kodak creates the first digital camera",
-        "year": 1975
+        "event": "The Wizarding World of Harry Potter – The immersive Hogsmeade land opens at Universal",
+        "year": 2010
       },
       {
-        "event": "Mark Twain, born Samuel Langhorne Clemens",
-        "year": 1835
+        "event": "Twitter – Jack Dorsey sends the first tweet: 'just setting up my twttr'",
+        "year": 2006
       },
       {
         "event": "Disneyland – Walt Disney opens his original park in Anaheim, California",
@@ -6008,12 +5770,12 @@
         "year": 2014
       },
       {
-        "event": "Twitter – Jack Dorsey sends the first tweet: 'just setting up my twttr'",
-        "year": 2006
+        "event": "A Charlie Brown Christmas – The Peanuts gang makes their animated TV debut",
+        "year": 1965
       },
       {
-        "event": "Furby – The robotic electronic pet becomes a massive holiday craze",
-        "year": 1998
+        "event": "Mark Twain, born Samuel Langhorne Clemens",
+        "year": 1835
       }
     ]
   },
@@ -6022,32 +5784,32 @@
     "category": "Science",
     "events": [
       {
-        "event": "Arno Penzias and Robert Wilson discover the cosmic microwave background radiation",
-        "year": 1965
+        "event": "Friedrich Wöhler synthesizes urea",
+        "year": 1828
       },
       {
-        "event": "The Human Genome Project begins",
-        "year": 1990
-      },
-      {
-        "event": "Arthur Eddington's eclipse expedition confirms general relativity",
-        "year": 1919
-      },
-      {
-        "event": "Yuri Gagarin becomes the first human in space",
-        "year": 1961
-      },
-      {
-        "event": "Joseph Priestley discovers oxygen",
-        "year": 1774
+        "event": "Wolfgang Pauli formulates the Pauli exclusion principle",
+        "year": 1925
       },
       {
         "event": "Niels Bohr proposes the Bohr model of the atom",
         "year": 1913
       },
       {
-        "event": "Friedrich Wöhler synthesizes urea",
-        "year": 1828
+        "event": "William Harvey publishes Exercitatio Anatomica de Motu Cordis et Sanguinis in Animalibus",
+        "year": 1628
+      },
+      {
+        "event": "The Human Genome Project begins",
+        "year": 1990
+      },
+      {
+        "event": "Edwin Hubble discovers the expansion of the universe",
+        "year": 1929
+      },
+      {
+        "event": "George Gamow, Ralph Alpher, and Robert Herman propose the Big Bang theory",
+        "year": 1948
       }
     ]
   },
@@ -6094,18 +5856,6 @@
         "year": 2001
       },
       {
-        "event": "What We Do in the Shadows debuts, applying the mockumentary format to a house of ancient vampires in Staten Island.",
-        "year": 2019
-      },
-      {
-        "event": "Reno 911! debuts, spoofing the format of the documentary reality show COPS.",
-        "year": 2003
-      },
-      {
-        "event": "People Just Do Nothing premieres on the BBC, following the operators of a pirate radio station.",
-        "year": 2014
-      },
-      {
         "event": "Abbott Elementary premieres, following a documentary crew filming underfunded teachers in Philadelphia.",
         "year": 2021
       },
@@ -6114,8 +5864,258 @@
         "year": 2005
       },
       {
+        "event": "What We Do in the Shadows debuts, applying the mockumentary format to a house of ancient vampires in Staten Island.",
+        "year": 2019
+      },
+      {
+        "event": "St. Denis Medical premieres, bringing the mockumentary lens to an underfunded Oregon hospital.",
+        "year": 2024
+      },
+      {
         "event": "Modern Family debuts, utilizing the mockumentary style to capture the dynamics of a large extended family.",
         "year": 2009
+      },
+      {
+        "event": "People Just Do Nothing premieres on the BBC, following the operators of a pirate radio station.",
+        "year": 2014
+      }
+    ]
+  },
+  {
+    "date": "2027-01-19",
+    "category": "Business",
+    "events": [
+      {
+        "event": "J.P. Morgan creates United States Steel Corporation, the world's first billion-dollar company.",
+        "year": 1901
+      },
+      {
+        "event": "Pan American World Airways is founded as a scheduled air mail and passenger service operating between Florida and Cuba.",
+        "year": 1927
+      },
+      {
+        "event": "The Bank of England is founded to act as the English Government's banker.",
+        "year": 1694
+      },
+      {
+        "event": "General Electric is formed through the merger of Edison General Electric and Thomson-Houston Electric Company.",
+        "year": 1892
+      },
+      {
+        "event": "Enron files for bankruptcy in one of the largest corporate accounting scandals in history.",
+        "year": 2001
+      },
+      {
+        "event": "Bill Gates and Paul Allen found Microsoft in Albuquerque, New Mexico.",
+        "year": 1975
+      },
+      {
+        "event": "The Dow Jones Industrial Average is first published by Charles Dow.",
+        "year": 1896
+      }
+    ]
+  },
+  {
+    "date": "2027-01-20",
+    "category": "History",
+    "events": [
+      {
+        "event": "Spanish Civil War begins",
+        "year": 1936
+      },
+      {
+        "event": "Fall of Saigon",
+        "year": 1975
+      },
+      {
+        "event": "Munich Beer Hall Putsch",
+        "year": 1923
+      },
+      {
+        "event": "Great Fire of London",
+        "year": 1666
+      },
+      {
+        "event": "Assassination of Archduke Franz Ferdinand",
+        "year": 1914
+      },
+      {
+        "event": "Watergate break-in",
+        "year": 1972
+      },
+      {
+        "event": "Fall of the Berlin Wall",
+        "year": 1989
+      }
+    ]
+  },
+  {
+    "date": "2027-01-21",
+    "category": "Landmarks",
+    "events": [
+      {
+        "event": "Palace of Versailles becomes royal residence",
+        "year": 1682
+      },
+      {
+        "event": "One World Trade Center opens",
+        "year": 2014
+      },
+      {
+        "event": "White House first occupied",
+        "year": 1800
+      },
+      {
+        "event": "Parthenon completed",
+        "year": -432
+      },
+      {
+        "event": "Expo 2020 Dubai pavilions open (delayed)",
+        "year": 2021
+      },
+      {
+        "event": "Burj Khalifa completed",
+        "year": 2010
+      },
+      {
+        "event": "Tower Bridge opens",
+        "year": 1894
+      }
+    ]
+  },
+  {
+    "date": "2027-01-22",
+    "category": "Technology",
+    "events": [
+      {
+        "event": "Enrico Fermi oversees the first controlled nuclear chain reaction.",
+        "year": 1942
+      },
+      {
+        "event": "Henry Ford introduces the Model T automobile.",
+        "year": 1908
+      },
+      {
+        "event": "The first web server and web browser are created.",
+        "year": 1990
+      },
+      {
+        "event": "The first nuclear power plant to generate electricity for a power grid starts operation in Obninsk.",
+        "year": 1954
+      },
+      {
+        "event": "Karl Benz builds the first practical automobile powered by an internal combustion engine.",
+        "year": 1885
+      },
+      {
+        "event": "Hans Lippershey invents the telescope.",
+        "year": 1608
+      },
+      {
+        "event": "Alexander Graham Bell patents the telephone.",
+        "year": 1876
+      }
+    ]
+  },
+  {
+    "date": "2027-01-23",
+    "category": "Sports",
+    "events": [
+      {
+        "event": "England wins the FIFA World Cup",
+        "year": 1966
+      },
+      {
+        "event": "Roger Bannister breaks the four-minute mile",
+        "year": 1954
+      },
+      {
+        "event": "IAAF (World Athletics) is founded",
+        "year": 1912
+      },
+      {
+        "event": "First official cricket match at Hambledon",
+        "year": 1766
+      },
+      {
+        "event": "First recorded bicycle race at Parc de Saint-Cloud, Paris",
+        "year": 1868
+      },
+      {
+        "event": "International Olympic Committee is founded",
+        "year": 1894
+      },
+      {
+        "event": "The first FIFA Women's World Cup is held",
+        "year": 1991
+      }
+    ]
+  },
+  {
+    "date": "2027-01-24",
+    "category": "Science",
+    "events": [
+      {
+        "event": "Erwin Schrödinger publishes the Schrödinger equation",
+        "year": 1926
+      },
+      {
+        "event": "Arno Penzias and Robert Wilson discover the cosmic microwave background radiation",
+        "year": 1965
+      },
+      {
+        "event": "Ole Rømer makes the first quantitative measurement of the speed of light",
+        "year": 1676
+      },
+      {
+        "event": "Arthur Eddington's eclipse expedition confirms general relativity",
+        "year": 1919
+      },
+      {
+        "event": "Stephen Hawking predicts Hawking radiation",
+        "year": 1974
+      },
+      {
+        "event": "Gregor Mendel begins his experiments on plant hybridization",
+        "year": 1856
+      },
+      {
+        "event": "Alan Guth proposes cosmic inflation",
+        "year": 1980
+      }
+    ]
+  },
+  {
+    "date": "2027-01-25",
+    "category": "Geography",
+    "events": [
+      {
+        "event": "Powell explores Grand Canyon",
+        "year": 1869
+      },
+      {
+        "event": "Victoria Falls discovered",
+        "year": 1855
+      },
+      {
+        "event": "Cape Town founded",
+        "year": 1652
+      },
+      {
+        "event": "Hudson explores Hudson River",
+        "year": 1609
+      },
+      {
+        "event": "First confirmed landing on Antarctica",
+        "year": 1895
+      },
+      {
+        "event": "Francis Drake begins circumnavigation",
+        "year": 1577
+      },
+      {
+        "event": "Nansen crosses Greenland",
+        "year": 1888
       }
     ]
   }

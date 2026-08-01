@@ -3094,7 +3094,7 @@ const FALLBACK_DATA = {
             "year": 1962
         },
         {
-            "event": "Subway – Opened originally as 'Pete\\'s Super Submarines'",
+            "event": "Subway – Opened originally as 'Pete's Super Submarines'",
             "year": 1965
         },
         {
@@ -3187,7 +3187,7 @@ const FALLBACK_DATA = {
         },
         {
             "event": "TikTok – Launched internationally by ByteDance",
-            "year": 2016
+            "year": 2017
         },
         {
             "event": "Oklahoma! – Rodgers and Hammerstein's groundbreaking first collaboration",
@@ -3294,7 +3294,7 @@ const FALLBACK_DATA = {
             "year": 1966
         },
         {
-            "event": "Pringles – Procter & Gamble introduces 'Pringle\\'s Newfangled Potato Chips'",
+            "event": "Pringles – Procter & Gamble introduces 'Pringle's Newfangled Potato Chips'",
             "year": 1968
         },
         {
@@ -3880,8 +3880,51 @@ const generation = {
     puzzles: [],
     catRandom: mulberry32(123456789),
     recentCategories: [],
-    usedEvents: new Set()
+    // Event text -> number of days in the memory window that used it. A plain
+    // Set was wrong in two ways: when the relaxed pass reused a banked event,
+    // the older day's expiry silently unbanned it early; and override days
+    // could not return their discarded generated events without risking
+    // unbanning an event another recent day legitimately used.
+    usedEvents: new Map()
 };
+
+function bankEvent(text) {
+    generation.usedEvents.set(text, (generation.usedEvents.get(text) || 0) + 1);
+}
+
+function unbankEvent(text) {
+    const count = generation.usedEvents.get(text);
+    if (count === undefined) return;
+    if (count <= 1) generation.usedEvents.delete(text);
+    else generation.usedEvents.set(text, count - 1);
+}
+
+// The override for a date, if one exists. Overrides are applied to responses
+// after generation, so generation itself must consult them too: the events
+// players actually see on an override day are the override's, and those are
+// what the no-repeat window has to track. Memoised — generation probes the
+// same dates repeatedly while building its look-ahead reservations.
+const overrideCache = new Map();
+function overrideForDate(dateStr) {
+    if (!overrideCache.has(dateStr)) {
+        const [probe] = applyOverrides([{ date: dateStr, category: '', events: [] }]);
+        overrideCache.set(dateStr, probe.events.length > 0 ? probe : null);
+    }
+    return overrideCache.get(dateStr);
+}
+
+// Events that an override will play within the memory window AFTER the given
+// day. Banking override events on their own day only protects later days; a
+// generated puzzle shortly BEFORE an override must equally not deal a card
+// the special-date puzzle is about to feature.
+function upcomingOverrideEvents(dayIndex) {
+    const reserved = new Set();
+    for (let ahead = 1; ahead <= MEMORY_BANK_DAYS; ahead++) {
+        const upcoming = overrideForDate(dateStrForIndex(dayIndex + ahead));
+        if (upcoming) upcoming.events.forEach(e => reserved.add(e.event));
+    }
+    return reserved;
+}
 
 // The furthest index any request is allowed to generate, recomputed per call so
 // it advances naturally with the calendar.
@@ -3909,10 +3952,13 @@ function generateThroughIndex(lastIndex) {
         // Never hand `generation.puzzles` entries to a caller directly.
         const selected = [];
         const usedYears = new Set();
+        const reservedAhead = upcomingOverrideEvents(i);
 
         const fits = (ev, minGap, respectRecentlyUsed) => {
             if (usedYears.has(ev.year)) return false;
-            if (respectRecentlyUsed && generation.usedEvents.has(ev.event)) return false;
+            if (respectRecentlyUsed && (generation.usedEvents.has(ev.event) || reservedAhead.has(ev.event))) {
+                return false;
+            }
             if (minGap > 1) {
                 for (const chosen of selected) {
                     if (Math.abs(chosen.year - ev.year) < minGap) return false;
@@ -3929,7 +3975,7 @@ function generateThroughIndex(lastIndex) {
 
                 usedYears.add(ev.year);
                 selected.push(ev);
-                generation.usedEvents.add(ev.event);
+                bankEvent(ev.event);
             }
         };
 
@@ -3947,12 +3993,27 @@ function generateThroughIndex(lastIndex) {
         take(1, true);
         take(1, false);
 
-        generation.puzzles.push({ date: dateStr, category: category, events: selected });
+        // On an override day the generated events are never shown. Bank the
+        // override's events instead, so nearby generated puzzles cannot repeat
+        // a card the override already played — previously an override's event
+        // could reappear from the pool days later, and the discarded generated
+        // events stayed banked even though nobody ever saw them.
+        const override = overrideForDate(dateStr);
+        if (override) {
+            selected.forEach(e => unbankEvent(e.event));
+            override.events.forEach(e => bankEvent(e.event));
+            generation.puzzles.push({ date: dateStr, category: override.category, events: override.events });
+        } else {
+            generation.puzzles.push({ date: dateStr, category: category, events: selected });
+        }
 
-        // Maintain 60-day memory bank
-        if (generation.puzzles.length >= MEMORY_BANK_DAYS) {
-            const oldPuzzle = generation.puzzles[generation.puzzles.length - MEMORY_BANK_DAYS];
-            oldPuzzle.events.forEach(e => generation.usedEvents.delete(e.event));
+        // Maintain the memory bank: generating a day must see the previous
+        // MEMORY_BANK_DAYS days banked, so expire the day that just fell out
+        // of that window. (Expiring at `length - MEMORY_BANK_DAYS` protected
+        // only 59 days.)
+        if (generation.puzzles.length > MEMORY_BANK_DAYS) {
+            const oldPuzzle = generation.puzzles[generation.puzzles.length - MEMORY_BANK_DAYS - 1];
+            oldPuzzle.events.forEach(e => unbankEvent(e.event));
         }
     }
 }
@@ -4007,7 +4068,7 @@ function applyOverrides(puzzles) {
                     { event: "Daniel Peter and Henri Nestlé invent milk chocolate", year: 1875 },
                     { event: "Milton S. Hershey founds the Hershey Chocolate Company", year: 1894 },
                     { event: "Jean Neuhaus II invents the Belgian praline", year: 1912 },
-                    { event: "Ruth Wakefield invents the chocolate chip cookie", year: 1930 }
+                    { event: "Ruth Wakefield invents the chocolate chip cookie", year: 1938 }
                 ]
             };
         }
@@ -4022,15 +4083,18 @@ function applyOverrides(puzzles) {
                 // Amazon (1995) and YouTube (2005) sat within two years of
                 // their neighbours, making two placements close to coin flips.
                 // Replaced with the TCP/IP switchover — arguably the single
-                // most important date in the category — and Instagram.
+                // most important date in the category. Google, Facebook and
+                // Instagram were later swapped out too: the nearby Tech
+                // Pioneers (07-18) and Social Media Launches (09-16) overrides
+                // already play those exact milestones.
                 events: [
                     { event: "First ARPANET message sent", year: 1969 },
                     { event: "ARPANET adopts TCP/IP, creating the modern internet", year: 1983 },
                     { event: "Tim Berners-Lee invents the World Wide Web", year: 1989 },
                     { event: "Mosaic (first popular web browser) released", year: 1993 },
-                    { event: "Google is founded", year: 1998 },
-                    { event: "Facebook is launched", year: 2004 },
-                    { event: "Instagram is launched", year: 2010 }
+                    { event: "Hotmail brings free email to the web", year: 1996 },
+                    { event: "Napster ignites peer-to-peer file sharing", year: 1999 },
+                    { event: "Apple's iPhone puts the full web in your pocket", year: 2007 }
                 ]
             };
         }
@@ -4142,8 +4206,8 @@ function applyOverrides(puzzles) {
                     { event: "'52nd Street' by Billy Joel wins Album of the Year", year: 1980 },
                     { event: "'Nick of Time' by Bonnie Raitt wins Album of the Year", year: 1990 },
                     { event: "'Supernatural' by Santana wins Album of the Year", year: 2000 },
-                    { event: "'We Are' by Jon Batiste wins Album of the Year", year: 2022 },
-                    { event: "'Harry's House' by Harry Styles wins Album of the Year", year: 2023 },
+                    { event: "'River: The Joni Letters' by Herbie Hancock wins Album of the Year", year: 2008 },
+                    { event: "'Golden Hour' by Kacey Musgraves wins Album of the Year", year: 2019 },
                     { event: "'Midnights' by Taylor Swift wins Album of the Year", year: 2024 }
                 ]
             };
@@ -4671,10 +4735,6 @@ function applyOverrides(puzzles) {
                               "year": 2001
                     },
                     {
-                              "event": "Reno 911! debuts, spoofing the format of the documentary reality show COPS.",
-                              "year": 2003
-                    },
-                    {
                               "event": "The Office (US) premieres on NBC, popularizing the workplace mockumentary format for American audiences.",
                               "year": 2005
                     },
@@ -4693,6 +4753,10 @@ function applyOverrides(puzzles) {
                     {
                               "event": "Abbott Elementary premieres, following a documentary crew filming underfunded teachers in Philadelphia.",
                               "year": 2021
+                    },
+                    {
+                              "event": "St. Denis Medical premieres, bringing the mockumentary lens to an underfunded Oregon hospital.",
+                              "year": 2024
                     }
           ]
 };
@@ -4803,7 +4867,7 @@ function applyOverrides(puzzles) {
                               "year": 2004
                     },
                     {
-                              "event": "Game of Thrones premieres on HBO, bringing unprecedented scale and budget to high fantasy television.",
+                              "event": "Black Mirror premieres, turning dark technological anxieties into an anthology phenomenon.",
                               "year": 2011
                     },
                     {
@@ -4907,20 +4971,20 @@ function applyOverrides(puzzles) {
           "category": "The Political / Legal / Espionage Thriller",
           "events": [
                     {
+                              "event": "Mission: Impossible premieres, defining the elaborate espionage caper for television.",
+                              "year": 1966
+                    },
+                    {
+                              "event": "Tinker Tailor Soldier Spy airs on the BBC, bringing le Carré's mole hunt to the screen.",
+                              "year": 1979
+                    },
+                    {
                               "event": "The West Wing premieres, offering an idealized, fast-talking look at the inner workings of the White House.",
                               "year": 1999
                     },
                     {
                               "event": "24 debuts, revolutionizing the espionage thriller with its real-time ticking clock format.",
                               "year": 2001
-                    },
-                    {
-                              "event": "Damages premieres, presenting a dark, ruthless take on high-stakes corporate litigation.",
-                              "year": 2007
-                    },
-                    {
-                              "event": "The Good Wife debuts, wrapping complex legal and political maneuvering inside a network procedural format.",
-                              "year": 2009
                     },
                     {
                               "event": "Homeland premieres, delivering tense, psychological espionage involving the CIA and terrorism.",
@@ -5013,7 +5077,7 @@ function applyOverrides(puzzles) {
                 category: "Sports",
                 events: [
                     { event: "First Wimbledon tennis championship is held", year: 1877 },
-                    { event: "First FIFA World Cup is held in Uruguay", year: 1930 },
+                    { event: "Jesse Owens wins four gold medals at the Berlin Olympics", year: 1936 },
                     { event: "Jackie Robinson breaks the baseball color line", year: 1947 },
                     { event: "Roger Bannister breaks the four-minute mile", year: 1954 },
                     { event: "The 'Miracle on Ice' at the Lake Placid Winter Olympics", year: 1980 },
@@ -5089,11 +5153,11 @@ function applyOverrides(puzzles) {
                 category: "The Infrastructure & Web 2.0 Innovators",
                 events: [
                     { event: "IBM is founded originally as the Computing-Tabulating-Recording Company.", year: 1911 },
-                    { event: "Intel is incorporated, kickstarting the Silicon Valley microprocessor revolution.", year: 1968 },
                     { event: "Oracle is founded by Larry Ellison to build commercial relational database systems.", year: 1977 },
+                    { event: "Cisco Systems is founded at Stanford, building the routers that power the internet.", year: 1984 },
                     { event: "Netflix is founded by Reed Hastings and Marc Randolph as a DVD-by-mail service.", year: 1997 },
-                    { event: "YouTube is founded by three former PayPal employees.", year: 2005 },
-                    { event: "Twitter is founded, introducing the concept of microblogging in 140 characters.", year: 2006 },
+                    { event: "LinkedIn is founded, taking professional networking online.", year: 2002 },
+                    { event: "Spotify is founded in Stockholm, paving the way for music streaming.", year: 2006 },
                     { event: "Uber is founded as a black-car service called Ubercab.", year: 2009 }
                 ]
             };
@@ -5110,7 +5174,7 @@ function applyOverrides(puzzles) {
                     { event: "The Miracle of Dunkirk successfully rescues over 338,000 Allied soldiers stranded on the beaches of France.", year: 1940 },
                     { event: "The Berlin Airlift begins, rescuing the blockaded city from starvation by constantly flying in supplies.", year: 1948 },
                     { event: "Operation Entebbe successfully rescues over 100 hostages held at an airport in Uganda.", year: 1976 },
-                    { event: "The Canadian Caper successfully smuggles six American diplomats out of Iran.", year: 1979 },
+                    { event: "The Canadian Caper successfully smuggles six American diplomats out of Iran.", year: 1980 },
                     { event: "US Air Force Captain Scott O'Grady is rescued by Marines after being shot down over Bosnia.", year: 1995 },
                     { event: "The dramatic rescue of the 33 trapped Chilean miners captivates millions on live television.", year: 2010 },
                     { event: "The Tham Luang cave rescue operation successfully extracts a boys' soccer team in Thailand.", year: 2018 }
@@ -5200,13 +5264,16 @@ function applyOverrides(puzzles) {
             puzzles[i] = {
                 date: "2026-08-03",
                 category: "Firsts in Space",
+                // Rewritten: six of the original seven repeated the Space
+                // Exploration Day puzzle (07-20) two weeks earlier. These are
+                // different firsts, spaced at least three years apart.
                 events: [
-                    { event: "Sputnik 1 launched – First artificial satellite", year: 1957 },
-                    { event: "Yuri Gagarin orbits Earth – First human in space", year: 1961 },
-                    { event: "Apollo 11 Moon landing – First humans to walk on the moon", year: 1969 },
-                    { event: "Hubble Space Telescope launched – First major optical telescope in space", year: 1990 },
-                    { event: "International Space Station (ISS) – First module launched", year: 1998 },
-                    { event: "Curiosity rover lands on Mars – First of the modern, large-scale Mars rovers", year: 2012 },
+                    { event: "A V-2 rocket becomes the first man-made object to reach space", year: 1944 },
+                    { event: "Valentina Tereshkova becomes the first woman in space", year: 1963 },
+                    { event: "Salyut 1 becomes the first space station", year: 1971 },
+                    { event: "Space Shuttle Columbia flies the first reusable orbital mission", year: 1981 },
+                    { event: "Dennis Tito becomes the first space tourist", year: 2001 },
+                    { event: "SpaceX lands an orbital rocket booster upright for the first time", year: 2015 },
                     { event: "James Webb Space Telescope launched – The most powerful space telescope ever built", year: 2021 }
                 ]
             };
@@ -5279,7 +5346,7 @@ function applyOverrides(puzzles) {
                 events: [
                     { event: "It's a Wonderful Life – The classic starring Jimmy Stewart", year: 1946 },
                     { event: "Rudolph the Red-Nosed Reindeer – The stop-motion TV special", year: 1964 },
-                    { event: "A Christmas Story – 'You\\'ll shoot your eye out!'", year: 1983 },
+                    { event: "A Christmas Story – 'You'll shoot your eye out!'", year: 1983 },
                     { event: "Home Alone – Kevin McCallister defends his house", year: 1990 },
                     { event: "The Nightmare Before Christmas – Tim Burton's Halloween/Christmas mashup", year: 1993 },
                     { event: "How the Grinch Stole Christmas! – The live-action version starring Jim Carrey", year: 2000 },
@@ -5314,7 +5381,7 @@ function applyOverrides(puzzles) {
                               "year": 1962
                     },
                     {
-                              "event": "Subway – Opened originally as 'Pete\\'s Super Submarines'",
+                              "event": "Subway – Opened originally as 'Pete's Super Submarines'",
                               "year": 1965
                     },
                     {
@@ -5342,8 +5409,8 @@ function applyOverrides(puzzles) {
                               "year": 1938
                     },
                     {
-                              "event": "Batman – Debuts in Detective Comics #27",
-                              "year": 1939
+                              "event": "MAD – The satirical institution debuts as a comic book",
+                              "year": 1952
                     },
                     {
                               "event": "Wonder Woman – Debuts in All Star Comics #8",
@@ -5422,16 +5489,12 @@ function applyOverrides(puzzles) {
                               "year": 1997
                     },
                     {
-                              "event": "Friendster – Launched as one of the first major global social networks",
-                              "year": 2002
+                              "event": "The WELL – The pioneering online community goes live in the Bay Area",
+                              "year": 1985
                     },
                     {
                               "event": "Facebook – Mark Zuckerberg launches 'TheFacebook' at Harvard",
                               "year": 2004
-                    },
-                    {
-                              "event": "YouTube – The first video, 'Me at the zoo,' is uploaded",
-                              "year": 2005
                     },
                     {
                               "event": "Twitter – Jack Dorsey sends the first tweet: 'just setting up my twttr'",
@@ -5442,8 +5505,12 @@ function applyOverrides(puzzles) {
                               "year": 2010
                     },
                     {
+                              "event": "Vine – The six-second looping video app launches under Twitter",
+                              "year": 2013
+                    },
+                    {
                               "event": "TikTok – Launched internationally by ByteDance",
-                              "year": 2016
+                              "year": 2017
                     }
           ]
 };
@@ -5546,8 +5613,8 @@ function applyOverrides(puzzles) {
                               "year": 1985
                     },
                     {
-                              "event": "World Wide Web Invented – Tim Berners-Lee writes the initial proposal at CERN",
-                              "year": 1989
+                              "event": "First Internet Worm – The Morris Worm accidentally cripples much of the early internet",
+                              "year": 1988
                     },
                     {
                               "event": "First Webcam – Created at Cambridge University just to monitor a coffee pot",
@@ -5594,11 +5661,11 @@ function applyOverrides(puzzles) {
                               "year": 1964
                     },
                     {
-                              "event": "Doritos – Originally created at a restaurant in Disneyland and released nationwide",
-                              "year": 1966
+                              "event": "Twinkies – James Dewar invents the cream-filled snack cake in Illinois",
+                              "year": 1930
                     },
                     {
-                              "event": "Pringles – Procter & Gamble introduces 'Pringle\\'s Newfangled Potato Chips'",
+                              "event": "Pringles – Procter & Gamble introduces 'Pringle's Newfangled Potato Chips'",
                               "year": 1968
                     },
                     {
@@ -5738,24 +5805,24 @@ function applyOverrides(puzzles) {
           "category": "Iconic Cars",
           "events": [
                     {
-                              "event": "Ford Model T – Henry Ford introduces the first affordable, mass-produced automobile",
-                              "year": 1908
+                              "event": "Jeep Willys MB – The rugged wartime 4x4 that spawned the civilian Jeep enters production",
+                              "year": 1941
                     },
                     {
-                              "event": "Volkswagen Beetle – Production begins on the iconic 'Bug'",
-                              "year": 1938
+                              "event": "Mini – Alec Issigonis's tiny front-wheel-drive icon is launched in Britain",
+                              "year": 1959
                     },
                     {
-                              "event": "Chevrolet Corvette – The quintessential American sports car is introduced",
-                              "year": 1953
+                              "event": "Porsche 911 – The enduring rear-engined sports car is unveiled in Frankfurt",
+                              "year": 1963
                     },
                     {
-                              "event": "Ford Mustang – The original 'pony car' makes a wildly successful debut",
-                              "year": 1964
+                              "event": "Lamborghini Countach – The scissor-doored supercar wedge enters production",
+                              "year": 1974
                     },
                     {
-                              "event": "Toyota Prius – The world's first mass-produced hybrid passenger car goes on sale",
-                              "year": 1997
+                              "event": "Mazda MX-5 Miata – The lightweight roadster revival debuts in Chicago",
+                              "year": 1989
                     },
                     {
                               "event": "Tesla Model S – Tesla releases its revolutionary luxury all-electric sedan",

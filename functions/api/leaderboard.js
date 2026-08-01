@@ -109,7 +109,12 @@ export async function onRequestGet(context) {
             realRows.map((row) => (row.display_name || '').toLowerCase()).filter(Boolean)
         );
 
-        const allRows = realRows.concat(buildPlaceholders(date, takenNames));
+        // Placeholders exist so a fresh board is not empty; only add enough to
+        // fill out a top 10. They used to be appended unconditionally, which
+        // inflated `total` and pushed low-scoring real players below bots even
+        // on busy days.
+        const needed = Math.max(0, 10 - realRows.length);
+        const allRows = realRows.concat(buildPlaceholders(date, takenNames).slice(0, needed));
 
         allRows.sort((a, b) => {
             if (b.score !== a.score) return b.score - a.score;

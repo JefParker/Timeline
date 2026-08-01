@@ -55,6 +55,15 @@ function formatClock(timeMs) {
 
 // Game State
 
+// A corrupted stored value here used to throw at startup when assigned to
+// Audio.volume (which rejects NaN and out-of-range numbers), leaving the whole
+// app stuck on the loading screen.
+function sanitizeVolume(raw) {
+    const value = parseFloat(raw);
+    if (!Number.isFinite(value)) return 0.25;
+    return Math.min(1, Math.max(0, value));
+}
+
 let gameState = {
     userId: localStorage.getItem('timeline_user_id') || generateUUID(),
     displayName: localStorage.getItem('timeline_display_name') || '',
@@ -70,7 +79,7 @@ let gameState = {
     isGameOver: false,
     soundsEnabled: localStorage.getItem('timeline_sounds_enabled') === 'true',
     musicEnabled: localStorage.getItem('timeline_music_enabled') === 'true',
-    musicVolume: localStorage.getItem('timeline_music_volume') ? parseFloat(localStorage.getItem('timeline_music_volume')) : 0.25
+    musicVolume: sanitizeVolume(localStorage.getItem('timeline_music_volume'))
 };
 
 if (!localStorage.getItem('timeline_user_id')) {
@@ -263,7 +272,13 @@ window.addEventListener('offline', () => {
 async function loadPuzzles() {
     gameState.puzzles = Array.isArray(gameState.puzzles) ? gameState.puzzles : [];
 
+    const todayStr = getLADateStr();
     const isUsable = (data) => Array.isArray(data) && data.length > 0;
+    // "Usable" is not enough for the offline fallbacks: a stale localStorage
+    // cache that ends yesterday used to win over the freshly deployed
+    // puzzles.json that actually contains today, producing "Error Loading
+    // Puzzle" while a good puzzle sat in the service worker cache.
+    const hasToday = (data) => isUsable(data) && data.some(p => p && p.date === todayStr);
 
     const cacheAndUse = (data) => {
         gameState.puzzles = data;
@@ -289,25 +304,37 @@ async function loadPuzzles() {
         console.warn("API puzzle fetch unavailable, attempting local cache fallbacks");
     }
 
-    // Tier 2: Read from localStorage cache
+    // Tier 2: localStorage cache, if it covers today.
     const cached = readJson('timeline_puzzles', null);
-    if (isUsable(cached)) {
+    if (hasToday(cached)) {
         gameState.puzzles = cached;
         return true;
     }
 
-    // Tier 3: Fetch static precached puzzles.json file
+    // Tier 3: static precached puzzles.json, if it covers today.
+    let staticData = null;
     try {
         const res = await fetch('/puzzles.json');
         if (res.ok) {
             const data = await res.json();
-            if (isUsable(data)) {
-                console.log("Loaded static fallback puzzles.json successfully");
-                return cacheAndUse(data);
-            }
+            if (isUsable(data)) staticData = data;
         }
     } catch (e) {
         console.error("Static puzzles.json fallback fetch failed", e);
+    }
+    if (hasToday(staticData)) {
+        console.log("Loaded static fallback puzzles.json successfully");
+        return cacheAndUse(staticData);
+    }
+
+    // Neither source has today's puzzle; keep whichever exists so the archive
+    // and dashboard still work, and let initGame show the error state.
+    if (isUsable(cached)) {
+        gameState.puzzles = cached;
+        return true;
+    }
+    if (staticData) {
+        return cacheAndUse(staticData);
     }
 
     console.error("Offline and no cached puzzles available");
@@ -564,7 +591,9 @@ async function initGame() {
 
     // Find today's puzzle
     const puzzle = gameState.puzzles.find(p => p.date === gameState.todayDate);
-    if (!puzzle || !Array.isArray(puzzle.events) || puzzle.events.length < 7) {
+    // Exactly 7: the counter, score displays, and stats buckets all assume it,
+    // so a malformed 8-event puzzle must not start.
+    if (!puzzle || !Array.isArray(puzzle.events) || puzzle.events.length !== 7) {
         // Fallback if missing
         categoryNameEl.textContent = "Error Loading Puzzle";
         return;
@@ -749,6 +778,10 @@ function nextEvent() {
     }
     
     gameState.activeEvent = gameState.remainingEvents.shift();
+    // A fresh card has no chosen slot yet. Without this, a bare tap on the
+    // card (pointerdown + pointerup, no move) snapped it into whatever slot
+    // the previous card used.
+    dropIndex = -1;
     eventCurrentEl.textContent = 7 - gameState.remainingEvents.length;
     
     activeCardContainer.innerHTML = '';
@@ -773,6 +806,7 @@ function nextEvent() {
         
         isDragging = true;
         startY = e.clientY;
+        dropIndex = -1; // No slot is chosen until the card actually moves
         el.classList.add('dragging');
         
         // Hide confirm if we pick it up again
@@ -852,17 +886,25 @@ document.addEventListener('pointermove', e => {
     }
 });
 
-document.addEventListener('pointerup', e => {
-    if (!isDragging || !currentActiveElement) return;
-    
+// Shared teardown for both pointerup and pointercancel. Resetting the scroll
+// direction matters: leaving it stale meant the next drag in the same
+// direction never restarted the auto-scroll interval.
+function stopDragScroll() {
     if (dragScrollInterval) {
         clearInterval(dragScrollInterval);
         dragScrollInterval = null;
     }
-    
+    window.currentScrollDirection = 0;
+}
+
+document.addEventListener('pointerup', e => {
+    if (!isDragging || !currentActiveElement) return;
+
+    stopDragScroll();
+
     isDragging = false;
     currentActiveElement.classList.remove('dragging');
-    
+
     currentActiveElement.style.position = 'relative';
     currentActiveElement.style.top = '0';
     currentActiveElement.style.left = '0';
@@ -890,33 +932,68 @@ document.addEventListener('pointerup', e => {
         dropIndex = -1;
         activeCardContainer.appendChild(currentActiveElement);
     }
-    
+
+    currentActiveElement = null;
+});
+
+// The browser can take the pointer away mid-drag (system gesture, incoming
+// call, browser UI). Without this handler the card stayed fixed on the body
+// with pointer-events disabled — a soft-lock only a reload could clear — and
+// any auto-scroll interval kept scrolling forever.
+document.addEventListener('pointercancel', () => {
+    if (!isDragging || !currentActiveElement) return;
+
+    stopDragScroll();
+
+    isDragging = false;
+    currentActiveElement.classList.remove('dragging');
+    currentActiveElement.style.position = 'relative';
+    currentActiveElement.style.top = '0';
+    currentActiveElement.style.left = '0';
+    currentActiveElement.style.width = '';
+
+    document.querySelectorAll('.drop-target').forEach(t => t.classList.remove('active-hover'));
+    dropIndex = -1;
+    activeCardContainer.appendChild(currentActiveElement);
     currentActiveElement = null;
 });
 
 // 6. Confirm Placement & Validation
 confirmBtn.addEventListener('click', async () => {
+    const event = gameState.activeEvent;
+    // No card in hand (double fire) or no chosen slot: nothing to confirm.
+    if (!event || dropIndex < 0) return;
+
     // Hide confirm button
     confirmContainer.classList.add('hidden');
-    
+
     playSound('confirm');
-    
-    const event = gameState.activeEvent;
-    
+
     // Determine correctness
     const placed = gameState.placedCards;
     let correct = true;
-    
+
     // Check if the year fits at dropIndex
     if (dropIndex > 0 && placed[dropIndex - 1].year > event.year) correct = false;
     if (dropIndex < placed.length && placed[dropIndex].year < event.year) correct = false;
-    
+
     if (correct) {
         gameState.score++;
     } else {
         event.wasWrong = true;
     }
-    
+
+    // Commit the placement to game state NOW, before the ~2.4s flip animation.
+    // An autosave firing mid-animation (tab close, app switch) used to capture
+    // the incremented score with the card still in hand, so restoring the save
+    // let the same card be played — and scored — a second time.
+    let correctIndex = 0;
+    while (correctIndex < placed.length && placed[correctIndex].year < event.year) {
+        correctIndex++;
+    }
+    placed.splice(correctIndex, 0, event);
+    gameState.activeEvent = null;
+
     // Create actual timeline card structure for the animation
     const cardEl = buildTimelineCard(event.event, event.year, {
         frontClass: correct ? 'correct' : 'incorrect',
@@ -943,17 +1020,10 @@ confirmBtn.addEventListener('click', async () => {
     // Flip back
     cardEl.classList.remove('flipped');
     await new Promise(r => setTimeout(r, 600));
-    
-    // Find correct index
-    let correctIndex = 0;
-    while (correctIndex < placed.length && placed[correctIndex].year < event.year) {
-        correctIndex++;
-    }
-    
-    // Add to placed arrays and re-render timeline
-    gameState.placedCards.splice(correctIndex, 0, event);
+
+    // State was committed above; the animation was presentation only.
     renderTimeline();
-    
+
     nextEvent();
     
     // Scroll back to the top to see the newly generated card or end game results
@@ -1031,7 +1101,12 @@ function getOfflineQueue() {
 }
 
 function saveToOfflineQueue(payload) {
-    const queue = getOfflineQueue();
+    // One queued result per player per date: re-submitting today's score (e.g.
+    // after setting a display name) supersedes the earlier anonymous entry
+    // instead of posting both on reconnect.
+    const queue = getOfflineQueue().filter(
+        p => !(p && p.user_id === payload.user_id && p.puzzle_date === payload.puzzle_date)
+    );
     queue.push(payload);
     // Bound the queue so a long offline streak cannot fill localStorage.
     const trimmed = queue.slice(-MAX_OFFLINE_QUEUE);
@@ -1142,7 +1217,12 @@ async function fetchLeaderboard() {
         });
         const res = await fetch(`/api/leaderboard?${urlParams.toString()}`);
         if (res.ok) {
-            return await res.json();
+            // A 200 with a null/non-object body (broken proxy, captive
+            // portal) must not escape here — callers dereference the result.
+            const data = await res.json();
+            if (data && typeof data === 'object' && !Array.isArray(data)) {
+                return data;
+            }
         }
     } catch(e) {
         console.error("Leaderboard fetch error:", e);
@@ -1213,12 +1293,12 @@ function buildLeaderboardRow(entry, rank, badge) {
 function renderLeaderboardItems(leaderboardData, listEl) {
     listEl.innerHTML = '';
 
-    if (!navigator.onLine || leaderboardData.isOffline) {
+    if (!navigator.onLine || (leaderboardData && leaderboardData.isOffline)) {
         renderLeaderboardMessage(listEl, 'Leaderboard unavailable while offline.');
         return;
     }
 
-    if (leaderboardData.isError) {
+    if (!leaderboardData || leaderboardData.isError) {
         renderLeaderboardMessage(listEl, 'Unable to load leaderboard data.');
         return;
     }
@@ -1906,9 +1986,10 @@ function renderCalendar(year, month) {
         daysContainer.appendChild(emptyDiv);
     }
     
-    const todayDateObj = new Date();
-    const todayStr = `${todayDateObj.getFullYear()}-${String(todayDateObj.getMonth() + 1).padStart(2, '0')}-${String(todayDateObj.getDate()).padStart(2, '0')}`;
-    
+    // Puzzle dates are LA-calendar dates; the device's local date highlighted
+    // the wrong "today" for anyone east of Los Angeles after their midnight.
+    const todayStr = getLADateStr();
+
     for (let day = 1; day <= daysInMonth; day++) {
         const dayDiv = document.createElement('div');
         dayDiv.className = 'calendar-day';
@@ -1933,9 +2014,11 @@ function renderCalendar(year, month) {
 }
 
 function initDashboard() {
-    const today = new Date();
-    selectedDateStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-    currentCalDate = new Date();
+    // Default the selection to the game's "today" (LA calendar), not the
+    // admin's local date.
+    selectedDateStr = getLADateStr();
+    const [laYear, laMonth] = selectedDateStr.split('-').map(Number);
+    currentCalDate = new Date(laYear, laMonth - 1, 1);
     renderCalendar(currentCalDate.getFullYear(), currentCalDate.getMonth());
     fetchPuzzleForDashboard(selectedDateStr);
     

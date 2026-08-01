@@ -28,8 +28,11 @@ set -u
 set -o pipefail
 
 PROJECT="${PROJECT:-timeline}"
-ENVIRONMENT="production"
 DEV_VARS_FILE=".dev.vars"
+
+# Note: `wrangler pages secret put` has no --env flag (it silently ignores
+# unknown options), so secrets always go to the project's production
+# environment. Preview-environment secrets must be set in the dashboard.
 
 # Which variable to rotate. Restricted to an allowlist: a typo here would
 # otherwise create a brand-new variable in Cloudflare that nothing reads, and
@@ -113,9 +116,11 @@ npx --yes wrangler@4 whoami >/dev/null 2>&1 \
 pass "Authenticated to Cloudflare"
 
 # Matched as a whole table field. A plain `grep -w timeline` would also match
-# "timeline-74i", because the hyphen counts as a word boundary.
-if ! npx --yes wrangler@4 pages project list 2>/dev/null \
-     | grep -qE "(^|[[:space:]|])${PROJECT}([[:space:]|]|\$)"; then
+# "timeline-74i", because the hyphen counts as a word boundary. The output is
+# captured first: with pipefail, `wrangler | grep -q` can fail spuriously when
+# grep exits early and wrangler dies on the broken pipe.
+PROJECT_LIST="$(npx --yes wrangler@4 pages project list 2>/dev/null || true)"
+if ! grep -qE "(^|[[:space:]|])${PROJECT}([[:space:]|]|\$)" <<< "$PROJECT_LIST"; then
   echo >&2
   echo "Projects visible on this account:" >&2
   npx --yes wrangler@4 pages project list >&2 || true
@@ -194,14 +199,14 @@ fi   # end of interactive-prompt branch
 
 # ------------------------------------------------------ push to Cloudflare ---
 
-head_ "Updating $KEY_NAME on '$PROJECT' ($ENVIRONMENT)"
+head_ "Updating $KEY_NAME on '$PROJECT' (production)"
 
 # Piped on stdin, never as an argv element. Anything in argv is visible in
 # `ps` and /proc/<pid>/cmdline to every other user on the machine. `printf` is
 # a bash builtin, so the value never becomes a separate process's arguments.
 if ! printf '%s' "$NEW_SECRET" \
      | npx --yes wrangler@4 pages secret put "$KEY_NAME" \
-         --project-name "$PROJECT" --env "$ENVIRONMENT" >/dev/null; then
+         --project-name "$PROJECT" >/dev/null; then
   fail "wrangler pages secret put failed. Nothing local was changed."
 fi
 pass "Remote $KEY_NAME updated"

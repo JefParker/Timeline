@@ -197,6 +197,59 @@ test('override event titles are non-empty', () => {
     }
 });
 
+test('override event titles render no literal backslashes', () => {
+    // Titles here are raw source text, so `\"` (a legitimate escape) shows up
+    // with its backslash. The bug pattern is an ESCAPED backslash — source
+    // `\\'` — which renders a real backslash on the card ("Pete\'s Super
+    // Submarines"). Apostrophes need no escaping inside double quotes.
+    for (const o of OVERRIDES) {
+        for (const title of o.titles) {
+            assert.ok(!title.includes('\\\\'), `${o.guardDate} title renders a literal backslash: ${title}`);
+        }
+    }
+});
+
+function dayNumber(dateStr) {
+    const [year, month, day] = dateStr.split('-').map(Number);
+    return Math.round(Date.UTC(year, month - 1, day) / 86400000);
+}
+
+test('no event text is repeated across overrides within 60 days', () => {
+    // The generator refuses to repeat an event within its 60-day memory
+    // window; hand-written overrides must honour the same rule or players see
+    // the identical card twice in quick succession.
+    for (let a = 0; a < OVERRIDES.length; a++) {
+        for (let b = a + 1; b < OVERRIDES.length; b++) {
+            const gap = Math.abs(dayNumber(OVERRIDES[a].guardDate) - dayNumber(OVERRIDES[b].guardDate));
+            if (gap > 60) continue;
+            const titlesB = new Set(OVERRIDES[b].titles.map(t => t.toLowerCase()));
+            for (const title of OVERRIDES[a].titles) {
+                assert.ok(
+                    !titlesB.has(title.toLowerCase()),
+                    `"${title}" appears in both ${OVERRIDES[a].guardDate} and ${OVERRIDES[b].guardDate}, only ${gap} days apart`
+                );
+            }
+        }
+    }
+});
+
+test('no override bunches three or more events under 3 years apart', () => {
+    // A single near-tie is the game; a chain of three or more events each
+    // within 3 years of the next turns a stretch of the puzzle into coin
+    // flips. Mirrors the threshold scripts/preview-puzzles.mjs warns at.
+    for (const o of OVERRIDES) {
+        const years = [...o.years].sort((x, y) => x - y);
+        let streak = 1;
+        for (let i = 1; i < years.length; i++) {
+            streak = years[i] - years[i - 1] < 3 ? streak + 1 : 1;
+            assert.ok(
+                streak < 3,
+                `${o.guardDate} (${o.category}) bunches ${streak} events inside runs of <3-year gaps (…${years[i - 2]}, ${years[i - 1]}, ${years[i]}…)`
+            );
+        }
+    }
+});
+
 test('the 2026-07-28 Sports puzzle no longer repeats 1997', () => {
     const july28 = OVERRIDES.find(o => o.guardDate === '2026-07-28');
     assert.ok(july28, 'expected an override for 2026-07-28');
