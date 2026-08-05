@@ -1,141 +1,5 @@
 [
   {
-    "date": "2026-07-30",
-    "category": "Technology",
-    "events": [
-      {
-        "event": "The Soviet Union launches Sputnik 1, the first artificial Earth satellite.",
-        "year": 1957
-      },
-      {
-        "event": "Edmund Cartwright invents the power loom.",
-        "year": 1785
-      },
-      {
-        "event": "Benjamin Franklin invents the lightning rod.",
-        "year": 1752
-      },
-      {
-        "event": "Philo Farnsworth transmits the first all-electronic television image.",
-        "year": 1927
-      },
-      {
-        "event": "Daniel Gabriel Fahrenheit invents the mercury thermometer.",
-        "year": 1714
-      },
-      {
-        "event": "The Altair 8800, sparking the microcomputer revolution, is released.",
-        "year": 1975
-      },
-      {
-        "event": "John Bardeen, Walter Brattain, and William Shockley invent the transistor.",
-        "year": 1947
-      }
-    ]
-  },
-  {
-    "date": "2026-07-31",
-    "category": "Big TV Events",
-    "events": [
-      {
-        "event": "52 million viewers watch the 'Friends' cast leave their apartment keys on the counter.",
-        "year": 2004
-      },
-      {
-        "event": "83 million viewers tune into 'Dallas' to finally learn 'Who shot J.R.?'.",
-        "year": 1980
-      },
-      {
-        "event": "The 'Game of Thrones' finale draws 19 million live viewers, a rare feat in the streaming era.",
-        "year": 2019
-      },
-      {
-        "event": "The groundbreaking 'Roots' finale captivates 100 million viewers.",
-        "year": 1977
-      },
-      {
-        "event": "Sam Malone turns off the lights for the last time in the 'Cheers' series finale.",
-        "year": 1993
-      },
-      {
-        "event": "The 'M*A*S*H' finale draws 106 million viewers, remaining the most-watched scripted episode ever.",
-        "year": 1983
-      },
-      {
-        "event": "A staggering 76 million viewers tune in to the polarizing series finale of 'Seinfeld'.",
-        "year": 1998
-      }
-    ]
-  },
-  {
-    "date": "2026-08-01",
-    "category": "Internet History",
-    "events": [
-      {
-        "event": "ARPANET adopts TCP/IP, creating the modern internet",
-        "year": 1983
-      },
-      {
-        "event": "Mosaic (first popular web browser) released",
-        "year": 1993
-      },
-      {
-        "event": "First ARPANET message sent",
-        "year": 1969
-      },
-      {
-        "event": "Tim Berners-Lee invents the World Wide Web",
-        "year": 1989
-      },
-      {
-        "event": "Apple's iPhone puts the full web in your pocket",
-        "year": 2007
-      },
-      {
-        "event": "Hotmail brings free email to the web",
-        "year": 1996
-      },
-      {
-        "event": "Napster ignites peer-to-peer file sharing",
-        "year": 1999
-      }
-    ]
-  },
-  {
-    "date": "2026-08-02",
-    "category": "Business",
-    "events": [
-      {
-        "event": "Frank McNamara and Ralph Schneider introduce the Diners Club card, the world's first multipurpose charge card.",
-        "year": 1950
-      },
-      {
-        "event": "Lehman Brothers files for bankruptcy, marking the climax of the global financial crisis.",
-        "year": 2008
-      },
-      {
-        "event": "Major tech companies heavily invest and launch numerous Generative AI tools and services in a global AI boom.",
-        "year": 2024
-      },
-      {
-        "event": "Jeff Bezos founds Amazon in Bellevue, Washington, initially as an online bookstore.",
-        "year": 1994
-      },
-      {
-        "event": "Procter & Gamble is founded by William Procter and James Gamble in Cincinnati, Ohio.",
-        "year": 1837
-      },
-      {
-        "event": "The Buttonwood Agreement is signed, laying the foundation for the New York Stock Exchange.",
-        "year": 1792
-      },
-      {
-        "event": "Tim Berners-Lee invents the World Wide Web, paving the way for e-commerce.",
-        "year": 1989
-      }
-    ]
-  },
-  {
     "date": "2026-08-03",
     "category": "Firsts in Space",
     "events": [
@@ -341,35 +205,35 @@
   },
   {
     "date": "2026-08-09",
-    "category": "Geography",
+    "category": "Unexpected Origins",
     "events": [
       {
-        "event": "Livingstone begins Zambezi expedition",
-        "year": 1852
+        "event": "Wrigley — sold soap and baking powder. Chewing gum was originally a free promotional item with the powder.",
+        "year": 1891
       },
       {
-        "event": "Jamestown founded",
-        "year": 1607
+        "event": "Samsung — started as a grocery trading company in Korea. Entered electronics in the late 1960s.",
+        "year": 1938
       },
       {
-        "event": "Scott reaches South Pole",
-        "year": 1912
+        "event": "3M — the Minnesota Mining and Manufacturing Company mined corundum for grinding wheels, then pivoted to adhesives.",
+        "year": 1902
       },
       {
-        "event": "Palmer sights Antarctica Peninsula",
-        "year": 1820
+        "event": "Nokia — began as a Finnish paper mill. It later moved through rubber and cables before becoming a mobile phone giant.",
+        "year": 1865
       },
       {
-        "event": "Cape Town founded",
-        "year": 1652
+        "event": "Avon — started as the California Perfume Company selling books door-to-door. Perfume samples outsold the books.",
+        "year": 1886
       },
       {
-        "event": "Waldseemüller map names America",
-        "year": 1507
+        "event": "Berkshire Hathaway — started as a textile mill in New England. Warren Buffett turned it into an investment holding giant in 1965.",
+        "year": 1839
       },
       {
-        "event": "Willoughby expedition attempts Northeast Passage",
-        "year": 1553
+        "event": "Nintendo — began making hanafuda playing cards in Kyoto. Didn't enter video games until the 1970s.",
+        "year": 1889
       }
     ]
   },
@@ -545,35 +409,35 @@
   },
   {
     "date": "2026-08-15",
-    "category": "Landmarks",
+    "category": "Pivot Stories, I",
     "events": [
       {
-        "event": "White House construction begins",
-        "year": 1792
+        "event": "Suzuki — started as a silk loom manufacturer. Now known for motorcycles and compact cars.",
+        "year": 1909
       },
       {
-        "event": "British Museum established",
-        "year": 1753
+        "event": "Sony — started as Tokyo Tsushin Kogyo making a failed rice cooker. Now an electronics and entertainment giant.",
+        "year": 1946
       },
       {
-        "event": "Parthenon construction begins",
-        "year": -447
+        "event": "Yamaha — began repairing and building reed organs. Now makes everything from motorcycles to pianos.",
+        "year": 1887
       },
       {
-        "event": "Leaning Tower of Pisa completed",
-        "year": 1373
+        "event": "LEGO — Ole Kirk Christiansen started as a carpenter making wooden toys. Now famous for plastic bricks.",
+        "year": 1932
       },
       {
-        "event": "Louvre Pyramid completed",
-        "year": 1989
+        "event": "Shell — Marcus Samuel began importing decorative seashells. Now one of the world's largest oil companies.",
+        "year": 1833
       },
       {
-        "event": "Mount Rushmore carving begins",
-        "year": 1927
+        "event": "Lamborghini — Ferruccio Lamborghini started making tractors. Now a legendary supercar manufacturer.",
+        "year": 1948
       },
       {
-        "event": "Taj Mahal construction begins",
-        "year": 1631
+        "event": "Colgate — started as a soap and candle shop in New York City. Now a global oral care brand.",
+        "year": 1806
       }
     ]
   },
@@ -1021,35 +885,35 @@
   },
   {
     "date": "2026-08-29",
-    "category": "Landmarks",
+    "category": "Pivot Stories, II",
     "events": [
       {
-        "event": "Panama Canal opens",
-        "year": 1914
+        "event": "American Express — started as an express mail business in Buffalo. Now a global financial services giant.",
+        "year": 1850
       },
       {
-        "event": "Winter Palace (first version) built",
-        "year": 1711
+        "event": "IBM — started as CTR making scales, time clocks, and tabulating machines. Now a cloud computing giant.",
+        "year": 1911
       },
       {
-        "event": "Space Needle opens",
-        "year": 1962
+        "event": "Coca-Cola — John Pemberton invented it as a patent medicine and nerve tonic. Now the biggest soft drink.",
+        "year": 1886
       },
       {
-        "event": "Great Fire of London destroys St Paul's",
-        "year": 1666
+        "event": "Mazda — started as Toyo Cork Kogyo making cork products. Moved to machine tools, then automobiles.",
+        "year": 1920
       },
       {
-        "event": "Burj Khalifa completed",
-        "year": 2010
+        "event": "Tiffany — started as a stationery and fancy goods emporium in New York. Pivoted to jewelry later.",
+        "year": 1837
       },
       {
-        "event": "Leaning Tower of Pisa construction begins",
-        "year": 1173
+        "event": "Starbucks — opened selling coffee beans and equipment. Didn't sell brewed coffee until the 1980s.",
+        "year": 1971
       },
       {
-        "event": "Eiffel Tower opens",
-        "year": 1889
+        "event": "IKEA — Ingvar Kamprad started selling pens and wallets by mail order. Furniture came later.",
+        "year": 1943
       }
     ]
   },
@@ -1466,32 +1330,32 @@
     "category": "Geography",
     "events": [
       {
-        "event": "Discovery of Moluccas by Portuguese",
-        "year": 1512
-      },
-      {
         "event": "Abel Tasman discovers New Zealand",
         "year": 1642
-      },
-      {
-        "event": "Cook explores New Zealand coastline",
-        "year": 1769
       },
       {
         "event": "Magellan departs on global circumnavigation",
         "year": 1519
       },
       {
-        "event": "Discovery of Brazil by Cabral",
-        "year": 1500
+        "event": "Waldseemüller map names America",
+        "year": 1507
       },
       {
         "event": "Cook crosses Antarctic Circle",
         "year": 1773
       },
       {
-        "event": "Sturt explores Murray River",
-        "year": 1830
+        "event": "Jamestown founded",
+        "year": 1607
+      },
+      {
+        "event": "Discovery of Brazil by Cabral",
+        "year": 1500
+      },
+      {
+        "event": "Cook explores New Zealand coastline",
+        "year": 1769
       }
     ]
   },
@@ -1810,28 +1674,28 @@
         "year": 1999
       },
       {
+        "event": "White House construction begins",
+        "year": 1792
+      },
+      {
         "event": "Machu Picchu built (estimated)",
         "year": 1438
-      },
-      {
-        "event": "Arc de Triomphe completed",
-        "year": 1836
-      },
-      {
-        "event": "Suez Canal opens",
-        "year": 1869
-      },
-      {
-        "event": "St. Paul's Cathedral completed",
-        "year": 1708
       },
       {
         "event": "White House first occupied",
         "year": 1800
       },
       {
-        "event": "Panama Canal expansion opens",
-        "year": 2016
+        "event": "St. Paul's Cathedral completed",
+        "year": 1708
+      },
+      {
+        "event": "British Museum established",
+        "year": 1753
+      },
+      {
+        "event": "Arc de Triomphe completed",
+        "year": 1836
       }
     ]
   },
@@ -2180,32 +2044,32 @@
     "category": "Landmarks",
     "events": [
       {
-        "event": "Palace of Versailles becomes royal residence",
-        "year": 1682
+        "event": "Forbidden City construction begins",
+        "year": 1406
+      },
+      {
+        "event": "CN Tower opens",
+        "year": 1976
       },
       {
         "event": "Louvre Museum opens",
         "year": 1793
       },
       {
+        "event": "Palace of Versailles becomes royal residence",
+        "year": 1682
+      },
+      {
         "event": "Eiffel Tower construction begins",
         "year": 1887
-      },
-      {
-        "event": "St. Peter's Basilica (Current) construction begins",
-        "year": 1506
-      },
-      {
-        "event": "Forbidden City construction begins",
-        "year": 1406
       },
       {
         "event": "Brooklyn Bridge opens",
         "year": 1883
       },
       {
-        "event": "CN Tower opens",
-        "year": 1976
+        "event": "Burj Khalifa completed",
+        "year": 2010
       }
     ]
   },
@@ -2962,24 +2826,24 @@
     "category": "Landmarks",
     "events": [
       {
-        "event": "St. Paul's Cathedral rebuilding begins",
-        "year": 1675
+        "event": "Panama Canal opens",
+        "year": 1914
       },
       {
         "event": "Arc de Triomphe construction begins",
         "year": 1806
       },
       {
-        "event": "Taj Mahal construction begins",
-        "year": 1631
+        "event": "Guggenheim Museum New York opens",
+        "year": 1959
       },
       {
         "event": "Pentagon completed",
         "year": 1943
       },
       {
-        "event": "Guggenheim Museum New York opens",
-        "year": 1959
+        "event": "St. Paul's Cathedral rebuilding begins",
+        "year": 1675
       },
       {
         "event": "Taj Mahal completed",
@@ -3136,24 +3000,24 @@
         "year": 1878
       },
       {
-        "event": "Cabrillo explores California coast",
-        "year": 1542
+        "event": "Cook reaches Botany Bay, Australia",
+        "year": 1770
       },
       {
-        "event": "Waldseemüller map names America",
-        "year": 1507
+        "event": "Cabrillo explores California coast",
+        "year": 1542
       },
       {
         "event": "De Soto expedition begins in North America",
         "year": 1539
       },
       {
-        "event": "Dampier explores Australian coast",
-        "year": 1699
+        "event": "Sturt explores Murray River",
+        "year": 1830
       },
       {
-        "event": "Cook reaches Botany Bay, Australia",
-        "year": 1770
+        "event": "Dampier explores Australian coast",
+        "year": 1699
       },
       {
         "event": "Bering Strait discovered",
@@ -3314,16 +3178,16 @@
         "year": 1711
       },
       {
-        "event": "British Museum established",
-        "year": 1753
+        "event": "Big Ben clock tower completed",
+        "year": 1859
       },
       {
         "event": "Louvre Pyramid completed",
         "year": 1989
       },
       {
-        "event": "Big Ben clock tower completed",
-        "year": 1859
+        "event": "St. Basil's Cathedral construction begins",
+        "year": 1555
       },
       {
         "event": "One World Trade Center opens",
@@ -3540,12 +3404,12 @@
     "category": "Landmarks",
     "events": [
       {
-        "event": "St. Basil's Cathedral construction begins",
-        "year": 1555
-      },
-      {
         "event": "Notre-Dame de Paris construction begins",
         "year": 1163
+      },
+      {
+        "event": "Ziggurat of Ur built",
+        "year": -2000
       },
       {
         "event": "Grand Central Terminal opens",
@@ -3556,8 +3420,8 @@
         "year": 1368
       },
       {
-        "event": "Ziggurat of Ur built",
-        "year": -2000
+        "event": "Taj Mahal construction begins",
+        "year": 1631
       },
       {
         "event": "Mount Rushmore carving begins",
@@ -5308,6 +5172,22 @@
     "category": "Landmarks",
     "events": [
       {
+        "event": "Machu Picchu built (estimated)",
+        "year": 1438
+      },
+      {
+        "event": "Erie Canal opened",
+        "year": 1825
+      },
+      {
+        "event": "Arc de Triomphe completed",
+        "year": 1836
+      },
+      {
+        "event": "Suez Canal opens",
+        "year": 1869
+      },
+      {
         "event": "St. Peter's Basilica (Current) construction begins",
         "year": 1506
       },
@@ -5316,24 +5196,8 @@
         "year": 1922
       },
       {
-        "event": "Taj Mahal construction begins",
-        "year": 1631
-      },
-      {
-        "event": "Suez Canal opens",
-        "year": 1869
-      },
-      {
-        "event": "Arc de Triomphe completed",
-        "year": 1836
-      },
-      {
-        "event": "Machu Picchu built (estimated)",
-        "year": 1438
-      },
-      {
-        "event": "Erie Canal opened",
-        "year": 1825
+        "event": "Pentagon completed",
+        "year": 1943
       }
     ]
   },
@@ -6116,6 +5980,142 @@
       {
         "event": "Nansen crosses Greenland",
         "year": 1888
+      }
+    ]
+  },
+  {
+    "date": "2027-01-26",
+    "category": "Cinema",
+    "events": [
+      {
+        "event": "Tim Burton's 'Batman' redefines the superhero film genre and blockbuster marketing.",
+        "year": 1989
+      },
+      {
+        "event": "Charlie Chaplin's Little Tramp character makes his debut in 'Kid Auto Races at Venice'.",
+        "year": 1914
+      },
+      {
+        "event": "Émile Cohl creates 'Fantasmagorie', one of the first fully animated films.",
+        "year": 1908
+      },
+      {
+        "event": "'Back to the Future' becomes the highest-grossing film of the year.",
+        "year": 1985
+      },
+      {
+        "event": "'Dr. No' introduces Sean Connery as James Bond, launching the longest-running film franchise.",
+        "year": 1962
+      },
+      {
+        "event": "'Avatar' pioneers modern 3D filmmaking and surpasses Titanic as the highest-grossing film.",
+        "year": 2009
+      },
+      {
+        "event": "'Alien' is released, blending science fiction and horror to immense success.",
+        "year": 1979
+      }
+    ]
+  },
+  {
+    "date": "2027-01-27",
+    "category": "Business",
+    "events": [
+      {
+        "event": "Samsung is founded by Lee Byung-chul in Daegu, Japanese Korea, as a trading company.",
+        "year": 1938
+      },
+      {
+        "event": "Time magazine is first published by Briton Hadden and Henry Luce.",
+        "year": 1923
+      },
+      {
+        "event": "Blockbuster Video opens its first store in Dallas, Texas.",
+        "year": 1985
+      },
+      {
+        "event": "Instagram is launched by Kevin Systrom and Mike Krieger.",
+        "year": 2010
+      },
+      {
+        "event": "The Stockton and Darlington Railway opens, the world's first public railway to use steam locomotives, boosting trade.",
+        "year": 1825
+      },
+      {
+        "event": "The collapse of Silicon Valley Bank becomes the second-largest bank failure in US history.",
+        "year": 2023
+      },
+      {
+        "event": "The East German Mark is abolished and replaced by the Deutsche Mark as German reunification nears.",
+        "year": 1990
+      }
+    ]
+  },
+  {
+    "date": "2027-01-28",
+    "category": "Entertainment",
+    "events": [
+      {
+        "event": "'The Avengers' is released in theaters.",
+        "year": 2012
+      },
+      {
+        "event": "'The Godfather' is released.",
+        "year": 1972
+      },
+      {
+        "event": "'The Phantom of the Opera' opens in London's West End.",
+        "year": 1986
+      },
+      {
+        "event": "'Casablanca' premieres.",
+        "year": 1942
+      },
+      {
+        "event": "The Twilight Zone premieres on television.",
+        "year": 1959
+      },
+      {
+        "event": "The first Emmy Awards are presented.",
+        "year": 1949
+      },
+      {
+        "event": "Playboy magazine publishes its first issue.",
+        "year": 1953
+      }
+    ]
+  },
+  {
+    "date": "2027-01-29",
+    "category": "History",
+    "events": [
+      {
+        "event": "First Olympic Games",
+        "year": -776
+      },
+      {
+        "event": "Assassination of JFK",
+        "year": 1963
+      },
+      {
+        "event": "Haitian Independence",
+        "year": 1804
+      },
+      {
+        "event": "Death of Lenin",
+        "year": 1924
+      },
+      {
+        "event": "Glorious Revolution in England",
+        "year": 1688
+      },
+      {
+        "event": "Defeat of the Spanish Armada",
+        "year": 1588
+      },
+      {
+        "event": "Hungarian Revolution",
+        "year": 1956
       }
     ]
   }

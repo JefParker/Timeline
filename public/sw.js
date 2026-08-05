@@ -1,4 +1,4 @@
-const CACHE_NAME = 'timeline-cache-v46';
+const CACHE_NAME = 'timeline-cache-v49';
 
 // Assets the app cannot work without. If any of these fail the install should
 // fail, because an incomplete cache would break offline play.

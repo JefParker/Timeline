@@ -4843,6 +4843,76 @@ function applyOverrides(puzzles) {
         }
     }
 
+    // Special Override for Unexpected Origins - 2026-08-09
+    // Note: the Business pool plays its own Samsung 1938 founding card on
+    // 2026-08-12. Dedup keys on exact event text, so the two coexist by
+    // design — accepted deliberately rather than reworded.
+    for (let i = 0; i < puzzles.length; i++) {
+        if (puzzles[i].date === "2026-08-09") {
+            puzzles[i] = {
+                date: "2026-08-09",
+                category: "Unexpected Origins",
+                events: [
+                    { event: "Berkshire Hathaway — started as a textile mill in New England. Warren Buffett turned it into an investment holding giant in 1965.", year: 1839 },
+                    { event: "Nokia — began as a Finnish paper mill. It later moved through rubber and cables before becoming a mobile phone giant.", year: 1865 },
+                    { event: "Avon — started as the California Perfume Company selling books door-to-door. Perfume samples outsold the books.", year: 1886 },
+                    { event: "Nintendo — began making hanafuda playing cards in Kyoto. Didn't enter video games until the 1970s.", year: 1889 },
+                    { event: "Wrigley — sold soap and baking powder. Chewing gum was originally a free promotional item with the powder.", year: 1891 },
+                    { event: "3M — the Minnesota Mining and Manufacturing Company mined corundum for grinding wheels, then pivoted to adhesives.", year: 1902 },
+                    { event: "Samsung — started as a grocery trading company in Korea. Entered electronics in the late 1960s.", year: 1938 }
+                ]
+            };
+        }
+    }
+
+    // Special Override for Pivot Stories - 2026-08-15
+    // Lamborghini is dated 1948 (Lamborghini Trattori) rather than 1963
+    // (Automobili Lamborghini), so the card text matches its year. That puts
+    // it 2 years from Sony — the only near-tie, and within the spacing rule.
+    // Note: the Business pool plays its own Sony 1946 founding card on
+    // 2026-09-08. Dedup keys on exact event text, so both stand.
+    for (let i = 0; i < puzzles.length; i++) {
+        if (puzzles[i].date === "2026-08-15") {
+            puzzles[i] = {
+                date: "2026-08-15",
+                category: "Pivot Stories, I",
+                events: [
+                    { event: "Colgate — started as a soap and candle shop in New York City. Now a global oral care brand.", year: 1806 },
+                    { event: "Shell — Marcus Samuel began importing decorative seashells. Now one of the world's largest oil companies.", year: 1833 },
+                    { event: "Yamaha — began repairing and building reed organs. Now makes everything from motorcycles to pianos.", year: 1887 },
+                    { event: "Suzuki — started as a silk loom manufacturer. Now known for motorcycles and compact cars.", year: 1909 },
+                    { event: "LEGO — Ole Kirk Christiansen started as a carpenter making wooden toys. Now famous for plastic bricks.", year: 1932 },
+                    { event: "Sony — started as Tokyo Tsushin Kogyo making a failed rice cooker. Now an electronics and entertainment giant.", year: 1946 },
+                    { event: "Lamborghini — Ferruccio Lamborghini started making tractors. Now a legendary supercar manufacturer.", year: 1948 }
+                ]
+            };
+        }
+    }
+
+    // Special Override for Pivot Stories, II - 2026-08-29
+    // Companion to the 2026-08-15 "Pivot Stories, I" puzzle.
+    // Known overlaps, all accepted deliberately: the 08-18 Catalog History
+    // override plays its own Tiffany (1845) and IKEA (1951) cards, and the
+    // 07-22 override already played IBM's 1911 founding. Dedup keys on exact
+    // event text, so none of these collide mechanically.
+    for (let i = 0; i < puzzles.length; i++) {
+        if (puzzles[i].date === "2026-08-29") {
+            puzzles[i] = {
+                date: "2026-08-29",
+                category: "Pivot Stories, II",
+                events: [
+                    { event: "Tiffany — started as a stationery and fancy goods emporium in New York. Pivoted to jewelry later.", year: 1837 },
+                    { event: "American Express — started as an express mail business in Buffalo. Now a global financial services giant.", year: 1850 },
+                    { event: "Coca-Cola — John Pemberton invented it as a patent medicine and nerve tonic. Now the biggest soft drink.", year: 1886 },
+                    { event: "IBM — started as CTR making scales, time clocks, and tabulating machines. Now a cloud computing giant.", year: 1911 },
+                    { event: "Mazda — started as Toyo Cork Kogyo making cork products. Moved to machine tools, then automobiles.", year: 1920 },
+                    { event: "IKEA — Ingvar Kamprad started selling pens and wallets by mail order. Furniture came later.", year: 1943 },
+                    { event: "Starbucks — opened selling coffee beans and equipment. Didn't sell brewed coffee until the 1980s.", year: 1971 }
+                ]
+            };
+        }
+    }
+
     // Special Override for TV Puzzles - 2026-09-01
     for (let i = 0; i < puzzles.length; i++) {
         if (puzzles[i].date === "2026-09-01") {
