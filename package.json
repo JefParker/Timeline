@@ -20,6 +20,9 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
+  "dependencies": {
+    "@simplewebauthn/server": "^13.3.0"
+  },
   "devDependencies": {
     "puppeteer": "^25.3.0",
     "wrangler": "^4.107.0"

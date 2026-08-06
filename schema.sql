@@ -37,3 +37,20 @@ CREATE INDEX IF NOT EXISTS idx_leaderboard_score_time ON leaderboard(puzzle_date
 -- Keep a real statement last: wrangler's SQL ingest warns about a "leftover
 -- buffer" if the file ends with a trailing comment.
 CREATE INDEX IF NOT EXISTS idx_leaderboard_user ON leaderboard(user_id, puzzle_date);
+
+-- Admin passkeys (WebAuthn). One row per registered authenticator; the admin is
+-- a single implicit user, so there is no user_id column.
+--
+-- `credential_id` and `public_key` are base64url text. `counter` is the
+-- authenticator's signature counter and is written on every successful login —
+-- a value that fails to increase means the credential has been cloned, so the
+-- login is rejected.
+CREATE TABLE IF NOT EXISTS admin_credentials (
+    credential_id TEXT PRIMARY KEY,
+    public_key TEXT NOT NULL,
+    counter INTEGER NOT NULL DEFAULT 0,
+    transports TEXT,
+    label TEXT NOT NULL DEFAULT 'Passkey',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_used_at TIMESTAMP
+);

@@ -259,6 +259,15 @@
             <button id="login-submit-btn" class="modal-btn primary" style="flex: 1;">Login</button>
             <button id="login-cancel-btn" class="modal-btn outline" style="flex: 1;">Cancel</button>
         </div>
+        <!-- Revealed by app.js only when the browser supports WebAuthn. -->
+        <div id="passkey-login-row" style="display: none; width: 100%; margin-top: 1.25rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 1rem;">
+                <span style="flex: 1; height: 1px; background: currentColor; opacity: 0.3;"></span>
+                or
+                <span style="flex: 1; height: 1px; background: currentColor; opacity: 0.3;"></span>
+            </div>
+            <button id="passkey-login-btn" class="modal-btn outline" style="width: 100%;">Sign in with a passkey</button>
+        </div>
     </div>
 
     <!-- Dashboard Modal -->
@@ -293,6 +302,16 @@
         
         <div id="error-message" class="hidden" style="color: var(--error-color); margin-top: 1rem; text-align: center; background: rgba(255, 0, 0, 0.1); padding: 0.5rem; border-radius: 4px;"></div>
         
+        <div id="passkey-section" style="margin-top: 2.5rem; display: none;">
+            <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem; text-align: center;">Passkeys</h3>
+            <p style="text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1rem;">
+                Sign in with Touch ID, Windows Hello or your phone instead of typing a password. The password still works as a backup.
+            </p>
+            <div id="passkey-list" style="font-size: 0.9rem;"></div>
+            <div id="passkey-error" style="color: var(--error-color); font-size: 0.85rem; display: none; text-align: center; margin-top: 0.75rem;"></div>
+            <button id="passkey-add-btn" class="modal-btn outline" style="width: 100%; margin-top: 1rem;">Add a passkey</button>
+        </div>
+
         <div style="display: flex; gap: 1rem; width: 100%; margin-top: 1.5rem;">
             <button id="logout-dashboard-btn" class="modal-btn outline" style="flex: 1; border-color: var(--error-color); color: var(--error-color);">Log Out</button>
             <button id="close-dashboard-btn" class="modal-btn primary" style="flex: 1;">Close</button>
@@ -304,6 +323,6 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <script src="/app.js?v=3"></script>
+    <script src="/app.js?v=4"></script>
 </body>
 </html>

@@ -1965,6 +1965,274 @@ if (loginCancelBtn) {
     });
 }
 
+// Passkey (WebAuthn) support
+//
+// Everything security-relevant happens server-side under /api/passkey/; the
+// code here only marshals binary fields in and out of base64url, because the
+// WebAuthn API speaks ArrayBuffers and JSON does not. This is hand-written
+// rather than using @simplewebauthn/browser because public/ is served as plain
+// static files with no bundler.
+
+const webauthnSupported = Boolean(
+    window.PublicKeyCredential && navigator.credentials && navigator.credentials.create
+);
+
+function b64urlToBuf(value) {
+    const normalised = String(value).replace(/-/g, '+').replace(/_/g, '/');
+    const padded = normalised + '='.repeat((4 - (normalised.length % 4)) % 4);
+    const binary = atob(padded);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+        bytes[i] = binary.charCodeAt(i);
+    }
+    return bytes.buffer;
+}
+
+function bufToB64url(buffer) {
+    const bytes = new Uint8Array(buffer);
+    let binary = '';
+    for (let i = 0; i < bytes.length; i++) {
+        binary += String.fromCharCode(bytes[i]);
+    }
+    return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+async function createPasskey(options) {
+    const credential = await navigator.credentials.create({
+        publicKey: {
+            ...options,
+            challenge: b64urlToBuf(options.challenge),
+            user: { ...options.user, id: b64urlToBuf(options.user.id) },
+            excludeCredentials: (options.excludeCredentials || []).map((cred) => ({
+                ...cred,
+                id: b64urlToBuf(cred.id)
+            }))
+        }
+    });
+    if (!credential) throw new Error('No credential returned');
+
+    return {
+        id: credential.id,
+        rawId: bufToB64url(credential.rawId),
+        type: credential.type,
+        clientExtensionResults: credential.getClientExtensionResults(),
+        response: {
+            clientDataJSON: bufToB64url(credential.response.clientDataJSON),
+            attestationObject: bufToB64url(credential.response.attestationObject),
+            transports:
+                typeof credential.response.getTransports === 'function'
+                    ? credential.response.getTransports()
+                    : []
+        }
+    };
+}
+
+async function getPasskeyAssertion(options) {
+    const credential = await navigator.credentials.get({
+        publicKey: {
+            ...options,
+            challenge: b64urlToBuf(options.challenge),
+            allowCredentials: (options.allowCredentials || []).map((cred) => ({
+                ...cred,
+                id: b64urlToBuf(cred.id)
+            }))
+        }
+    });
+    if (!credential) throw new Error('No credential returned');
+
+    return {
+        id: credential.id,
+        rawId: bufToB64url(credential.rawId),
+        type: credential.type,
+        clientExtensionResults: credential.getClientExtensionResults(),
+        response: {
+            clientDataJSON: bufToB64url(credential.response.clientDataJSON),
+            authenticatorData: bufToB64url(credential.response.authenticatorData),
+            signature: bufToB64url(credential.response.signature),
+            userHandle: credential.response.userHandle
+                ? bufToB64url(credential.response.userHandle)
+                : undefined
+        }
+    };
+}
+
+/** Dismissing the OS prompt is a normal outcome, not an error worth shouting about. */
+function describePasskeyError(error, fallback) {
+    if (!error || !error.name) return fallback;
+    if (error.name === 'NotAllowedError' || error.name === 'AbortError') return 'Cancelled.';
+    if (error.name === 'InvalidStateError') return 'This device already has a passkey registered.';
+    return fallback;
+}
+
+const passkeyLoginRow = document.getElementById('passkey-login-row');
+const passkeyLoginBtn = document.getElementById('passkey-login-btn');
+
+if (passkeyLoginRow && webauthnSupported) {
+    passkeyLoginRow.style.display = 'block';
+}
+
+if (passkeyLoginBtn) {
+    passkeyLoginBtn.addEventListener('click', async () => {
+        loginErrorMsg.style.display = 'none';
+        passkeyLoginBtn.disabled = true;
+        try {
+            const optionsRes = await fetch('/api/passkey/auth-options', { method: 'POST' });
+            if (!optionsRes.ok) throw new Error('Could not start passkey sign-in');
+
+            const assertion = await getPasskeyAssertion(await optionsRes.json());
+
+            const verifyRes = await fetch('/api/passkey/auth-verify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ credential: assertion })
+            });
+            if (!verifyRes.ok) throw new Error('Passkey was not accepted');
+
+            isAdmin = true;
+            setDashboardButtonVisible(true);
+            document.getElementById('login-modal').classList.add('hidden');
+            document.getElementById('dashboard-modal').classList.remove('hidden');
+            loginUsernameInput.value = '';
+            loginPasswordInput.value = '';
+            initDashboard();
+        } catch (error) {
+            loginErrorMsg.textContent = describePasskeyError(
+                error,
+                'No usable passkey on this device.'
+            );
+            loginErrorMsg.style.display = 'block';
+        } finally {
+            passkeyLoginBtn.disabled = false;
+        }
+    });
+}
+
+function showPasskeyError(message) {
+    const box = document.getElementById('passkey-error');
+    if (!box) return;
+    box.textContent = message;
+    box.style.display = 'block';
+}
+
+function hidePasskeyError() {
+    const box = document.getElementById('passkey-error');
+    if (box) box.style.display = 'none';
+}
+
+async function refreshPasskeyList() {
+    const section = document.getElementById('passkey-section');
+    const list = document.getElementById('passkey-list');
+    if (!section || !list) return;
+
+    // Nothing here is usable without WebAuthn, so hide the panel entirely.
+    section.style.display = webauthnSupported ? 'block' : 'none';
+    if (!webauthnSupported) return;
+
+    hidePasskeyError();
+    list.textContent = 'Loading...';
+
+    try {
+        const res = await fetch('/api/passkey/credentials');
+        if (!res.ok) throw new Error('Could not list passkeys');
+        const { credentials } = await res.json();
+
+        list.textContent = '';
+
+        if (!credentials || credentials.length === 0) {
+            const empty = document.createElement('p');
+            empty.style.cssText = 'text-align: center; color: var(--text-secondary); margin: 0;';
+            empty.textContent = 'No passkeys registered yet.';
+            list.appendChild(empty);
+            return;
+        }
+
+        for (const cred of credentials) {
+            const row = document.createElement('div');
+            row.style.cssText =
+                'display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid rgba(128, 128, 128, 0.2);';
+
+            const name = document.createElement('span');
+            name.style.cssText =
+                'flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;';
+            // textContent, not innerHTML: labels are stored server-side and
+            // should never be able to inject markup here.
+            name.textContent = cred.label;
+
+            const used = document.createElement('span');
+            used.style.cssText = 'color: var(--text-secondary); font-size: 0.8rem;';
+            used.textContent = cred.lastUsedAt
+                ? `used ${String(cred.lastUsedAt).slice(0, 10)}`
+                : 'never used';
+
+            const remove = document.createElement('button');
+            remove.style.cssText =
+                'background: none; border: none; color: var(--error-color); cursor: pointer; padding: 0.25rem 0.5rem; font: inherit;';
+            remove.textContent = 'Remove';
+            remove.addEventListener('click', () => removePasskey(cred.id, cred.label));
+
+            row.append(name, used, remove);
+            list.appendChild(row);
+        }
+    } catch (error) {
+        list.textContent = '';
+        showPasskeyError('Could not load passkeys.');
+    }
+}
+
+async function addPasskey() {
+    const btn = document.getElementById('passkey-add-btn');
+    hidePasskeyError();
+
+    const label = prompt('Name this passkey (e.g. "MacBook Touch ID")', 'Passkey');
+    if (label === null) return;
+
+    if (btn) btn.disabled = true;
+    try {
+        const optionsRes = await fetch('/api/passkey/register-options', { method: 'POST' });
+        if (!optionsRes.ok) throw new Error('Could not start passkey setup');
+
+        const attestation = await createPasskey(await optionsRes.json());
+
+        const verifyRes = await fetch('/api/passkey/register-verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ credential: attestation, label })
+        });
+        if (!verifyRes.ok) {
+            const data = await verifyRes.json().catch(() => ({}));
+            throw new Error(data.error || 'Passkey was not accepted');
+        }
+
+        await refreshPasskeyList();
+    } catch (error) {
+        showPasskeyError(describePasskeyError(error, error.message || 'Could not add that passkey.'));
+    } finally {
+        if (btn) btn.disabled = false;
+    }
+}
+
+async function removePasskey(id, label) {
+    if (!confirm(`Remove the passkey "${label}"? You can add it again at any time.`)) return;
+
+    hidePasskeyError();
+    try {
+        const res = await fetch('/api/passkey/credentials', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id })
+        });
+        if (!res.ok) throw new Error('Could not remove passkey');
+        await refreshPasskeyList();
+    } catch (error) {
+        showPasskeyError('Could not remove that passkey.');
+    }
+}
+
+const passkeyAddBtn = document.getElementById('passkey-add-btn');
+if (passkeyAddBtn) {
+    passkeyAddBtn.addEventListener('click', addPasskey);
+}
+
 let currentCalDate = new Date();
 let selectedDateStr = null;
 
@@ -2021,7 +2289,8 @@ function initDashboard() {
     currentCalDate = new Date(laYear, laMonth - 1, 1);
     renderCalendar(currentCalDate.getFullYear(), currentCalDate.getMonth());
     fetchPuzzleForDashboard(selectedDateStr);
-    
+    refreshPasskeyList();
+
     document.getElementById('cal-prev-month').onclick = () => {
         currentCalDate.setMonth(currentCalDate.getMonth() - 1);
         renderCalendar(currentCalDate.getFullYear(), currentCalDate.getMonth());

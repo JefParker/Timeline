@@ -23,7 +23,8 @@ or in a local `.dev.vars` file (already gitignored).
 | --- | --- | --- |
 | `ADMIN_USERNAME` | Admin dashboard username | Yes — at the login form |
 | `ADMIN_PASSWORD` | Admin dashboard password | Yes — at the login form |
-| `ADMIN_SECRET` | HMAC key that signs the admin session cookie | **Never** |
+| `ADMIN_SECRET` | HMAC key that signs the admin session cookie and passkey challenges | **Never** |
+| `WEBAUTHN_RP_ID` | Optional. Domain passkeys are bound to; defaults to `timeline-74i.pages.dev` | **Never** |
 
 **`ADMIN_SECRET` is not a password.** It is a machine-only key used by
 `lib/auth.js` to sign and verify the `tl_admin` cookie; nobody ever enters it
@@ -86,6 +87,40 @@ curl -s https://timeline-74i.pages.dev/api/session -H "Cookie: tl_admin=<old-tok
 `{"admin":false}` means the new `ADMIN_SECRET` is live. On `/api/login`, 200 is
 success, 401 means wrong username/password, and 503 means one of the three
 variables is missing or empty on the deployment (`functions/api/login.js`).
+
+## Passkeys
+
+The dashboard accepts a passkey (Touch ID, Windows Hello, phone) as well as the
+username and password. Both stay enabled: password login is how the first
+passkey gets registered, and it is the way back in if every registered device is
+lost.
+
+Set up requires the `admin_credentials` table, so run the schema once:
+
+```bash
+npm run db:schema
+```
+
+Then sign in with the password, open the dashboard, and use **Add a passkey**.
+After that the login modal offers **Sign in with a passkey**.
+
+Passkeys are enrolled as discoverable credentials with user verification
+required, so signing in is one tap and always needs a biometric or PIN — an
+unlocked stolen device is not enough on its own.
+
+**A passkey is bound to the domain it was registered on.** That domain is
+`timeline-74i.pages.dev`, set as `DEFAULT_RP_ID` in `lib/webauthn.js` and
+overridable with a `WEBAUTHN_RP_ID` environment variable. Preview deploys work
+because they are subdomains of it. Moving to a custom domain invalidates every
+registered passkey — set `WEBAUTHN_RP_ID` to the new domain, redeploy, then
+sign in with the password and re-register.
+
+Two pieces of state back all this: registered public keys live in the
+`admin_credentials` D1 table, and the one-time challenge between the "options"
+and "verify" calls rides in a short-lived cookie signed with `ADMIN_SECRET`
+(so rotating that secret also invalidates any in-flight login, not just
+sessions). Replay is caught by the authenticator's signature counter, which is
+written back on every successful login.
 
 ## Development
 
@@ -186,6 +221,11 @@ block to add another.
 | `/api/login` | POST | Sets a signed, HttpOnly admin session cookie |
 | `/api/logout` | POST | Clears it |
 | `/api/session` | GET | Whether the caller currently holds an admin session |
+| `/api/passkey/auth-options` | POST | Starts a passkey sign-in |
+| `/api/passkey/auth-verify` | POST | Finishes it; sets the same cookie as `/api/login` |
+| `/api/passkey/register-options` | POST | Starts enrolling a passkey (admin only) |
+| `/api/passkey/register-verify` | POST | Finishes enrolment (admin only) |
+| `/api/passkey/credentials` | GET / DELETE | List or remove passkeys (admin only) |
 
 The leaderboard response never includes player IDs. The full board (`all`) is
 only returned to an authenticated admin.
